@@ -745,7 +745,7 @@ function toolImageSrc(toolName) {
 
 function renderPracticalToolEntries(tools, accent) {
   return tools.map((tool, index) => `<article class="pr-tool-entry" style="--tool-accent:${accent};">
-    <h3>${index + 1}. ${tool.name} (${normalizeToolTag(tool.tag)})</h3>
+    <h3><span class="pr-tool-index">${String(index + 1).padStart(2, "0")}</span><span class="pr-tool-heading">${index + 1}. ${tool.name} (${normalizeToolTag(tool.tag)})</span></h3>
     <figure class="pr-tool-figure" role="img" aria-label="${tool.name} 工具示意图">
       <div class="pr-tool-shot">
         <img class="pr-tool-image" src="${toolImageSrc(tool.name)}" alt="${tool.name} 工具截图" loading="lazy"/>
@@ -754,7 +754,7 @@ function renderPracticalToolEntries(tools, accent) {
     <ul class="pr-tool-points">
       <li><strong>简介：</strong>${tool.summary}</li>
       <li><strong>亮点：</strong>${tool.highlight}</li>
-      <li>&ldquo;${tool.quote}&rdquo;</li>
+      <li class="pr-tool-quote">&ldquo;${tool.quote}&rdquo;</li>
     </ul>
   </article>`).join("");
 }
@@ -763,7 +763,7 @@ const practicalGroupNumbers = ["一", "二", "三"];
 
 function renderPracticalToolGroups() {
   return practicalToolGroups.map((group, index) => `<section class="pr-tool-group" style="--tool-accent:${group.accent};">
-    <h2>${practicalGroupNumbers[index]}、${group.title}：${group.subtitle}</h2>
+    <h2><span class="pr-tool-group-number">${String(index + 1).padStart(2, "0")}</span><span>${practicalGroupNumbers[index]}、${group.title}：${group.subtitle}</span></h2>
     ${renderPracticalToolEntries(group.tools, group.accent)}
   </section>`).join("");
 }
@@ -777,15 +777,16 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
 </section>
 <style>
 .pr-tools-section {
-  padding: 2.5rem 1rem 5rem;
-  background: #ffffff;
+  padding: 4.5rem 1rem 6rem;
+  background:
+    linear-gradient(180deg, #f5f7fb 0%, #f5f7fb 58%, #ffffff 100%);
   color: #111827;
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
   letter-spacing: 0;
 }
 .pr-tools-article {
   width: 100%;
-  max-width: 1040px;
+  max-width: 1080px;
   margin: 0 auto;
 }
 .pr-tool-directory {
@@ -793,85 +794,197 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
   padding-top: 0;
 }
 .pr-tool-group {
-  margin: 0 0 3.2rem;
-  padding-top: 2.35rem;
+  margin: 0 0 4rem;
+  padding-top: 0.25rem;
 }
 .pr-tool-group h2 {
-  margin: 0 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 0 0 1.5rem;
   color: #111827;
-  font-size: 1.42rem;
-  line-height: 1.35;
-  font-weight: 900;
+  font-size: clamp(1.42rem, 2.2vw, 1.86rem);
+  line-height: 1.25;
+  font-weight: 950;
   letter-spacing: 0;
+}
+.pr-tool-group-number {
+  display: inline-flex;
+  width: 2.45rem;
+  height: 2.45rem;
+  flex: 0 0 2.45rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(239, 68, 68, 0.18);
+  border-color: color-mix(in srgb, var(--tool-accent) 26%, transparent);
+  border-radius: 999px;
+  background: rgba(255, 244, 244, 0.96);
+  background: color-mix(in srgb, var(--tool-accent) 10%, #ffffff);
+  color: var(--tool-accent);
+  font-size: 0.95rem;
+  font-weight: 950;
 }
 .pr-tool-entry {
-  margin: 0 0 2.8rem;
+  position: relative;
+  margin: 0 0 1.35rem;
+  padding: 1.45rem;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.09);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.07);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+.pr-tool-entry::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--tool-accent);
+}
+.pr-tool-entry:hover {
+  transform: translateY(-2px);
+  border-color: rgba(239, 68, 68, 0.22);
+  border-color: color-mix(in srgb, var(--tool-accent) 30%, rgba(15, 23, 42, 0.09));
+  box-shadow: 0 24px 54px rgba(15, 23, 42, 0.1);
 }
 .pr-tool-entry h3 {
-  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 1.05rem;
   color: #111827;
-  font-size: 1.28rem;
+  font-size: clamp(1.12rem, 1.8vw, 1.36rem);
   line-height: 1.35;
   font-weight: 900;
   letter-spacing: 0;
 }
+.pr-tool-index {
+  display: inline-flex;
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--tool-accent);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 950;
+}
+.pr-tool-heading {
+  min-width: 0;
+}
 .pr-tool-figure {
-  width: min(760px, 100%);
-  margin: 0 0 1rem;
+  width: 100%;
+  margin: 0 0 1.05rem;
 }
 .pr-tool-shot {
   position: relative;
-  display: block;
+  display: flex;
   width: 100%;
+  min-height: 340px;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  border: 1px solid #d7dce3;
-  background: #ffffff;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  background:
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--tool-accent) 13%, transparent), transparent 30%),
+    linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 .pr-tool-image {
   display: block;
-  width: 100%;
+  width: min(100%, 860px);
+  max-height: 520px;
   height: auto;
+  object-fit: contain;
 }
 .pr-tool-points {
+  display: grid;
+  gap: 0.56rem;
   margin: 0;
-  padding-left: 1.25rem;
-  color: #111827;
-  font-size: 1.03rem;
-  line-height: 1.72;
+  padding: 0;
+  color: #1f2937;
+  font-size: 1rem;
+  line-height: 1.7;
+  list-style: none;
 }
 .pr-tool-points li {
-  margin: 0.12rem 0;
+  position: relative;
+  margin: 0;
+  padding-left: 1.15rem;
+}
+.pr-tool-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: var(--tool-accent);
 }
 .pr-tool-points strong {
+  color: #111827;
   font-weight: 900;
+}
+.pr-tool-quote {
+  color: #4b5563;
+  font-weight: 700;
 }
 @media (max-width: 900px) {
   .pr-tools-section {
-    padding: 2rem 1rem 4rem;
+    padding: 3.4rem 1rem 4.5rem;
+  }
+  .pr-tool-entry {
+    padding: 1.2rem;
   }
   .pr-tool-shot {
-    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+    min-height: 280px;
   }
 }
 @media (max-width: 520px) {
   .pr-tools-section {
-    padding: 1.5rem 0.86rem 3.5rem;
+    padding: 2.35rem 0.86rem 3.5rem;
   }
   .pr-tool-directory {
     margin-top: 0;
   }
+  .pr-tool-group {
+    margin-bottom: 3rem;
+  }
   .pr-tool-group h2 {
-    font-size: 1.12rem;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 1.18rem;
+  }
+  .pr-tool-group-number {
+    width: 2rem;
+    height: 2rem;
+    flex-basis: 2rem;
+    font-size: 0.82rem;
+  }
+  .pr-tool-entry {
+    padding: 1rem;
   }
   .pr-tool-entry h3 {
+    align-items: flex-start;
     font-size: 1.04rem;
   }
+  .pr-tool-index {
+    width: 1.75rem;
+    height: 1.75rem;
+    flex-basis: 1.75rem;
+    font-size: 0.8rem;
+  }
   .pr-tool-shot {
-    box-shadow: none;
+    min-height: 190px;
   }
   .pr-tool-points {
-    font-size: 0.95rem;
+    font-size: 0.94rem;
   }
 }
 </style></div>`;

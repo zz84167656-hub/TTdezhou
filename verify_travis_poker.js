@@ -174,9 +174,12 @@ assert(about.includes("实用工具"), "Tools page must show the tools heading")
 assert(about.includes("一、实战模拟类：低成本试错神器"), "Tools page must use numbered article-style category headings");
 assert(about.includes("1. GTO+ (付费/专业向)"), "Tools page must use numbered tool headings");
 assert(about.includes("pr-tool-entry"), "Tools page must use article-style tool entries");
+assert(about.includes("pr-tool-index"), "Tools page must include styled numbered tool badges");
+assert(about.includes("pr-tool-heading"), "Tools page must include styled tool headings");
 assert(about.includes("pr-tool-figure"), "Tools page must include a large figure for each tool");
 assert(about.includes("pr-tool-image"), "Tools page must render real local tool images");
 assert(about.includes("pr-tool-points"), "Tools page must use bullet-point tool explanations");
+assert(about.includes("pr-tool-quote"), "Tools page must style the tool quote line");
 for (const fileName of toolImageFiles) {
   assert(about.includes(`assets/${encodeURIComponent(fileName)}`), `Tools page must reference ${fileName}`);
 }
