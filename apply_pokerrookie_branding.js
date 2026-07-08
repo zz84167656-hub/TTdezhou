@@ -354,7 +354,7 @@ const newEmail = "23294069@qq.com";
 const wechatId = "liuyao3643";
 const inviteCode = "long999";
 const kookUrl = "https://kook.vip/cyBSvz";
-const downloadPromoAsset = "assets/pokerrookie-download-promo.png";
+const downloadPromoAsset = "assets/pokerrookie-download-promo.png?v=provided-a2da111";
 const prizeStrip = `<div class="gg-prize-strip">
     <div class="gg-prize-box">
       <span class="gg-prize-label">赛事权益</span>
@@ -471,7 +471,7 @@ function replaceBrandText(html) {
 
 function replaceDownloadContent(html) {
   return html
-    .replace(/<img class="gg-event-img" src="[^"]+" alt="[^"]*">/g, `<img class="gg-event-img" src="${downloadPromoAsset}" alt="PokerRookie 战队多重福利海报">`)
+    .replace(/<img\b[^>]*class="gg-event-img"[^>]*>/g, `<img class="gg-event-img" src="${downloadPromoAsset}" alt="PokerRookie 战队多重福利海报">`)
     .replace(/<div class="gg-prize-strip">[\s\S]*?(?=\n\s*<div class="gg-grid">)/g, `${prizeStrip}\n\n  `)
     .replace(/https:\/\/t\.me\/travispoker/g, kookUrl)
     .replace(/加入\s*TG\s*群/g, "加入KOOK群")

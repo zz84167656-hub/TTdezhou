@@ -113,7 +113,8 @@ assert(homeMirror.includes(bilibiliUrl), "travis-poker.html must mirror the Bili
 
 const download = read("download.html");
 assert(download.includes("https://ggpuke888.com/travispoker"), "Download page must keep the external GG Poker download link");
-assert(download.includes('src="assets/pokerrookie-download-promo.png"'), "Download page must use the local PokerRookie promo image");
+assert(download.includes('src="assets/pokerrookie-download-promo.png?v=provided-a2da111"'), "Download page must use the cache-busted PokerRookie promo image");
+assert(!download.includes('src="assets/pokerrookie-download-promo.png" alt='), "Download page must not use the unversioned cached promo image path");
 assert(download.includes("PokerRookie 战队多重福利海报"), "Download page promo image must have the updated alt text");
 assert(!download.includes("6a032e7b2e8d4641e876a9c6_Untitled-1.png"), "Download page must not use the old remote event image");
 assert(download.includes(kookUrl), "Download page must link to the KOOK group");
