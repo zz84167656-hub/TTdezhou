@@ -656,12 +656,17 @@ const videoTeachingSection = `<div class="w-embed pokerrookie-video-teaching-emb
   line-height: 1.8;
 }
 .pr-video-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem;
+  display: block;
+  columns: 2 360px;
+  column-gap: 1.25rem;
 }
 .pr-video-card {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 1.25rem;
   overflow: hidden;
+  break-inside: avoid;
+  page-break-inside: avoid;
   border: 1px solid rgba(17, 24, 39, 0.1);
   border-radius: 18px;
   background: #fff;
@@ -727,7 +732,7 @@ const videoTeachingSection = `<div class="w-embed pokerrookie-video-teaching-emb
     padding: 4.5rem 1rem;
   }
   .pr-video-grid {
-    grid-template-columns: 1fr;
+    columns: 1;
   }
   .pr-video-cover {
     min-height: 190px;
