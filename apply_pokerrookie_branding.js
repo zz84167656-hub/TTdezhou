@@ -758,7 +758,7 @@ function renderPracticalToolGroups() {
 const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-embed"><section class="pr-tools-section">
   <div class="pr-tools-inner">
     <div class="pr-tools-head">
-      <div class="pr-tools-label">免费资源</div>
+      <div class="pr-tools-label">工具导航</div>
       <h2>实用工具</h2>
       <p>从GTO解算、AI训练到HUD数据分析，把学习、试错和复盘拆成更可执行的训练流程。</p>
     </div>
@@ -950,7 +950,7 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
 }
 </style></div>`;
 
-const freeResourceModules = `${videoTeachingSection}${practicalToolsSection}`;
+const freeResourceModules = videoTeachingSection;
 
 function ensureCss(html) {
   const withoutOld = html.replace(/<style id="pokerrookie-branding">[\s\S]*?<\/style>/g, "");
@@ -971,6 +971,10 @@ function replaceLogos(html) {
 
 function removeLabNav(html) {
   return html.replace(/<a href="lab\.html"[^>]*class="navbar_link lab[^"]*"[^>]*>Poker LAB<\/a>/g, "");
+}
+
+function replaceToolsNav(html) {
+  return html.replace(/(<a href="about\.html"[^>]*>)(?:关于我|实用工具)(<\/a>)/g, "$1实用工具$2");
 }
 
 function escapeRegExp(value) {
@@ -1000,7 +1004,7 @@ function replaceBrandText(html) {
 function replaceDownloadContent(html) {
   return html
     .replace(/<img\b[^>]*class="gg-event-img"[^>]*>/g, `<img class="gg-event-img" src="${downloadPromoAsset}" alt="PokerRookie 战队多重福利海报">`)
-    .replace(/<div class="gg-prize-strip">[\s\S]*?(?=\n\s*<div class="gg-grid">)/g, `${prizeStrip}\n\n  `)
+    .replace(/<div class="gg-prize-strip">[\s\S]*?(?=\n\s*<div class="gg-grid">)/g, `${prizeStrip}\n`)
     .replace(/https:\/\/ggpuke888\.com\/travispoker/g, ggDownloadUrl)
     .replace(/https:\/\/t\.me\/travispoker/g, kookUrl)
     .replace(/加入\s*TG\s*群/g, "加入KOOK群")
@@ -1015,6 +1019,19 @@ function replaceDownloadContent(html) {
 
 function replaceFreeContent(html) {
   return html.replace(/(<main class="main-wrapper"><div class="w-embed w-iframe">[\s\S]*?<\/div><\/div>)[\s\S]*?(?=<\/main>)/, `$1${freeResourceModules}`);
+}
+
+function replaceAboutContent(html) {
+  const description = "GTO解算、AI训练与HUD数据分析工具整理，帮助你把训练、复盘和实战决策变得更系统。";
+
+  return html
+    .replace(/<title>[\s\S]*?<\/title>/, "<title>实用工具｜PokerRookie</title>")
+    .replace(/<meta content="[^"]*" name="description"\/>/, `<meta content="${description}" name="description"/>`)
+    .replace(/<meta content="[^"]*" property="og:title"\/>/, '<meta content="实用工具｜PokerRookie" property="og:title"/>')
+    .replace(/<meta content="[^"]*" property="og:description"\/>/, `<meta content="${description}" property="og:description"/>`)
+    .replace(/<meta content="[^"]*" name="twitter:title"\/>/, '<meta content="实用工具｜PokerRookie" name="twitter:title"/>')
+    .replace(/<meta content="[^"]*" name="twitter:description"\/>/, `<meta content="${description}" name="twitter:description"/>`)
+    .replace(/<main class="main-wrapper">[\s\S]*?<\/main>/, `<main class="main-wrapper">${practicalToolsSection}</main>`);
 }
 
 const improveCardPattern = /<div class="choice-card is-red"><div class="card-badge">适合想认真提升的人<\/div>[\s\S]*?<div class="card-note">适合想长期提升的玩家<\/div><\/div>/g;
@@ -1033,12 +1050,15 @@ function replaceHome(html) {
 for (const fileName of htmlFiles) {
   const filePath = path.join(root, fileName);
   let html = fs.readFileSync(filePath, "utf8");
-  html = ensureFooterScript(ensureCss(replaceFooter(removeLabNav(replaceLogos(html)))));
+  html = ensureFooterScript(ensureCss(replaceFooter(replaceToolsNav(removeLabNav(replaceLogos(html))))));
   if (fileName === "download.html") {
     html = replaceDownloadContent(html);
   }
   if (fileName === "free.html") {
     html = replaceFreeContent(html);
+  }
+  if (fileName === "about.html") {
+    html = replaceAboutContent(html);
   }
   if (fileName === "index.html" || fileName === "travis-poker.html") {
     html = replaceHome(html);

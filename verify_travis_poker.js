@@ -21,7 +21,7 @@ const pages = {
   "travis-poker.html": "PokerRookie｜德州扑克高级实战解析与策略学习",
   "download.html": "游戏下载｜PokerRookie",
   "free.html": "免费资源｜PokerRookie",
-  "about.html": "PokerRookie｜关于我",
+  "about.html": "实用工具｜PokerRookie",
   "lab.html": "PokerRookie LAB"
 };
 
@@ -70,6 +70,9 @@ for (const [fileName, title] of Object.entries(pages)) {
   assert(!html.includes('src="assets/pokerrookie-logo.png"'), `${fileName} must not use the unversioned PokerRookie logo path`);
   assert(!html.includes('class="navbar_link lab'), `${fileName} must not show Poker LAB in the nav`);
   assert(!html.includes(">Poker LAB</a>"), `${fileName} must not include the Poker LAB nav link`);
+  assert(!html.includes(">关于我</a>"), `${fileName} must not show the old About nav label`);
+  assert(html.includes('href="about.html"'), `${fileName} must keep the local tools page link`);
+  assert(html.includes(">实用工具</a>"), `${fileName} must show the tools nav label`);
   assert(!html.includes("69d6fb774fb3fe709a3c22ef_1"), `${fileName} must not use the old TravisPoker nav logo`);
   assert(!html.includes("69973e9728086fd6a49a2e06_travispoker-28"), `${fileName} must not use the old TravisPoker footer logo`);
   assert(!html.includes('href="https://www.travispoker.com/download"'), `${fileName} must not route internal download link to remote site`);
@@ -98,7 +101,7 @@ for (const [fileName, title] of Object.entries(pages)) {
 const home = read("index.html");
 assert(home.includes('href="download.html"'), "Home CTA/nav must link to local download page");
 assert(home.includes('href="free.html"'), "Home nav must link to local free page");
-assert(home.includes('href="about.html"'), "Home nav must link to local about page");
+assert(home.includes('href="about.html"'), "Home nav must link to local tools page");
 assert(home.includes('href="download.html" class="pokerrookie-hero-title-link w-inline-block"'), "Home hero slogan must link to the download page");
 assert(home.includes('src="assets/sologan.webp"'), "Home hero must use the slogan artwork");
 assert(home.includes('class="pokerrookie-hero-slogan"'), "Home hero slogan image must include the slogan styling");
@@ -144,21 +147,31 @@ assert(!free.includes("A 高牌面，KK/QQ"), "Free page must remove the old pre
 assert(!free.includes("内容马上更新"), "Free page must remove the old coming-soon placeholder");
 assert(!free.includes("tp-free-coming"), "Free page must remove the old coming-soon card wrapper");
 assert(!free.includes("code-embed w-embed pokerrookie-video-teaching-embed"), "Free page video teaching module must not be hidden by code-embed");
-assert(free.includes("pokerrookie-practical-tools-embed"), "Free page must include the practical tools module");
-assert(free.includes('<div class="w-embed pokerrookie-practical-tools-embed">'), "Free page tools module must not use hidden Webflow code-embed class");
-assert(free.includes("实用工具"), "Free page fourth module must be renamed to practical tools");
-assert(free.includes("实战模拟类"), "Free page tools module must include the simulation tools group");
-assert(free.includes("AI训练类"), "Free page tools module must include the AI training tools group");
-assert(free.includes("数据分析类"), "Free page tools module must include the data analysis tools group");
-assert(free.includes("GTO+"), "Free page tools module must include GTO+");
-assert(free.includes("PioSolver"), "Free page tools module must include PioSolver");
-assert(free.includes("ALPHAX"), "Free page tools module must include ALPHAX");
-assert(free.includes("PokerSnowie"), "Free page tools module must include PokerSnowie");
-assert(free.includes("Hand2Note"), "Free page tools module must include Hand2Note");
-assert(free.includes("PokerTracker 4"), "Free page tools module must include PokerTracker 4");
-assert(free.includes("把玄学变成科学"), "Free page tools module must include the data analysis subtitle");
+assert(!free.includes("pokerrookie-practical-tools-embed"), "Free page must move the practical tools module to the tools page");
+assert(!free.includes("GTO+"), "Free page must not keep the practical tools cards");
 assert(!free.includes("把图片上的水印处理掉"), "Free page must not show internal watermark-removal notes");
 assert(!free.includes("code-embed w-embed pokerrookie-practical-tools-embed"), "Free page tools module must not be hidden by code-embed");
+
+const about = read("about.html");
+assert(about.includes("实用工具｜PokerRookie"), "Tools page title must replace the old about title");
+assert(about.includes("pokerrookie-practical-tools-embed"), "Tools page must include the practical tools module");
+assert(about.includes('<div class="w-embed pokerrookie-practical-tools-embed">'), "Tools page module must not use hidden Webflow code-embed class");
+assert(about.includes("工具导航"), "Tools page must include the updated tools label");
+assert(about.includes("实用工具"), "Tools page must show the tools heading");
+assert(about.includes("实战模拟类"), "Tools page must include the simulation tools group");
+assert(about.includes("AI训练类"), "Tools page must include the AI training tools group");
+assert(about.includes("数据分析类"), "Tools page must include the data analysis tools group");
+assert(about.includes("GTO+"), "Tools page must include GTO+");
+assert(about.includes("PioSolver"), "Tools page must include PioSolver");
+assert(about.includes("ALPHAX"), "Tools page must include ALPHAX");
+assert(about.includes("PokerSnowie"), "Tools page must include PokerSnowie");
+assert(about.includes("Hand2Note"), "Tools page must include Hand2Note");
+assert(about.includes("PokerTracker 4"), "Tools page must include PokerTracker 4");
+assert(about.includes("把玄学变成科学"), "Tools page must include the data analysis subtitle");
+assert(!about.includes("写给卡在瓶颈期的你"), "Tools page must remove the old about hero");
+assert(!about.includes("创始人 | PokerRookie"), "Tools page must remove the old about profile block");
+assert(!about.includes("code-embed w-embed pokerrookie-practical-tools-embed"), "Tools page module must not be hidden by code-embed");
+assert(!about.includes("把图片上的水印处理掉"), "Tools page must not show internal watermark-removal notes");
 
 const download = read("download.html");
 assert(download.includes(ggDownloadUrl), "Download page must use the updated GG Poker download link");
