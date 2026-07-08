@@ -1,7 +1,9 @@
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 const root = __dirname;
+const assetsDir = path.join(root, "assets");
 const htmlFiles = [
   "index.html",
   "travis-poker.html",
@@ -10,6 +12,17 @@ const htmlFiles = [
   "about.html",
   "lab.html"
 ];
+
+function versionedAsset(fileName) {
+  const filePath = path.join(assetsDir, fileName);
+  const version = fs.existsSync(filePath)
+    ? crypto.createHash("sha1").update(fs.readFileSync(filePath)).digest("hex").slice(0, 8)
+    : "missing";
+
+  return `assets/${fileName}?v=${version}`;
+}
+
+const logoSrc = versionedAsset("pokerrookie-logo.png");
 
 const css = `<style id="pokerrookie-branding">
 .navbar_logo-link {
@@ -438,8 +451,9 @@ function ensureFooterScript(html) {
 
 function replaceLogos(html) {
   return html
-    .replace(/<img\b(?=[^>]*class="navbar2_logo")[^>]*\/?>/g, '<img src="assets/pokerrookie-logo.png" alt="PokerRookie" loading="lazy" class="navbar2_logo pokerrookie-nav-logo"/>')
-    .replace(/<img\b(?=[^>]*69973e9728086fd6a49a2e06_travispoker-28)[^>]*\/?>/g, '<img src="assets/pokerrookie-logo.png" alt="PokerRookie" loading="lazy" class="pokerrookie-footer-logo"/>');
+    .replace(/<img\b(?=[^>]*class="[^"]*navbar2_logo[^"]*")[^>]*\/?>/g, `<img src="${logoSrc}" alt="PokerRookie" loading="lazy" class="navbar2_logo pokerrookie-nav-logo"/>`)
+    .replace(/<img\b(?=[^>]*class="[^"]*pokerrookie-footer-logo[^"]*")[^>]*\/?>/g, `<img src="${logoSrc}" alt="PokerRookie" loading="lazy" class="pokerrookie-footer-logo"/>`)
+    .replace(/<img\b(?=[^>]*69973e9728086fd6a49a2e06_travispoker-28)[^>]*\/?>/g, `<img src="${logoSrc}" alt="PokerRookie" loading="lazy" class="pokerrookie-footer-logo"/>`);
 }
 
 function removeLabNav(html) {

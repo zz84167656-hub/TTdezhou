@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 const root = __dirname;
 const assetsDir = path.join(root, "assets");
@@ -12,6 +13,8 @@ const contactEmail = "23294069@qq.com";
 const wechatId = "liuyao3643";
 const inviteCode = "long999";
 const kookUrl = "https://kook.vip/cyBSvz";
+const logoVersion = crypto.createHash("sha1").update(fs.readFileSync(logoAsset)).digest("hex").slice(0, 8);
+const logoSrc = `assets/pokerrookie-logo.png?v=${logoVersion}`;
 const pages = {
   "index.html": "PokerRookie｜德州扑克高级实战解析与策略学习",
   "travis-poker.html": "PokerRookie｜德州扑克高级实战解析与策略学习",
@@ -62,6 +65,8 @@ for (const [fileName, title] of Object.entries(pages)) {
   assert(html.includes(title), `${fileName} title/content must match the reference page`);
   assert(!html.includes("Travis"), `${fileName} must not show the old Travis brand text`);
   assert(html.includes("assets/pokerrookie-logo.png"), `${fileName} must use the PokerRookie logo`);
+  assert(html.includes(logoSrc), `${fileName} must use the cache-busted PokerRookie logo`);
+  assert(!html.includes('src="assets/pokerrookie-logo.png"'), `${fileName} must not use the unversioned PokerRookie logo path`);
   assert(!html.includes('class="navbar_link lab'), `${fileName} must not show Poker LAB in the nav`);
   assert(!html.includes(">Poker LAB</a>"), `${fileName} must not include the Poker LAB nav link`);
   assert(!html.includes("69d6fb774fb3fe709a3c22ef_1"), `${fileName} must not use the old TravisPoker nav logo`);
