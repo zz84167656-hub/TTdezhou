@@ -25,6 +25,10 @@ function versionedAsset(fileName) {
 const logoSrc = versionedAsset("pokerrookie-logo.png");
 
 const css = `<style id="pokerrookie-branding">
+.main-wrapper {
+  border: 0 !important;
+  outline: 0 !important;
+}
 .navbar_logo-link {
   display: flex !important;
   align-items: center !important;

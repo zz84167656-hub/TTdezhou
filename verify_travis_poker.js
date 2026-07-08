@@ -79,6 +79,7 @@ for (const [fileName, title] of Object.entries(pages)) {
   assert(html.includes("assets/pokerrookie-logo.png"), `${fileName} must use the PokerRookie logo`);
   assert(html.includes(logoSrc), `${fileName} must use the cache-busted PokerRookie logo`);
   assert(!html.includes('src="assets/pokerrookie-logo.png"'), `${fileName} must not use the unversioned PokerRookie logo path`);
+  assert(html.includes(".main-wrapper {\n  border: 0 !important;"), `${fileName} must remove the generated main wrapper border`);
   assert(!html.includes('class="navbar_link lab'), `${fileName} must not show Poker LAB in the nav`);
   assert(!html.includes(">Poker LAB</a>"), `${fileName} must not include the Poker LAB nav link`);
   assert(!html.includes(">关于我</a>"), `${fileName} must not show the old About nav label`);
