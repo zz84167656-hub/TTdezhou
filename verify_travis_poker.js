@@ -124,6 +124,7 @@ assert(homeMirror.includes(bilibiliUrl), "travis-poker.html must mirror the Bili
 
 const free = read("free.html");
 assert(free.includes("pokerrookie-video-teaching-embed"), "Free page must include the video teaching module");
+assert(free.includes('<div class="w-embed pokerrookie-video-teaching-embed">'), "Free page video teaching module must not use hidden Webflow code-embed class");
 assert(free.includes("视频教学"), "Free page third module must be renamed to video teaching");
 assert(free.includes("WSOP"), "Free page video teaching module must include WSOP");
 assert(free.includes("HighStakesPoker"), "Free page video teaching module must include HighStakesPoker");
@@ -140,7 +141,11 @@ assert(free.includes("https://space.bilibili.com/443284341/lists/2566567?type=se
 assert((free.match(/space\.bilibili\.com\/443284341\/lists\//g) || []).length >= 34, "Free page must include all provided video teaching lists");
 assert(!free.includes("YOUR_VIDEO_ID"), "Free page must remove the old YouTube placeholder video");
 assert(!free.includes("A 高牌面，KK/QQ"), "Free page must remove the old preview lesson module");
+assert(!free.includes("内容马上更新"), "Free page must remove the old coming-soon placeholder");
+assert(!free.includes("tp-free-coming"), "Free page must remove the old coming-soon card wrapper");
+assert(!free.includes("code-embed w-embed pokerrookie-video-teaching-embed"), "Free page video teaching module must not be hidden by code-embed");
 assert(free.includes("pokerrookie-practical-tools-embed"), "Free page must include the practical tools module");
+assert(free.includes('<div class="w-embed pokerrookie-practical-tools-embed">'), "Free page tools module must not use hidden Webflow code-embed class");
 assert(free.includes("实用工具"), "Free page fourth module must be renamed to practical tools");
 assert(free.includes("实战模拟类"), "Free page tools module must include the simulation tools group");
 assert(free.includes("AI训练类"), "Free page tools module must include the AI training tools group");
@@ -153,6 +158,7 @@ assert(free.includes("Hand2Note"), "Free page tools module must include Hand2Not
 assert(free.includes("PokerTracker 4"), "Free page tools module must include PokerTracker 4");
 assert(free.includes("把玄学变成科学"), "Free page tools module must include the data analysis subtitle");
 assert(!free.includes("把图片上的水印处理掉"), "Free page must not show internal watermark-removal notes");
+assert(!free.includes("code-embed w-embed pokerrookie-practical-tools-embed"), "Free page tools module must not be hidden by code-embed");
 
 const download = read("download.html");
 assert(download.includes(ggDownloadUrl), "Download page must use the updated GG Poker download link");

@@ -599,7 +599,7 @@ function renderVideoTeachingCards() {
   </article>`).join("");
 }
 
-const videoTeachingSection = `<div class="code-embed w-embed pokerrookie-video-teaching-embed"><section class="pr-video-section">
+const videoTeachingSection = `<div class="w-embed pokerrookie-video-teaching-embed"><section class="pr-video-section">
   <div class="pr-video-inner">
     <div class="pr-video-head">
       <div class="pr-video-label">免费资源</div>
@@ -755,7 +755,7 @@ function renderPracticalToolGroups() {
   </section>`).join("");
 }
 
-const practicalToolsSection = `<div class="code-embed w-embed pokerrookie-practical-tools-embed"><section class="pr-tools-section">
+const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-embed"><section class="pr-tools-section">
   <div class="pr-tools-inner">
     <div class="pr-tools-head">
       <div class="pr-tools-label">免费资源</div>
@@ -1014,7 +1014,7 @@ function replaceDownloadContent(html) {
 }
 
 function replaceFreeContent(html) {
-  return html.replace(/<div class="code-embed w-embed(?: w-iframe| pokerrookie-video-teaching-embed| pokerrookie-practical-tools-embed)?"><section[\s\S]*?(?=<\/main>)/, freeResourceModules);
+  return html.replace(/(<main class="main-wrapper"><div class="w-embed w-iframe">[\s\S]*?<\/div><\/div>)[\s\S]*?(?=<\/main>)/, `$1${freeResourceModules}`);
 }
 
 const improveCardPattern = /<div class="choice-card is-red"><div class="card-badge">适合想认真提升的人<\/div>[\s\S]*?<div class="card-note">适合想长期提升的玩家<\/div><\/div>/g;
