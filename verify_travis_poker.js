@@ -13,6 +13,7 @@ const contactEmail = "23294069@qq.com";
 const wechatId = "liuyao3643";
 const inviteCode = "long999";
 const kookUrl = "https://kook.vip/cyBSvz";
+const ggDownloadUrl = "http://playgg8.fun/long999";
 const logoVersion = crypto.createHash("sha1").update(fs.readFileSync(logoAsset)).digest("hex").slice(0, 8);
 const logoSrc = `assets/pokerrookie-logo.png?v=${logoVersion}`;
 const pages = {
@@ -122,7 +123,8 @@ assert(homeMirror.includes('src="assets/sologan.webp"'), "travis-poker.html must
 assert(homeMirror.includes(bilibiliUrl), "travis-poker.html must mirror the Bilibili profile link");
 
 const download = read("download.html");
-assert(download.includes("https://ggpuke888.com/travispoker"), "Download page must keep the external GG Poker download link");
+assert(download.includes(ggDownloadUrl), "Download page must use the updated GG Poker download link");
+assert(!download.includes("https://ggpuke888.com/travispoker"), "Download page must not keep the old GG Poker download link");
 assert(download.includes('src="assets/pokerrookie-download-promo.png?v=provided-a2da111"'), "Download page must use the cache-busted PokerRookie promo image");
 assert(!download.includes('src="assets/pokerrookie-download-promo.png" alt='), "Download page must not use the unversioned cached promo image path");
 assert(download.includes("PokerRookie 战队多重福利海报"), "Download page promo image must have the updated alt text");

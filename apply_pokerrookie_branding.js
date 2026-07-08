@@ -369,6 +369,7 @@ const newEmail = "23294069@qq.com";
 const wechatId = "liuyao3643";
 const inviteCode = "long999";
 const kookUrl = "https://kook.vip/cyBSvz";
+const ggDownloadUrl = "http://playgg8.fun/long999";
 const downloadPromoAsset = "assets/pokerrookie-download-promo.png?v=provided-a2da111";
 const prizeStrip = `<div class="gg-prize-strip">
     <div class="gg-prize-box">
@@ -489,6 +490,7 @@ function replaceDownloadContent(html) {
   return html
     .replace(/<img\b[^>]*class="gg-event-img"[^>]*>/g, `<img class="gg-event-img" src="${downloadPromoAsset}" alt="PokerRookie 战队多重福利海报">`)
     .replace(/<div class="gg-prize-strip">[\s\S]*?(?=\n\s*<div class="gg-grid">)/g, `${prizeStrip}\n\n  `)
+    .replace(/https:\/\/ggpuke888\.com\/travispoker/g, ggDownloadUrl)
     .replace(/https:\/\/t\.me\/travispoker/g, kookUrl)
     .replace(/加入\s*TG\s*群/g, "加入KOOK群")
     .replace(/加入飞机群组/g, "加入KOOK群")
