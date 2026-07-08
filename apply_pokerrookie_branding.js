@@ -371,6 +371,77 @@ const inviteCode = "long999";
 const kookUrl = "https://kook.vip/cyBSvz";
 const ggDownloadUrl = "http://playgg8.fun/long999";
 const downloadPromoAsset = "assets/pokerrookie-download-promo.png?v=provided-a2da111";
+const videoTeachingGroups = [
+  {
+    title: "WSOP",
+    kicker: "世界大赛精选",
+    image: "https://images.unsplash.com/photo-1670251400844-26c200b75a0f?auto=format&fit=crop&w=1200&q=75",
+    links: [
+      ["2022WSOP金手链系列赛", "https://space.bilibili.com/443284341/lists/459974?type=season"],
+      ["2022WSOP主赛", "https://space.bilibili.com/443284341/lists/483527?type=season"],
+      ["2023WSOP金手链系列赛", "https://space.bilibili.com/443284341/lists/1346652?type=season"],
+      ["2023WSOP主赛", "https://space.bilibili.com/443284341/lists/1346654?type=season"],
+      ["2024WSOP金手链系列赛", "https://space.bilibili.com/443284341/lists/3083053?type=season"],
+      ["2024WSOP主赛", "https://space.bilibili.com/443284341/lists/3083049?type=season"]
+    ]
+  },
+  {
+    title: "HighStakesPoker",
+    kicker: "高额桌经典季",
+    image: "https://images.unsplash.com/photo-1518133120397-258d5eb470c6?auto=format&fit=crop&w=1200&q=75",
+    links: [
+      ["第九季", "https://space.bilibili.com/443284341/lists/210103?type=season"],
+      ["第十季", "https://space.bilibili.com/443284341/lists/1050475?type=season"],
+      ["第十一季", "https://space.bilibili.com/443284341/lists/1619024?type=season"],
+      ["第十二季", "https://space.bilibili.com/443284341/lists/2241967?type=season"],
+      ["第十三季", "https://space.bilibili.com/443284341/lists/3512657?type=season"],
+      ["第十五季", "https://space.bilibili.com/443284341/lists/7002894?type=season"],
+      ["第十六季", "https://space.bilibili.com/443284341/lists/8204354?type=season"]
+    ]
+  },
+  {
+    title: "Hustler Casino Live",
+    kicker: "直播名局复盘",
+    image: "https://images.unsplash.com/photo-1512767254318-423c816efbf3?auto=format&fit=crop&w=1200&q=75",
+    links: [
+      ["超高额之周S1", "https://space.bilibili.com/443284341/lists/657555?type=season"],
+      ["超高额之周S2", "https://space.bilibili.com/443284341/lists/939271?type=season"],
+      ["超高额之周S3", "https://space.bilibili.com/443284341/lists/1926352?type=season"],
+      ["超高额之周S4", "https://space.bilibili.com/443284341/lists/3908974?type=season"],
+      ["百万之战S1", "https://space.bilibili.com/443284341/lists/1375868?type=season"],
+      ["百万之战S2", "https://space.bilibili.com/443284341/lists/3090012?type=season"]
+    ]
+  },
+  {
+    title: "传奇扑克",
+    kicker: "现金桌与锦标赛",
+    image: "https://images.unsplash.com/photo-1518133196839-3aa1219f671d?auto=format&fit=crop&w=1200&q=75",
+    links: [
+      ["2023传奇扑克现金桌", "https://space.bilibili.com/443284341/lists/1417811?type=season"],
+      ["2024传奇扑克现金桌", "https://space.bilibili.com/443284341/lists/2178695?type=season"],
+      ["2026传奇扑克现金桌", "https://space.bilibili.com/443284341/lists/7978305?type=season"],
+      ["传奇扑克百万之战", "https://space.bilibili.com/443284341/lists/1626314?type=season"],
+      ["传奇扑克锦标赛", "https://space.bilibili.com/443284341/lists/2995673?type=season"],
+      ["2022塞浦路斯站系列赛", "https://space.bilibili.com/443284341/lists/307946?type=season"],
+      ["2022塞浦路斯站主赛", "https://space.bilibili.com/443284341/lists/709807?type=season"],
+      ["2022马德里站系列赛", "https://space.bilibili.com/443284341/lists/410912?type=season"],
+      ["2023越南站主赛", "https://space.bilibili.com/443284341/lists/1185327?type=season"],
+      ["百万传奇", "https://space.bilibili.com/443284341/lists/62809?type=season"]
+    ]
+  },
+  {
+    title: "PokerRookie精选",
+    kicker: "实战与闲聊合集",
+    image: "https://images.unsplash.com/photo-1719228159232-48608b807a58?auto=format&fit=crop&w=1200&q=75",
+    links: [
+      ["PokerRookie的扑克之旅", "https://space.bilibili.com/443284341/lists/6881653?type=season"],
+      ["GG扑克超级百万赛", "https://space.bilibili.com/443284341/lists/488529?type=season"],
+      ["闲聊扑克", "https://space.bilibili.com/443284341/lists/4098922?type=season"],
+      ["好好学习，天天向上", "https://space.bilibili.com/443284341/lists/2522815?type=season"],
+      ["GG扑克实战", "https://space.bilibili.com/443284341/lists/2566567?type=season"]
+    ]
+  }
+];
 const prizeStrip = `<div class="gg-prize-strip">
     <div class="gg-prize-box">
       <span class="gg-prize-label">赛事权益</span>
@@ -441,6 +512,154 @@ const footerScript = `<script id="pokerrookie-wechat-copy">
 })();
 </script>`;
 
+function renderVideoTeachingLinks(links) {
+  return links.map(([label, url]) => `<a class="pr-video-link" href="${url}" target="_blank" rel="noopener"><span>${label}</span><span aria-hidden="true">↗</span></a>`).join("");
+}
+
+function renderVideoTeachingCards() {
+  return videoTeachingGroups.map((group) => `<article class="pr-video-card">
+    <div class="pr-video-cover" style="background-image:linear-gradient(180deg, rgba(8, 10, 15, 0.08), rgba(8, 10, 15, 0.68)), url('${group.image}');">
+      <div class="pr-video-kicker">${group.kicker}</div>
+      <h3>${group.title}</h3>
+    </div>
+    <div class="pr-video-links">
+      ${renderVideoTeachingLinks(group.links)}
+    </div>
+  </article>`).join("");
+}
+
+const videoTeachingSection = `<div class="code-embed w-embed pokerrookie-video-teaching-embed"><section class="pr-video-section">
+  <div class="pr-video-inner">
+    <div class="pr-video-head">
+      <div class="pr-video-label">免费资源</div>
+      <h2>视频教学</h2>
+      <p>按系列整理 PokerRookie 的 B 站教学与实战复盘合集，选择你想看的系列直接跳转观看。</p>
+    </div>
+    <div class="pr-video-grid">
+      ${renderVideoTeachingCards()}
+    </div>
+  </div>
+</section>
+<style>
+.pr-video-section {
+  padding: 6.5rem 5vw;
+  background: #f4f7fb;
+  color: #121620;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.pr-video-inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.pr-video-head {
+  display: grid;
+  gap: 1rem;
+  max-width: 720px;
+  margin-bottom: 2.5rem;
+}
+.pr-video-label {
+  width: fit-content;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: #111827;
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+.pr-video-head h2 {
+  margin: 0;
+  color: #05070b;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 0.98;
+  font-weight: 950;
+}
+.pr-video-head p {
+  margin: 0;
+  color: #536070;
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+.pr-video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+.pr-video-card {
+  overflow: hidden;
+  border: 1px solid rgba(17, 24, 39, 0.1);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
+}
+.pr-video-cover {
+  display: flex;
+  min-height: 220px;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1.35rem;
+  background-size: cover;
+  background-position: center;
+}
+.pr-video-kicker {
+  width: fit-content;
+  padding: 0.38rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #e5483f;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+.pr-video-cover h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  line-height: 1;
+  font-weight: 950;
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.42);
+}
+.pr-video-links {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1rem;
+}
+.pr-video-link {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.78rem 0.9rem;
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: 12px;
+  background: #f9fafb;
+  color: #172033;
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+.pr-video-link:hover {
+  transform: translateY(-1px);
+  border-color: rgba(229, 72, 63, 0.32);
+  background: #fff1ef;
+  color: #df3f37;
+}
+@media (max-width: 900px) {
+  .pr-video-section {
+    padding: 4.5rem 1rem;
+  }
+  .pr-video-grid {
+    grid-template-columns: 1fr;
+  }
+  .pr-video-cover {
+    min-height: 190px;
+  }
+}
+</style></div>`;
+
 function ensureCss(html) {
   const withoutOld = html.replace(/<style id="pokerrookie-branding">[\s\S]*?<\/style>/g, "");
   return withoutOld.replace("</head>", `${css}</head>`);
@@ -502,6 +721,10 @@ function replaceDownloadContent(html) {
     .replace(/<span>① 四条9\+ \/ 同花顺：送1买入（每月5次）<\/span><br>\s*<span>② 锦标赛进 FT：送100红包（每月5次）<\/span>/g, "<span>1.击中四条及以上牌型可获得一个买入，无限领取</span><br>\n        <span>2.新用户注册可获赠赏金赛门票</span><br>\n        <span>3.新用户完成首存再加赠一张门票</span>");
 }
 
+function replaceFreeContent(html) {
+  return html.replace(/<div class="code-embed w-embed(?: w-iframe| pokerrookie-video-teaching-embed)?"><section[\s\S]*?<\/section><\/div>(?=<\/main>)/, videoTeachingSection);
+}
+
 const improveCardPattern = /<div class="choice-card is-red"><div class="card-badge">适合想认真提升的人<\/div>[\s\S]*?<div class="card-note">适合想长期提升的玩家<\/div><\/div>/g;
 
 function replaceHome(html) {
@@ -521,6 +744,9 @@ for (const fileName of htmlFiles) {
   html = ensureFooterScript(ensureCss(replaceFooter(removeLabNav(replaceLogos(html)))));
   if (fileName === "download.html") {
     html = replaceDownloadContent(html);
+  }
+  if (fileName === "free.html") {
+    html = replaceFreeContent(html);
   }
   if (fileName === "index.html" || fileName === "travis-poker.html") {
     html = replaceHome(html);

@@ -122,6 +122,25 @@ assert(homeMirror.includes('href="download.html" class="pokerrookie-hero-title-l
 assert(homeMirror.includes('src="assets/sologan.webp"'), "travis-poker.html must use the slogan artwork");
 assert(homeMirror.includes(bilibiliUrl), "travis-poker.html must mirror the Bilibili profile link");
 
+const free = read("free.html");
+assert(free.includes("pokerrookie-video-teaching-embed"), "Free page must include the video teaching module");
+assert(free.includes("视频教学"), "Free page third module must be renamed to video teaching");
+assert(free.includes("WSOP"), "Free page video teaching module must include WSOP");
+assert(free.includes("HighStakesPoker"), "Free page video teaching module must include HighStakesPoker");
+assert(free.includes("Hustler Casino Live"), "Free page video teaching module must include Hustler Casino Live");
+assert(free.includes("传奇扑克"), "Free page video teaching module must include Triton/Poker series");
+assert(free.includes("PokerRookie精选"), "Free page video teaching module must include PokerRookie selections");
+assert(free.includes("2022WSOP金手链系列赛"), "Free page must include the WSOP list items");
+assert(free.includes("PokerRookie的扑克之旅"), "Free page must include the PokerRookie journey list");
+assert(free.includes("https://space.bilibili.com/443284341/lists/459974?type=season"), "Free page must include the first WSOP Bilibili list");
+assert(free.includes("https://space.bilibili.com/443284341/lists/8204354?type=season"), "Free page must include HighStakesPoker season 16");
+assert(free.includes("https://space.bilibili.com/443284341/lists/3090012?type=season"), "Free page must include Hustler million battle S2");
+assert(free.includes("https://space.bilibili.com/443284341/lists/7978305?type=season"), "Free page must include 2026 Triton cash game");
+assert(free.includes("https://space.bilibili.com/443284341/lists/2566567?type=season"), "Free page must include GG Poker practice");
+assert((free.match(/space\.bilibili\.com\/443284341\/lists\//g) || []).length >= 34, "Free page must include all provided video teaching lists");
+assert(!free.includes("YOUR_VIDEO_ID"), "Free page must remove the old YouTube placeholder video");
+assert(!free.includes("A 高牌面，KK/QQ"), "Free page must remove the old preview lesson module");
+
 const download = read("download.html");
 assert(download.includes(ggDownloadUrl), "Download page must use the updated GG Poker download link");
 assert(!download.includes("https://ggpuke888.com/travispoker"), "Download page must not keep the old GG Poker download link");
