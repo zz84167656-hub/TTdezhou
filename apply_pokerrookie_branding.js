@@ -731,221 +731,334 @@ const videoTeachingSection = `<div class="w-embed pokerrookie-video-teaching-emb
 }
 </style></div>`;
 
-function renderPracticalToolCards(tools, accent) {
-  return tools.map((tool) => `<article class="pr-tool-card" style="--tool-accent:${accent};">
-      <div class="pr-tool-visual" aria-hidden="true"><span>${tool.mark}</span></div>
-      <div class="pr-tool-copy">
-        <div class="pr-tool-topline"><h4>${tool.name}</h4><span>${tool.tag}</span></div>
-        <p>${tool.summary}</p>
-        <div class="pr-tool-highlight"><strong>亮点</strong>${tool.highlight}</div>
-        <blockquote>${tool.quote}</blockquote>
-      </div>
-    </article>`).join("");
+function normalizeToolTag(tag) {
+  return tag.replace(/\s*\/\s*/g, "/");
 }
 
+function renderPracticalToolEntries(tools, accent) {
+  return tools.map((tool, index) => `<article class="pr-tool-entry" style="--tool-accent:${accent};">
+    <h3>${index + 1}. ${tool.name} (${normalizeToolTag(tool.tag)})</h3>
+    <figure class="pr-tool-figure" role="img" aria-label="${tool.name} 工具示意图">
+      <div class="pr-tool-shot">
+        <div class="pr-shot-matrix" aria-hidden="true"></div>
+        <div class="pr-shot-chart" aria-hidden="true">
+          <svg viewBox="0 0 360 190" preserveAspectRatio="none">
+            <path d="M18 46 C92 66 136 116 186 94 C234 72 279 144 342 157"/>
+            <path d="M18 82 C86 102 136 142 188 126 C240 112 282 158 342 171"/>
+          </svg>
+          <div class="pr-shot-controls"><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="pr-shot-mark" aria-hidden="true">${tool.mark}</div>
+      </div>
+    </figure>
+    <ul class="pr-tool-points">
+      <li><strong>简介：</strong>${tool.summary}</li>
+      <li><strong>亮点：</strong>${tool.highlight}</li>
+      <li>&ldquo;${tool.quote}&rdquo;</li>
+    </ul>
+  </article>`).join("");
+}
+
+const practicalGroupNumbers = ["一", "二", "三"];
+
 function renderPracticalToolGroups() {
-  return practicalToolGroups.map((group) => `<section class="pr-tool-group">
-    <div class="pr-tool-group-head" style="--tool-accent:${group.accent};">
-      <span>${group.title}</span>
-      <h3>${group.subtitle}</h3>
-    </div>
-    <div class="pr-tool-list">
-      ${renderPracticalToolCards(group.tools, group.accent)}
-    </div>
+  return practicalToolGroups.map((group, index) => `<section class="pr-tool-group" style="--tool-accent:${group.accent};">
+    <h2>${practicalGroupNumbers[index]}、${group.title}：${group.subtitle}</h2>
+    ${renderPracticalToolEntries(group.tools, group.accent)}
   </section>`).join("");
 }
 
 const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-embed"><section class="pr-tools-section">
-  <div class="pr-tools-inner">
-    <div class="pr-tools-head">
-      <div class="pr-tools-label">工具导航</div>
-      <h2>实用工具</h2>
-      <p>从GTO解算、AI训练到HUD数据分析，把学习、试错和复盘拆成更可执行的训练流程。</p>
-    </div>
-    <div class="pr-tools-body">
+  <article class="pr-tools-article">
+    <header class="pr-article-head">
+      <h1>AI时代，扑克玩家需要具备哪些实用工具认知？</h1>
+      <div class="pr-article-meta">
+        <div class="pr-author">
+          <span class="pr-author-avatar" aria-hidden="true">PR</span>
+          <div>
+            <strong>PokerRookie</strong>
+            <span>2026-07-08</span>
+          </div>
+        </div>
+        <div class="pr-read-meta">6 个工具 · 3 个方向 · 系统训练</div>
+      </div>
+      <div class="pr-article-alert">工具变化很快，真正重要的不是装满软件，而是知道每类工具解决什么问题，什么时候用，以及如何回到实战复盘。</div>
+      <p>从 GTO 解算、AI 训练到 HUD 数据分析，工具的价值不是替你打牌，而是把模糊的感觉拆成可验证的决策。下面这份清单按用途分成三类，方便你根据自己的阶段选择。</p>
+      <p>新手先理解数据和训练逻辑，进阶玩家再补解算深度；不要一次买齐所有软件，先让一个工具真正进入你的复盘流程。</p>
+      <img class="pr-article-cover" src="assets/poker-tools-cover.svg" alt="扑克工具与数据分析工作台" loading="lazy"/>
+    </header>
+    <section class="pr-tool-directory" aria-label="实用工具清单">
       ${renderPracticalToolGroups()}
-    </div>
-  </div>
+    </section>
+  </article>
 </section>
 <style>
 .pr-tools-section {
-  padding: 6.5rem 5vw;
-  background: #0d1117;
-  color: #f8fafc;
+  padding: 2.5rem 1rem 5rem;
+  background: #ffffff;
+  color: #111827;
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  letter-spacing: 0;
 }
-.pr-tools-inner {
+.pr-tools-article {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1040px;
   margin: 0 auto;
 }
-.pr-tools-head {
+.pr-article-head {
   display: grid;
-  gap: 1rem;
-  max-width: 760px;
-  margin-bottom: 2.75rem;
+  gap: 1.35rem;
 }
-.pr-tools-label {
-  width: fit-content;
-  padding: 0.45rem 0.85rem;
-  border: 1px solid rgba(248, 250, 252, 0.16);
+.pr-article-head h1 {
+  margin: 0;
+  color: #101318;
+  font-size: 2.35rem;
+  line-height: 1.18;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+.pr-article-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.35rem;
+  color: #697386;
+  font-size: 0.92rem;
+}
+.pr-author {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.72rem;
+}
+.pr-author-avatar {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #23a455;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+.pr-author strong {
+  display: block;
+  color: #1f2937;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  font-weight: 800;
+}
+.pr-author span:last-child {
+  display: block;
+  margin-top: 0.12rem;
+  color: #6b7280;
+  font-size: 0.86rem;
+}
+.pr-read-meta {
+  white-space: nowrap;
+}
+.pr-article-alert {
+  padding: 0.72rem 1rem;
+  border-radius: 6px;
+  border-left: 3px solid #f59e0b;
+  background: #fff8ed;
+  color: #b45309;
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+.pr-article-head p {
+  margin: 0;
+  color: #111827;
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+.pr-article-cover {
+  width: 100%;
+  display: block;
+  margin-top: 0.45rem;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+.pr-tool-directory {
+  margin-top: 3.4rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid #e5e7eb;
+}
+.pr-tool-group {
+  margin: 0 0 3.2rem;
+  padding-top: 2.35rem;
+}
+.pr-tool-group h2 {
+  margin: 0 0 2rem;
+  color: #111827;
+  font-size: 1.42rem;
+  line-height: 1.35;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+.pr-tool-entry {
+  margin: 0 0 2.8rem;
+}
+.pr-tool-entry h3 {
+  margin: 0 0 1rem;
+  color: #111827;
+  font-size: 1.28rem;
+  line-height: 1.35;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+.pr-tool-figure {
+  width: min(760px, 100%);
+  margin: 0 0 1rem;
+}
+.pr-tool-shot {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 1rem;
+  min-height: 310px;
+  padding: 1.2rem;
+  overflow: hidden;
+  border: 1px solid #d7dce3;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+.pr-tool-shot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.2), rgba(248, 250, 252, 0.72));
+  pointer-events: none;
+}
+.pr-shot-matrix,
+.pr-shot-chart {
+  position: relative;
+  z-index: 1;
+  min-height: 220px;
+  border: 1px solid #cfd6df;
+  background: #f8fafc;
+}
+.pr-shot-matrix {
+  background:
+    linear-gradient(90deg, rgba(17, 24, 39, 0.18) 1px, transparent 1px),
+    linear-gradient(rgba(17, 24, 39, 0.18) 1px, transparent 1px),
+    linear-gradient(135deg, color-mix(in srgb, var(--tool-accent), #38bdf8 44%) 0 38%, #111827 38% 58%, #86efac 58% 100%);
+  background-size: 24px 24px, 24px 24px, 100% 100%;
+}
+.pr-shot-chart {
+  display: grid;
+  align-content: end;
+  padding: 1rem;
+}
+.pr-shot-chart svg {
+  width: 100%;
+  height: 150px;
+}
+.pr-shot-chart path {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+.pr-shot-chart path:first-child {
+  stroke: #0ea5e9;
+}
+.pr-shot-chart path:nth-child(2) {
+  stroke: #84cc16;
+}
+.pr-shot-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.45rem;
+}
+.pr-shot-controls span {
+  height: 14px;
   border-radius: 999px;
-  background: rgba(248, 250, 252, 0.08);
-  color: #f97373;
+  background: color-mix(in srgb, var(--tool-accent), #e5e7eb 68%);
+}
+.pr-shot-mark {
+  position: absolute;
+  right: 1.2rem;
+  bottom: 1rem;
+  z-index: 2;
+  padding: 0.35rem 0.55rem;
+  border: 2px solid color-mix(in srgb, var(--tool-accent), white 18%);
+  background: #ffffff;
+  color: var(--tool-accent);
   font-size: 0.82rem;
   font-weight: 900;
 }
-.pr-tools-head h2 {
+.pr-tool-points {
   margin: 0;
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  line-height: 0.98;
-  font-weight: 950;
+  padding-left: 1.25rem;
+  color: #111827;
+  font-size: 1.03rem;
+  line-height: 1.72;
 }
-.pr-tools-head p {
-  margin: 0;
-  color: #b6c2d1;
-  font-size: 1.08rem;
-  line-height: 1.8;
+.pr-tool-points li {
+  margin: 0.12rem 0;
 }
-.pr-tools-body {
-  display: grid;
-  gap: 1.5rem;
-}
-.pr-tool-group {
-  display: grid;
-  grid-template-columns: minmax(220px, 0.32fr) minmax(0, 1fr);
-  gap: 1.25rem;
-  align-items: start;
-}
-.pr-tool-group-head {
-  position: sticky;
-  top: 96px;
-  padding: 1.35rem;
-  border: 1px solid rgba(248, 250, 252, 0.12);
-  border-radius: 18px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
-}
-.pr-tool-group-head span {
-  display: inline-flex;
-  margin-bottom: 0.9rem;
-  padding: 0.36rem 0.72rem;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--tool-accent), transparent 82%);
-  color: color-mix(in srgb, var(--tool-accent), white 24%);
-  font-size: 0.78rem;
+.pr-tool-points strong {
   font-weight: 900;
 }
-.pr-tool-group-head h3 {
-  margin: 0;
-  color: #fff;
-  font-size: clamp(1.6rem, 3vw, 2.25rem);
-  line-height: 1.06;
-  font-weight: 950;
-}
-.pr-tool-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-.pr-tool-card {
-  display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
-  gap: 1rem;
-  min-height: 260px;
-  padding: 1rem;
-  border: 1px solid rgba(248, 250, 252, 0.12);
-  border-radius: 18px;
-  background: #151b24;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.18);
-}
-.pr-tool-visual {
-  display: flex;
-  min-height: 100%;
-  align-items: center;
-  justify-content: center;
-  border-radius: 14px;
-  background:
-    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.24), transparent 28%),
-    linear-gradient(145deg, color-mix(in srgb, var(--tool-accent), #111827 10%), #111827);
-}
-.pr-tool-visual span {
-  color: #fff;
-  font-size: 1.55rem;
-  font-weight: 950;
-}
-.pr-tool-copy {
-  display: grid;
-  gap: 0.8rem;
-  align-content: start;
-}
-.pr-tool-topline {
-  display: grid;
-  gap: 0.45rem;
-}
-.pr-tool-topline h4 {
-  margin: 0;
-  color: #fff;
-  font-size: 1.35rem;
-  line-height: 1.1;
-  font-weight: 950;
-}
-.pr-tool-topline span {
-  width: fit-content;
-  padding: 0.32rem 0.58rem;
-  border-radius: 999px;
-  background: rgba(248, 250, 252, 0.08);
-  color: #c7d2fe;
-  font-size: 0.76rem;
-  font-weight: 900;
-}
-.pr-tool-copy p {
-  margin: 0;
-  color: #cbd5e1;
-  font-size: 0.94rem;
-  line-height: 1.65;
-}
-.pr-tool-highlight {
-  display: grid;
-  gap: 0.35rem;
-  padding: 0.75rem;
-  border-radius: 12px;
-  background: rgba(248, 250, 252, 0.06);
-  color: #dbeafe;
-  font-size: 0.9rem;
-  line-height: 1.58;
-}
-.pr-tool-highlight strong {
-  color: color-mix(in srgb, var(--tool-accent), white 28%);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-}
-.pr-tool-card blockquote {
-  margin: 0;
-  color: #94a3b8;
-  font-size: 0.88rem;
-  line-height: 1.65;
-}
-@media (max-width: 1060px) {
-  .pr-tool-group {
-    grid-template-columns: 1fr;
-  }
-  .pr-tool-group-head {
-    position: static;
-  }
-}
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .pr-tools-section {
-    padding: 4.5rem 1rem;
+    padding: 2rem 1rem 4rem;
   }
-  .pr-tool-list {
+  .pr-article-head h1 {
+    font-size: 1.9rem;
+  }
+  .pr-article-meta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .pr-read-meta {
+    white-space: normal;
+  }
+  .pr-tool-shot {
+    min-height: 260px;
     grid-template-columns: 1fr;
   }
-  .pr-tool-card {
-    grid-template-columns: 1fr;
-    min-height: 0;
+}
+@media (max-width: 520px) {
+  .pr-tools-section {
+    padding: 1.5rem 0.86rem 3.5rem;
   }
-  .pr-tool-visual {
-    min-height: 108px;
+  .pr-article-head {
+    gap: 1rem;
+  }
+  .pr-article-head h1 {
+    font-size: 1.55rem;
+  }
+  .pr-article-head p,
+  .pr-article-alert {
+    font-size: 0.95rem;
+  }
+  .pr-tool-directory {
+    margin-top: 2.4rem;
+  }
+  .pr-tool-group h2 {
+    font-size: 1.12rem;
+  }
+  .pr-tool-entry h3 {
+    font-size: 1.04rem;
+  }
+  .pr-tool-shot {
+    min-height: 210px;
+    padding: 0.8rem;
+    gap: 0.7rem;
+  }
+  .pr-shot-matrix,
+  .pr-shot-chart {
+    min-height: 124px;
+  }
+  .pr-shot-chart svg {
+    height: 86px;
+  }
+  .pr-tool-points {
+    font-size: 0.95rem;
   }
 }
 </style></div>`;
@@ -1004,7 +1117,7 @@ function replaceBrandText(html) {
 function replaceDownloadContent(html) {
   return html
     .replace(/<img\b[^>]*class="gg-event-img"[^>]*>/g, `<img class="gg-event-img" src="${downloadPromoAsset}" alt="PokerRookie 战队多重福利海报">`)
-    .replace(/<div class="gg-prize-strip">[\s\S]*?(?=\n\s*<div class="gg-grid">)/g, `${prizeStrip}\n`)
+    .replace(/<div class="gg-prize-strip">[\s\S]*?\n\s*<div class="gg-grid">/g, `${prizeStrip}\n\n  <div class="gg-grid">`)
     .replace(/https:\/\/ggpuke888\.com\/travispoker/g, ggDownloadUrl)
     .replace(/https:\/\/t\.me\/travispoker/g, kookUrl)
     .replace(/加入\s*TG\s*群/g, "加入KOOK群")
