@@ -140,6 +140,19 @@ assert(free.includes("https://space.bilibili.com/443284341/lists/2566567?type=se
 assert((free.match(/space\.bilibili\.com\/443284341\/lists\//g) || []).length >= 34, "Free page must include all provided video teaching lists");
 assert(!free.includes("YOUR_VIDEO_ID"), "Free page must remove the old YouTube placeholder video");
 assert(!free.includes("A 高牌面，KK/QQ"), "Free page must remove the old preview lesson module");
+assert(free.includes("pokerrookie-practical-tools-embed"), "Free page must include the practical tools module");
+assert(free.includes("实用工具"), "Free page fourth module must be renamed to practical tools");
+assert(free.includes("实战模拟类"), "Free page tools module must include the simulation tools group");
+assert(free.includes("AI训练类"), "Free page tools module must include the AI training tools group");
+assert(free.includes("数据分析类"), "Free page tools module must include the data analysis tools group");
+assert(free.includes("GTO+"), "Free page tools module must include GTO+");
+assert(free.includes("PioSolver"), "Free page tools module must include PioSolver");
+assert(free.includes("ALPHAX"), "Free page tools module must include ALPHAX");
+assert(free.includes("PokerSnowie"), "Free page tools module must include PokerSnowie");
+assert(free.includes("Hand2Note"), "Free page tools module must include Hand2Note");
+assert(free.includes("PokerTracker 4"), "Free page tools module must include PokerTracker 4");
+assert(free.includes("把玄学变成科学"), "Free page tools module must include the data analysis subtitle");
+assert(!free.includes("把图片上的水印处理掉"), "Free page must not show internal watermark-removal notes");
 
 const download = read("download.html");
 assert(download.includes(ggDownloadUrl), "Download page must use the updated GG Poker download link");

@@ -442,6 +442,77 @@ const videoTeachingGroups = [
     ]
   }
 ];
+const practicalToolGroups = [
+  {
+    title: "实战模拟类",
+    subtitle: "低成本试错神器",
+    accent: "#ef4444",
+    tools: [
+      {
+        name: "GTO+",
+        tag: "付费 / 专业向",
+        mark: "GTO",
+        summary: "高级GTO计算软件，适合进阶玩家和职业牌手，能模拟各种场景的最优策略。",
+        highlight: "解算GTO策略的神器，职业牌手训练标配。",
+        quote: "第一次看到自己的决策偏离GTO 40%时，血压直接飙升"
+      },
+      {
+        name: "PioSolver",
+        tag: "职业级GTO训练神器",
+        mark: "PIO",
+        summary: "职业牌手公认最强的GTO策略求解软件，支持深度翻前翻后模拟。",
+        highlight: "可构建超复杂决策树，支持多街bet尺寸、不同对手类型，并用EV差异热力图直观显示策略漏洞。",
+        quote: "打开它的第一天，我发现自己过去三年打的德州都是玄学..."
+      }
+    ]
+  },
+  {
+    title: "AI训练类",
+    subtitle: "拥有属于你的德扑私教",
+    accent: "#2563eb",
+    tools: [
+      {
+        name: "ALPHAX",
+        tag: "付费 / 免费试用",
+        mark: "AI",
+        summary: "全球首款多人实时GTO解算AI，基于Pluribus大模型开发。",
+        highlight: "线上训练AI助手，实时输出EV值、牌力评估、对手漏洞分析，兼容各大主流平台实战应用。",
+        quote: "开着AlphaX打训练赛，就像考试带了计算器还提前看了答案"
+      },
+      {
+        name: "PokerSnowie",
+        tag: "付费",
+        mark: "SNW",
+        summary: "AI驱动的德州扑克训练软件，模拟真实对局并提供实时反馈，帮助修正错误决策。",
+        highlight: "AI实时纠正你的决策错误，适合纠正直觉流玩家的漏洞。",
+        quote: "被AI骂了3个月后，我终于明白为什么河牌不该bluff..."
+      }
+    ]
+  },
+  {
+    title: "数据分析类",
+    subtitle: "把玄学变成科学",
+    accent: "#0f766e",
+    tools: [
+      {
+        name: "Hand2Note",
+        tag: "付费 / 免费试用",
+        mark: "H2N",
+        summary: "实时HUD（平视显示）数据分析工具，帮助你在对局中洞悉对手弱点。",
+        highlight: "实时统计对手数据，如加注率、跟注率等，并自动标记过度诈唬、跟注站等对手漏洞。",
+        quote: "它让我发现俱乐部总赢分的老王，翻前加注率居然高达38%！"
+      },
+      {
+        name: "PokerTracker 4",
+        tag: "经典款",
+        mark: "PT4",
+        summary: "老牌扑克数据分析软件，适用于长期复盘和策略优化。",
+        highlight: "百万手牌数据库，深度分析个人数据。和Hand2Note二选一就行，新手建议后者。",
+        quote: "把每一次感觉，都变成可以复盘的数据"
+      }
+    ]
+  }
+];
 const prizeStrip = `<div class="gg-prize-strip">
     <div class="gg-prize-box">
       <span class="gg-prize-label">赛事权益</span>
@@ -660,6 +731,227 @@ const videoTeachingSection = `<div class="code-embed w-embed pokerrookie-video-t
 }
 </style></div>`;
 
+function renderPracticalToolCards(tools, accent) {
+  return tools.map((tool) => `<article class="pr-tool-card" style="--tool-accent:${accent};">
+      <div class="pr-tool-visual" aria-hidden="true"><span>${tool.mark}</span></div>
+      <div class="pr-tool-copy">
+        <div class="pr-tool-topline"><h4>${tool.name}</h4><span>${tool.tag}</span></div>
+        <p>${tool.summary}</p>
+        <div class="pr-tool-highlight"><strong>亮点</strong>${tool.highlight}</div>
+        <blockquote>${tool.quote}</blockquote>
+      </div>
+    </article>`).join("");
+}
+
+function renderPracticalToolGroups() {
+  return practicalToolGroups.map((group) => `<section class="pr-tool-group">
+    <div class="pr-tool-group-head" style="--tool-accent:${group.accent};">
+      <span>${group.title}</span>
+      <h3>${group.subtitle}</h3>
+    </div>
+    <div class="pr-tool-list">
+      ${renderPracticalToolCards(group.tools, group.accent)}
+    </div>
+  </section>`).join("");
+}
+
+const practicalToolsSection = `<div class="code-embed w-embed pokerrookie-practical-tools-embed"><section class="pr-tools-section">
+  <div class="pr-tools-inner">
+    <div class="pr-tools-head">
+      <div class="pr-tools-label">免费资源</div>
+      <h2>实用工具</h2>
+      <p>从GTO解算、AI训练到HUD数据分析，把学习、试错和复盘拆成更可执行的训练流程。</p>
+    </div>
+    <div class="pr-tools-body">
+      ${renderPracticalToolGroups()}
+    </div>
+  </div>
+</section>
+<style>
+.pr-tools-section {
+  padding: 6.5rem 5vw;
+  background: #0d1117;
+  color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.pr-tools-inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.pr-tools-head {
+  display: grid;
+  gap: 1rem;
+  max-width: 760px;
+  margin-bottom: 2.75rem;
+}
+.pr-tools-label {
+  width: fit-content;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid rgba(248, 250, 252, 0.16);
+  border-radius: 999px;
+  background: rgba(248, 250, 252, 0.08);
+  color: #f97373;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+.pr-tools-head h2 {
+  margin: 0;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 0.98;
+  font-weight: 950;
+}
+.pr-tools-head p {
+  margin: 0;
+  color: #b6c2d1;
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+.pr-tools-body {
+  display: grid;
+  gap: 1.5rem;
+}
+.pr-tool-group {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.32fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+.pr-tool-group-head {
+  position: sticky;
+  top: 96px;
+  padding: 1.35rem;
+  border: 1px solid rgba(248, 250, 252, 0.12);
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+}
+.pr-tool-group-head span {
+  display: inline-flex;
+  margin-bottom: 0.9rem;
+  padding: 0.36rem 0.72rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tool-accent), transparent 82%);
+  color: color-mix(in srgb, var(--tool-accent), white 24%);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+.pr-tool-group-head h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  line-height: 1.06;
+  font-weight: 950;
+}
+.pr-tool-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.pr-tool-card {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 1rem;
+  min-height: 260px;
+  padding: 1rem;
+  border: 1px solid rgba(248, 250, 252, 0.12);
+  border-radius: 18px;
+  background: #151b24;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.18);
+}
+.pr-tool-visual {
+  display: flex;
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.24), transparent 28%),
+    linear-gradient(145deg, color-mix(in srgb, var(--tool-accent), #111827 10%), #111827);
+}
+.pr-tool-visual span {
+  color: #fff;
+  font-size: 1.55rem;
+  font-weight: 950;
+}
+.pr-tool-copy {
+  display: grid;
+  gap: 0.8rem;
+  align-content: start;
+}
+.pr-tool-topline {
+  display: grid;
+  gap: 0.45rem;
+}
+.pr-tool-topline h4 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  font-weight: 950;
+}
+.pr-tool-topline span {
+  width: fit-content;
+  padding: 0.32rem 0.58rem;
+  border-radius: 999px;
+  background: rgba(248, 250, 252, 0.08);
+  color: #c7d2fe;
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+.pr-tool-copy p {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+.pr-tool-highlight {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: rgba(248, 250, 252, 0.06);
+  color: #dbeafe;
+  font-size: 0.9rem;
+  line-height: 1.58;
+}
+.pr-tool-highlight strong {
+  color: color-mix(in srgb, var(--tool-accent), white 28%);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+}
+.pr-tool-card blockquote {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+@media (max-width: 1060px) {
+  .pr-tool-group {
+    grid-template-columns: 1fr;
+  }
+  .pr-tool-group-head {
+    position: static;
+  }
+}
+@media (max-width: 760px) {
+  .pr-tools-section {
+    padding: 4.5rem 1rem;
+  }
+  .pr-tool-list {
+    grid-template-columns: 1fr;
+  }
+  .pr-tool-card {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .pr-tool-visual {
+    min-height: 108px;
+  }
+}
+</style></div>`;
+
+const freeResourceModules = `${videoTeachingSection}${practicalToolsSection}`;
+
 function ensureCss(html) {
   const withoutOld = html.replace(/<style id="pokerrookie-branding">[\s\S]*?<\/style>/g, "");
   return withoutOld.replace("</head>", `${css}</head>`);
@@ -722,7 +1014,7 @@ function replaceDownloadContent(html) {
 }
 
 function replaceFreeContent(html) {
-  return html.replace(/<div class="code-embed w-embed(?: w-iframe| pokerrookie-video-teaching-embed)?"><section[\s\S]*?<\/section><\/div>(?=<\/main>)/, videoTeachingSection);
+  return html.replace(/<div class="code-embed w-embed(?: w-iframe| pokerrookie-video-teaching-embed| pokerrookie-practical-tools-embed)?"><section[\s\S]*?(?=<\/main>)/, freeResourceModules);
 }
 
 const improveCardPattern = /<div class="choice-card is-red"><div class="card-badge">适合想认真提升的人<\/div>[\s\S]*?<div class="card-note">适合想长期提升的玩家<\/div><\/div>/g;
