@@ -8,7 +8,6 @@ const logoAsset = path.join(assetsDir, "pokerrookie-logo.png");
 const profileAsset = path.join(assetsDir, "pokerrookie-profile.jpg");
 const downloadPromoAsset = path.join(assetsDir, "pokerrookie-download-promo.png");
 const sloganAsset = path.join(assetsDir, "sologan.webp");
-const toolsCoverAsset = path.join(assetsDir, "poker-tools-cover.svg");
 const bilibiliUrl = "https://space.bilibili.com/443284341?spm_id_from=333.337.0.0";
 const contactEmail = "23294069@qq.com";
 const wechatId = "liuyao3643";
@@ -60,7 +59,6 @@ assert(fs.existsSync(logoAsset), "Missing PokerRookie logo asset");
 assert(fs.existsSync(profileAsset), "Missing PokerRookie profile photo asset");
 assert(fs.existsSync(downloadPromoAsset), "Missing PokerRookie download promo asset");
 assert(fs.existsSync(sloganAsset), "Missing PokerRookie hero slogan asset");
-assert(fs.existsSync(toolsCoverAsset), "Missing PokerRookie tools cover asset");
 
 for (const [fileName, title] of Object.entries(pages)) {
   const html = read(fileName);
@@ -160,8 +158,6 @@ const about = read("about.html");
 assert(about.includes("实用工具｜PokerRookie"), "Tools page title must replace the old about title");
 assert(about.includes("pokerrookie-practical-tools-embed"), "Tools page must include the practical tools module");
 assert(about.includes('<div class="w-embed pokerrookie-practical-tools-embed">'), "Tools page module must not use hidden Webflow code-embed class");
-assert(about.includes("AI时代，扑克玩家需要具备哪些实用工具认知？"), "Tools page must use the article-style headline");
-assert(about.includes("assets/poker-tools-cover.svg"), "Tools page must use the local article cover image");
 assert(about.includes("实用工具"), "Tools page must show the tools heading");
 assert(about.includes("一、实战模拟类：低成本试错神器"), "Tools page must use numbered article-style category headings");
 assert(about.includes("1. GTO+ (付费/专业向)"), "Tools page must use numbered tool headings");
@@ -180,6 +176,11 @@ assert(about.includes("PokerTracker 4"), "Tools page must include PokerTracker 4
 assert(about.includes("把玄学变成科学"), "Tools page must include the data analysis subtitle");
 assert(!about.includes("写给卡在瓶颈期的你"), "Tools page must remove the old about hero");
 assert(!about.includes("创始人 | PokerRookie"), "Tools page must remove the old about profile block");
+assert(!about.includes("AI时代，扑克玩家需要具备哪些实用工具认知？"), "Tools page must remove the top article intro headline");
+assert(!about.includes("pr-article-head"), "Tools page must remove the top article intro block");
+assert(!about.includes("pr-article-alert"), "Tools page must remove the top article alert");
+assert(!about.includes("pr-article-cover"), "Tools page must remove the top article cover");
+assert(!about.includes("assets/poker-tools-cover.svg"), "Tools page must not reference the removed tools cover image");
 assert(!about.includes("code-embed w-embed pokerrookie-practical-tools-embed"), "Tools page module must not be hidden by code-embed");
 assert(!about.includes("background: #0d1117"), "Tools page must not use the old dark tools design");
 assert(!about.includes("pr-tool-card"), "Tools page must not use the old card grid tools design");

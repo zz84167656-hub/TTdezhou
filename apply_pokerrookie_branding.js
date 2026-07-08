@@ -770,23 +770,6 @@ function renderPracticalToolGroups() {
 
 const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-embed"><section class="pr-tools-section">
   <article class="pr-tools-article">
-    <header class="pr-article-head">
-      <h1>AI时代，扑克玩家需要具备哪些实用工具认知？</h1>
-      <div class="pr-article-meta">
-        <div class="pr-author">
-          <span class="pr-author-avatar" aria-hidden="true">PR</span>
-          <div>
-            <strong>PokerRookie</strong>
-            <span>2026-07-08</span>
-          </div>
-        </div>
-        <div class="pr-read-meta">6 个工具 · 3 个方向 · 系统训练</div>
-      </div>
-      <div class="pr-article-alert">工具变化很快，真正重要的不是装满软件，而是知道每类工具解决什么问题，什么时候用，以及如何回到实战复盘。</div>
-      <p>从 GTO 解算、AI 训练到 HUD 数据分析，工具的价值不是替你打牌，而是把模糊的感觉拆成可验证的决策。下面这份清单按用途分成三类，方便你根据自己的阶段选择。</p>
-      <p>新手先理解数据和训练逻辑，进阶玩家再补解算深度；不要一次买齐所有软件，先让一个工具真正进入你的复盘流程。</p>
-      <img class="pr-article-cover" src="assets/poker-tools-cover.svg" alt="扑克工具与数据分析工作台" loading="lazy"/>
-    </header>
     <section class="pr-tool-directory" aria-label="实用工具清单">
       ${renderPracticalToolGroups()}
     </section>
@@ -805,87 +788,9 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
   max-width: 1040px;
   margin: 0 auto;
 }
-.pr-article-head {
-  display: grid;
-  gap: 1.35rem;
-}
-.pr-article-head h1 {
-  margin: 0;
-  color: #101318;
-  font-size: 2.35rem;
-  line-height: 1.18;
-  font-weight: 900;
-  letter-spacing: 0;
-}
-.pr-article-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-bottom: 0.35rem;
-  color: #697386;
-  font-size: 0.92rem;
-}
-.pr-author {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.72rem;
-}
-.pr-author-avatar {
-  display: inline-flex;
-  width: 36px;
-  height: 36px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: #23a455;
-  color: #fff;
-  font-size: 0.78rem;
-  font-weight: 900;
-}
-.pr-author strong {
-  display: block;
-  color: #1f2937;
-  font-size: 0.95rem;
-  line-height: 1.2;
-  font-weight: 800;
-}
-.pr-author span:last-child {
-  display: block;
-  margin-top: 0.12rem;
-  color: #6b7280;
-  font-size: 0.86rem;
-}
-.pr-read-meta {
-  white-space: nowrap;
-}
-.pr-article-alert {
-  padding: 0.72rem 1rem;
-  border-radius: 6px;
-  border-left: 3px solid #f59e0b;
-  background: #fff8ed;
-  color: #b45309;
-  font-size: 0.96rem;
-  line-height: 1.65;
-}
-.pr-article-head p {
-  margin: 0;
-  color: #111827;
-  font-size: 1.05rem;
-  line-height: 1.9;
-}
-.pr-article-cover {
-  width: 100%;
-  display: block;
-  margin-top: 0.45rem;
-  border-radius: 4px;
-  border: 1px solid #e5e7eb;
-  background: #f8fafc;
-}
 .pr-tool-directory {
-  margin-top: 3.4rem;
-  padding-top: 0.6rem;
-  border-top: 1px solid #e5e7eb;
+  margin-top: 0;
+  padding-top: 0;
 }
 .pr-tool-group {
   margin: 0 0 3.2rem;
@@ -1007,16 +912,6 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
   .pr-tools-section {
     padding: 2rem 1rem 4rem;
   }
-  .pr-article-head h1 {
-    font-size: 1.9rem;
-  }
-  .pr-article-meta {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-  .pr-read-meta {
-    white-space: normal;
-  }
   .pr-tool-shot {
     min-height: 260px;
     grid-template-columns: 1fr;
@@ -1026,18 +921,8 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
   .pr-tools-section {
     padding: 1.5rem 0.86rem 3.5rem;
   }
-  .pr-article-head {
-    gap: 1rem;
-  }
-  .pr-article-head h1 {
-    font-size: 1.55rem;
-  }
-  .pr-article-head p,
-  .pr-article-alert {
-    font-size: 0.95rem;
-  }
   .pr-tool-directory {
-    margin-top: 2.4rem;
+    margin-top: 0;
   }
   .pr-tool-group h2 {
     font-size: 1.12rem;
