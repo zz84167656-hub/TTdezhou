@@ -6,6 +6,8 @@ const assetsDir = path.join(root, "assets");
 const logoAsset = path.join(assetsDir, "pokerrookie-logo.png");
 const profileAsset = path.join(assetsDir, "pokerrookie-profile.jpg");
 const bilibiliUrl = "https://space.bilibili.com/443284341?spm_id_from=333.337.0.0";
+const contactEmail = "23294069@qq.com";
+const wechatId = "liuyao3643";
 const pages = {
   "index.html": "Travis Poker｜德州扑克高级实战解析与策略学习",
   "travis-poker.html": "Travis Poker｜德州扑克高级实战解析与策略学习",
@@ -61,6 +63,20 @@ for (const [fileName, title] of Object.entries(pages)) {
   assert(!html.includes('href="https://www.travispoker.com/free"'), `${fileName} must not route internal free link to remote site`);
   assert(!html.includes('href="https://www.travispoker.com/about"'), `${fileName} must not route internal about link to remote site`);
   assert(!html.includes('href="https://www.travispoker.com/lab"'), `${fileName} must not route internal lab link to remote site`);
+  assert(!html.includes("text-block-33"), `${fileName} must remove the old footer tagline`);
+  assert(!html.includes("Travispoker2020@gmail.com"), `${fileName} must not show the old footer email`);
+  assert(!html.includes("travispoker2020@gmail.com"), `${fileName} must not link the old footer email`);
+  assert(!html.includes("https://www.youtube.com/@travispoker"), `${fileName} must not show the old YouTube footer link`);
+  assert(!html.includes("YouTube"), `${fileName} must not show the old YouTube footer label`);
+  assert(!html.includes("\u00a9 2026 Travis Poker"), `${fileName} must not show the old footer copyright`);
+  assert(html.includes(contactEmail), `${fileName} must show the new footer email`);
+  assert(html.includes(`mailto:${contactEmail}`), `${fileName} must link the new footer email`);
+  assert(html.includes(wechatId), `${fileName} must show the WeChat ID`);
+  assert(html.includes("pokerrookie-wechat-copy"), `${fileName} must include the WeChat copy control`);
+  assert(html.includes("pokerrookie-wechat-icon"), `${fileName} must include the WeChat icon`);
+  assert(html.includes("pokerrookie-wechat-label"), `${fileName} must include the WeChat label`);
+  assert(html.includes('script id="pokerrookie-wechat-copy"'), `${fileName} must include the WeChat copy script`);
+  assert(html.includes("\u00a9 2026 PokerRookie"), `${fileName} must show the PokerRookie footer copyright`);
 }
 
 const home = read("index.html");
@@ -90,7 +106,7 @@ assert(download.includes("https://t.me/travispoker"), "Download page must keep t
 assert(download.includes("战队福利活动"), "Download page must include the lower benefits section");
 assert(download.includes("四条9+ / 同花顺"), "Download page must include the lower event benefit rules");
 assert(download.includes("加入飞机群组"), "Download page must include the lower Telegram group section");
-assert(download.includes("Travispoker2020@gmail.com"), "Download page must include the footer contact section");
+assert(download.includes(contactEmail), "Download page must include the updated footer contact section");
 
 const lab = read("lab.html");
 assert(lab.includes("https://travispoker.circle.so/checkout/travispoker_tier0?coupon_code=LAB25"), "LAB page must keep the Circle checkout link");
