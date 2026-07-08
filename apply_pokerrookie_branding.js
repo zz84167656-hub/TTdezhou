@@ -208,6 +208,44 @@ const css = `<style id="pokerrookie-branding">
   border-radius: 16px;
   background: #f4f4f2;
 }
+.gg-hero-img-card {
+  padding: 10px !important;
+  background: linear-gradient(145deg, #ffffff 0%, #fff7e6 100%) !important;
+  border-color: rgba(242, 185, 75, 0.42) !important;
+}
+.gg-event-img {
+  border-radius: 24px !important;
+  box-shadow: 0 20px 50px rgba(65, 20, 95, 0.18);
+}
+.gg-prize-box {
+  display: flex !important;
+  min-height: 96px;
+  padding: 17px 16px 18px !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.gg-prize-label {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0 !important;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(232, 67, 59, 0.08);
+  color: #e8433b !important;
+  font-size: 12px !important;
+  font-weight: 900;
+  line-height: 1 !important;
+  letter-spacing: 0.08em;
+}
+.gg-prize-box strong {
+  max-width: 260px;
+  font-size: 19px !important;
+  line-height: 1.24 !important;
+  letter-spacing: -0.02em;
+}
 @media (max-width: 991px) {
   .navbar_logo-link {
     min-width: 180px;
@@ -290,6 +328,14 @@ const css = `<style id="pokerrookie-branding">
   .pokerrookie-profile-photo {
     border-radius: 12px;
   }
+  .gg-prize-box {
+    min-height: 92px;
+  }
+  .gg-prize-box strong {
+    max-width: 100%;
+    font-size: 18px !important;
+    line-height: 1.28 !important;
+  }
   .footer .div-block-28 {
     width: 150px !important;
   }
@@ -308,6 +354,21 @@ const newEmail = "23294069@qq.com";
 const wechatId = "liuyao3643";
 const inviteCode = "long999";
 const kookUrl = "https://kook.vip/cyBSvz";
+const downloadPromoAsset = "assets/pokerrookie-download-promo.png";
+const prizeStrip = `<div class="gg-prize-strip">
+    <div class="gg-prize-box">
+      <span class="gg-prize-label">赛事权益</span>
+      <strong>每月高额保底战队赛免费参与</strong>
+    </div>
+    <div class="gg-prize-box">
+      <span class="gg-prize-label">现金奖励</span>
+      <strong>每月现金奖励上不封顶</strong>
+    </div>
+    <div class="gg-prize-box">
+      <span class="gg-prize-label">新人礼包</span>
+      <strong>新玩家免费送赏金赛门票</strong>
+    </div>
+  </div>`;
 const emailLink = `<a href="mailto:${newEmail}" class="link-block pokerrookie-email-link w-inline-block"><span class="pokerrookie-email-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span class="text-block-34 pokerrookie-email-label">${newEmail}</span></a>`;
 const wechatButton = `<button type="button" class="link-block-2 pokerrookie-wechat-copy" data-wechat="${wechatId}" aria-label="Copy WeChat ID ${wechatId}"><span class="pokerrookie-wechat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M9.5 4.2c-4.1 0-7.4 2.6-7.4 5.9 0 1.9 1.1 3.6 2.9 4.7l-.6 2.1 2.5-1.2c.8.2 1.7.4 2.6.4 4.1 0 7.4-2.6 7.4-5.9s-3.3-6-7.4-6zm-2.5 4.9c-.5 0-.9-.4-.9-.9s.4-.9.9-.9.9.4.9.9-.4.9-.9.9zm5.1 0c-.5 0-.9-.4-.9-.9s.4-.9.9-.9.9.4.9.9-.4.9-.9.9z"/><path d="M21.9 14.3c0-2.9-2.9-5.3-6.5-5.3h-.3c.1.4.2.8.2 1.2 0 3.8-3.8 6.8-8.4 6.8h-.5c1.1 1.6 3.3 2.7 5.8 2.7.8 0 1.5-.1 2.2-.3l2.1 1-.5-1.7c1.8-1 2.9-2.6 2.9-4.4zm-8.4-1c.4 0 .8.3.8.8s-.3.8-.8.8-.8-.3-.8-.8.4-.8.8-.8zm4.5 0c.4 0 .8.3.8.8s-.3.8-.8.8-.8-.3-.8-.8.4-.8.8-.8z"/></svg></span><span class="text-block-35 pokerrookie-wechat-label">${wechatId}</span></button>`;
 const footerScript = `<script id="pokerrookie-wechat-copy">
@@ -410,6 +471,8 @@ function replaceBrandText(html) {
 
 function replaceDownloadContent(html) {
   return html
+    .replace(/<img class="gg-event-img" src="[^"]+" alt="[^"]*">/g, `<img class="gg-event-img" src="${downloadPromoAsset}" alt="PokerRookie 战队多重福利海报">`)
+    .replace(/<div class="gg-prize-strip">[\s\S]*?(?=\n\s*<div class="gg-grid">)/g, `${prizeStrip}\n\n  `)
     .replace(/https:\/\/t\.me\/travispoker/g, kookUrl)
     .replace(/加入\s*TG\s*群/g, "加入KOOK群")
     .replace(/加入飞机群组/g, "加入KOOK群")

@@ -5,6 +5,7 @@ const root = __dirname;
 const assetsDir = path.join(root, "assets");
 const logoAsset = path.join(assetsDir, "pokerrookie-logo.png");
 const profileAsset = path.join(assetsDir, "pokerrookie-profile.jpg");
+const downloadPromoAsset = path.join(assetsDir, "pokerrookie-download-promo.png");
 const bilibiliUrl = "https://space.bilibili.com/443284341?spm_id_from=333.337.0.0";
 const contactEmail = "23294069@qq.com";
 const wechatId = "liuyao3643";
@@ -51,6 +52,7 @@ assert(md.includes("# 13. 验收标准"), "MD must include acceptance criteria")
 
 assert(fs.existsSync(logoAsset), "Missing PokerRookie logo asset");
 assert(fs.existsSync(profileAsset), "Missing PokerRookie profile photo asset");
+assert(fs.existsSync(downloadPromoAsset), "Missing PokerRookie download promo asset");
 
 for (const [fileName, title] of Object.entries(pages)) {
   const html = read(fileName);
@@ -111,6 +113,9 @@ assert(homeMirror.includes(bilibiliUrl), "travis-poker.html must mirror the Bili
 
 const download = read("download.html");
 assert(download.includes("https://ggpuke888.com/travispoker"), "Download page must keep the external GG Poker download link");
+assert(download.includes('src="assets/pokerrookie-download-promo.png"'), "Download page must use the local PokerRookie promo image");
+assert(download.includes("PokerRookie 战队多重福利海报"), "Download page promo image must have the updated alt text");
+assert(!download.includes("6a032e7b2e8d4641e876a9c6_Untitled-1.png"), "Download page must not use the old remote event image");
 assert(download.includes(kookUrl), "Download page must link to the KOOK group");
 assert(!download.includes("https://t.me/travispoker"), "Download page must not keep the old Telegram link");
 assert(download.includes("加入KOOK群"), "Download page must show the KOOK group label");
@@ -121,6 +126,10 @@ assert(!download.includes("TRAVISPOKER"), "Download page must remove the old inv
 assert(download.includes("每月高额保底战队赛免费参与"), "Download page must show the updated first prize box");
 assert(download.includes("每月现金奖励上不封顶"), "Download page must show the updated second prize box");
 assert(download.includes("新玩家免费送赏金赛门票"), "Download page must show the updated third prize box");
+assert(download.includes("gg-prize-label"), "Download page prize boxes must include small labels");
+assert(download.includes("赛事权益"), "Download page first prize box must include a small title");
+assert(download.includes("现金奖励"), "Download page second prize box must include a small title");
+assert(download.includes("新人礼包"), "Download page third prize box must include a small title");
 assert(!download.includes("18,888 CNY"), "Download page must remove the old prize amount");
 assert(!download.includes("6月13日"), "Download page must remove the old event date");
 assert(!download.includes("新人可参加"), "Download page must remove the old event eligibility label");
