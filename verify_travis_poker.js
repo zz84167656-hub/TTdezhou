@@ -74,6 +74,9 @@ for (const [fileName, title] of Object.entries(pages)) {
   assert(!html.includes("\u00a9 2026 Travis Poker"), `${fileName} must not show the old footer copyright`);
   assert(html.includes(contactEmail), `${fileName} must show the new footer email`);
   assert(html.includes(`mailto:${contactEmail}`), `${fileName} must link the new footer email`);
+  assert(html.includes("pokerrookie-email-link"), `${fileName} must include the email icon link`);
+  assert(html.includes("pokerrookie-email-icon"), `${fileName} must include the email icon`);
+  assert(html.includes("pokerrookie-email-label"), `${fileName} must include the email label`);
   assert(html.includes(wechatId), `${fileName} must show the WeChat ID`);
   assert(html.includes("pokerrookie-wechat-copy"), `${fileName} must include the WeChat copy control`);
   assert(html.includes("pokerrookie-wechat-icon"), `${fileName} must include the WeChat icon`);
