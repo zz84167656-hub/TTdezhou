@@ -94,6 +94,33 @@ const css = `<style id="pokerrookie-branding">
 .pokerrookie-wechat-label {
   transition: color 160ms ease;
 }
+.pokerrookie-hero-title-link {
+  display: inline-block !important;
+  position: relative;
+  margin-top: 18px;
+  max-width: 100%;
+  color: #050505 !important;
+  font-family: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-weight: 950;
+  line-height: 0.98;
+  text-decoration: none !important;
+  text-wrap: balance;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  box-shadow: inset 0 -0.14em 0 rgba(239, 63, 63, 0.16);
+  transition: color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+.pokerrookie-hero-title-link:hover {
+  color: #ef3f3f !important;
+  box-shadow: inset 0 -0.22em 0 rgba(239, 63, 63, 0.24);
+  transform: translateY(-2px);
+}
+.pokerrookie-hero-title-link:focus-visible {
+  outline: 3px solid rgba(239, 63, 63, 0.35);
+  outline-offset: 8px;
+  border-radius: 8px;
+}
 .pokerrookie-bili-link {
   display: flex !important;
   align-items: center !important;
@@ -274,6 +301,7 @@ const css = `<style id="pokerrookie-branding">
 </style>`;
 
 const profileCard = `<div class="choice-card is-red is-green pokerrookie-profile-card"><div class="pokerrookie-profile-copy"><div class="pokerrookie-profile-label">人物介绍</div><h1 class="pokerrookie-profile-title">PokerRookie</h1><div class="pokerrookie-profile-subtitle">B站知名Up主</div><p class="pokerrookie-profile-desc">国内顶尖德州扑克、奥马哈与混合游戏玩家，拥有APT、GOP、RDPT、KPC等赛事的十余个冠军头衔。</p></div><div class="pokerrookie-profile-media"><img class="pokerrookie-profile-photo" src="assets/pokerrookie-profile.jpg" alt="PokerRookie 人物照片" loading="lazy"/></div></div>`;
+const heroTitleLink = `<a href="download.html" class="text-block-40 pokerrookie-hero-title-link w-inline-block">和PokerRookie一起游戏<br/></a>`;
 const bilibiliLink = `<a href="https://space.bilibili.com/443284341?spm_id_from=333.337.0.0" class="pokerrookie-bili-link w-inline-block"><span>访问 PokerRookie 的 Bilibili 主页</span></a>`;
 
 const newEmail = "23294069@qq.com";
@@ -398,8 +426,10 @@ const improveCardPattern = /<div class="choice-card is-red"><div class="card-bad
 function replaceHome(html) {
   return html
     .replace(/<a\b(?=[^>]*class="[^"]*pokerrookie-bili-link)[\s\S]*?<\/a>/g, "")
-    .replace(/<div class="text-block-40">欢迎你的加入<br\/><\/div>/g, '<div class="text-block-40">和PokerRookie一起游戏<br/></div>')
-    .replace(/<div class="text-block-40">和PokerRookie一起游戏<br\/><\/div>/g, `<div class="text-block-40">和PokerRookie一起游戏<br/></div>${bilibiliLink}`)
+    .replace(/<a\b(?=[^>]*class="[^"]*pokerrookie-hero-title-link)[\s\S]*?<\/a>\s*/g, "")
+    .replace(/<div class="text-block-40">欢迎你的加入<br\/><\/div>\s*/g, "")
+    .replace(/<div class="text-block-40">和PokerRookie一起游戏<br\/><\/div>\s*/g, "")
+    .replace(/<div class="eyebrow-line"><\/div>/g, `<div class="eyebrow-line"></div>${heroTitleLink}${bilibiliLink}`)
     .replace(/<div class="choice-card is-red is-green">[\s\S]*?<div class="choice-card is-red">/, `${profileCard}<div class="choice-card is-red">`)
     .replace(improveCardPattern, "");
 }

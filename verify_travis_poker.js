@@ -90,6 +90,8 @@ assert(home.includes('href="download.html"'), "Home CTA/nav must link to local d
 assert(home.includes('href="free.html"'), "Home nav must link to local free page");
 assert(home.includes('href="about.html"'), "Home nav must link to local about page");
 assert(home.includes("和PokerRookie一起游戏"), "Home hero title must be updated");
+assert(home.includes('href="download.html" class="text-block-40 pokerrookie-hero-title-link w-inline-block"'), "Home hero title must link to the download page");
+assert(home.includes("pokerrookie-hero-title-link"), "Home hero title must include the clickable title styling");
 assert(home.includes(bilibiliUrl), "Home must include the PokerRookie Bilibili profile link");
 assert(home.includes("pokerrookie-bili-link"), "Home must style the Bilibili profile link");
 assert(home.includes("人物介绍"), "Home profile card must include the intro label");
@@ -104,6 +106,7 @@ assert(!home.includes('<h1 class="card-title">认真提升</h1>'), "Home must re
 assert(!home.includes("研究更多实战分析"), "Home must remove the improvement card button");
 
 const homeMirror = read("travis-poker.html");
+assert(homeMirror.includes('href="download.html" class="text-block-40 pokerrookie-hero-title-link w-inline-block"'), "travis-poker.html hero title must link to the download page");
 assert(homeMirror.includes(bilibiliUrl), "travis-poker.html must mirror the Bilibili profile link");
 
 const download = read("download.html");
