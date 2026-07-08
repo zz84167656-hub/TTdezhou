@@ -735,20 +735,16 @@ function normalizeToolTag(tag) {
   return tag.replace(/\s*\/\s*/g, "/");
 }
 
+function toolImageSrc(toolName) {
+  return `assets/${encodeURIComponent(toolName)}.webp`;
+}
+
 function renderPracticalToolEntries(tools, accent) {
   return tools.map((tool, index) => `<article class="pr-tool-entry" style="--tool-accent:${accent};">
     <h3>${index + 1}. ${tool.name} (${normalizeToolTag(tool.tag)})</h3>
     <figure class="pr-tool-figure" role="img" aria-label="${tool.name} 工具示意图">
       <div class="pr-tool-shot">
-        <div class="pr-shot-matrix" aria-hidden="true"></div>
-        <div class="pr-shot-chart" aria-hidden="true">
-          <svg viewBox="0 0 360 190" preserveAspectRatio="none">
-            <path d="M18 46 C92 66 136 116 186 94 C234 72 279 144 342 157"/>
-            <path d="M18 82 C86 102 136 142 188 126 C240 112 282 158 342 171"/>
-          </svg>
-          <div class="pr-shot-controls"><span></span><span></span><span></span><span></span></div>
-        </div>
-        <div class="pr-shot-mark" aria-hidden="true">${tool.mark}</div>
+        <img class="pr-tool-image" src="${toolImageSrc(tool.name)}" alt="${tool.name} 工具截图" loading="lazy"/>
       </div>
     </figure>
     <ul class="pr-tool-points">
@@ -821,79 +817,17 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
 }
 .pr-tool-shot {
   position: relative;
-  display: grid;
-  grid-template-columns: 0.92fr 1.08fr;
-  gap: 1rem;
-  min-height: 310px;
-  padding: 1.2rem;
+  display: block;
+  width: 100%;
   overflow: hidden;
   border: 1px solid #d7dce3;
   background: #ffffff;
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
 }
-.pr-tool-shot::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(248, 250, 252, 0.2), rgba(248, 250, 252, 0.72));
-  pointer-events: none;
-}
-.pr-shot-matrix,
-.pr-shot-chart {
-  position: relative;
-  z-index: 1;
-  min-height: 220px;
-  border: 1px solid #cfd6df;
-  background: #f8fafc;
-}
-.pr-shot-matrix {
-  background:
-    linear-gradient(90deg, rgba(17, 24, 39, 0.18) 1px, transparent 1px),
-    linear-gradient(rgba(17, 24, 39, 0.18) 1px, transparent 1px),
-    linear-gradient(135deg, color-mix(in srgb, var(--tool-accent), #38bdf8 44%) 0 38%, #111827 38% 58%, #86efac 58% 100%);
-  background-size: 24px 24px, 24px 24px, 100% 100%;
-}
-.pr-shot-chart {
-  display: grid;
-  align-content: end;
-  padding: 1rem;
-}
-.pr-shot-chart svg {
+.pr-tool-image {
+  display: block;
   width: 100%;
-  height: 150px;
-}
-.pr-shot-chart path {
-  fill: none;
-  stroke-width: 8;
-  stroke-linecap: round;
-}
-.pr-shot-chart path:first-child {
-  stroke: #0ea5e9;
-}
-.pr-shot-chart path:nth-child(2) {
-  stroke: #84cc16;
-}
-.pr-shot-controls {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.45rem;
-}
-.pr-shot-controls span {
-  height: 14px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--tool-accent), #e5e7eb 68%);
-}
-.pr-shot-mark {
-  position: absolute;
-  right: 1.2rem;
-  bottom: 1rem;
-  z-index: 2;
-  padding: 0.35rem 0.55rem;
-  border: 2px solid color-mix(in srgb, var(--tool-accent), white 18%);
-  background: #ffffff;
-  color: var(--tool-accent);
-  font-size: 0.82rem;
-  font-weight: 900;
+  height: auto;
 }
 .pr-tool-points {
   margin: 0;
@@ -913,8 +847,7 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
     padding: 2rem 1rem 4rem;
   }
   .pr-tool-shot {
-    min-height: 260px;
-    grid-template-columns: 1fr;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
   }
 }
 @media (max-width: 520px) {
@@ -931,16 +864,7 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
     font-size: 1.04rem;
   }
   .pr-tool-shot {
-    min-height: 210px;
-    padding: 0.8rem;
-    gap: 0.7rem;
-  }
-  .pr-shot-matrix,
-  .pr-shot-chart {
-    min-height: 124px;
-  }
-  .pr-shot-chart svg {
-    height: 86px;
+    box-shadow: none;
   }
   .pr-tool-points {
     font-size: 0.95rem;

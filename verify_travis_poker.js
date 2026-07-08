@@ -16,6 +16,14 @@ const kookUrl = "https://kook.vip/cyBSvz";
 const ggDownloadUrl = "http://playgg8.fun/long999";
 const logoVersion = crypto.createHash("sha1").update(fs.readFileSync(logoAsset)).digest("hex").slice(0, 8);
 const logoSrc = `assets/pokerrookie-logo.png?v=${logoVersion}`;
+const toolImageFiles = [
+  "GTO+.webp",
+  "PioSolver.webp",
+  "ALPHAX.webp",
+  "PokerSnowie.webp",
+  "Hand2Note.webp",
+  "PokerTracker 4.webp"
+];
 const pages = {
   "index.html": "PokerRookie｜德州扑克高级实战解析与策略学习",
   "travis-poker.html": "PokerRookie｜德州扑克高级实战解析与策略学习",
@@ -59,6 +67,9 @@ assert(fs.existsSync(logoAsset), "Missing PokerRookie logo asset");
 assert(fs.existsSync(profileAsset), "Missing PokerRookie profile photo asset");
 assert(fs.existsSync(downloadPromoAsset), "Missing PokerRookie download promo asset");
 assert(fs.existsSync(sloganAsset), "Missing PokerRookie hero slogan asset");
+for (const fileName of toolImageFiles) {
+  assert(fs.existsSync(path.join(assetsDir, fileName)), `Missing tools image asset: ${fileName}`);
+}
 
 for (const [fileName, title] of Object.entries(pages)) {
   const html = read(fileName);
@@ -163,7 +174,11 @@ assert(about.includes("一、实战模拟类：低成本试错神器"), "Tools p
 assert(about.includes("1. GTO+ (付费/专业向)"), "Tools page must use numbered tool headings");
 assert(about.includes("pr-tool-entry"), "Tools page must use article-style tool entries");
 assert(about.includes("pr-tool-figure"), "Tools page must include a large figure for each tool");
+assert(about.includes("pr-tool-image"), "Tools page must render real local tool images");
 assert(about.includes("pr-tool-points"), "Tools page must use bullet-point tool explanations");
+for (const fileName of toolImageFiles) {
+  assert(about.includes(`assets/${encodeURIComponent(fileName)}`), `Tools page must reference ${fileName}`);
+}
 assert(about.includes("实战模拟类"), "Tools page must include the simulation tools group");
 assert(about.includes("AI训练类"), "Tools page must include the AI training tools group");
 assert(about.includes("数据分析类"), "Tools page must include the data analysis tools group");
@@ -185,6 +200,8 @@ assert(!about.includes("code-embed w-embed pokerrookie-practical-tools-embed"), 
 assert(!about.includes("background: #0d1117"), "Tools page must not use the old dark tools design");
 assert(!about.includes("pr-tool-card"), "Tools page must not use the old card grid tools design");
 assert(!about.includes("pr-directory-head"), "Tools page must not use the old directory header block");
+assert(!about.includes("pr-shot-matrix"), "Tools page must not use generated placeholder tool art");
+assert(!about.includes("pr-shot-chart"), "Tools page must not use generated placeholder chart art");
 assert(!about.includes("把图片上的水印处理掉"), "Tools page must not show internal watermark-removal notes");
 
 const download = read("download.html");
