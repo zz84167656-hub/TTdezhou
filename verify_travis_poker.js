@@ -129,6 +129,8 @@ const free = read("free.html");
 assert(free.includes("pokerrookie-video-teaching-embed"), "Free page must include the video teaching module");
 assert(free.includes('<div class="w-embed pokerrookie-video-teaching-embed">'), "Free page video teaching module must not use hidden Webflow code-embed class");
 assert(free.includes("视频教学"), "Free page third module must be renamed to video teaching");
+assert(!free.includes("preflopchart.netlify.app"), "Free page must remove the old preflop chart iframe block");
+assert(!free.includes('<div class="w-embed w-iframe">'), "Free page must remove the old embedded iframe wrapper");
 assert(free.includes("WSOP"), "Free page video teaching module must include WSOP");
 assert(free.includes("HighStakesPoker"), "Free page video teaching module must include HighStakesPoker");
 assert(free.includes("Hustler Casino Live"), "Free page video teaching module must include Hustler Casino Live");

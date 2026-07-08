@@ -1018,7 +1018,7 @@ function replaceDownloadContent(html) {
 }
 
 function replaceFreeContent(html) {
-  return html.replace(/(<main class="main-wrapper"><div class="w-embed w-iframe">[\s\S]*?<\/div><\/div>)[\s\S]*?(?=<\/main>)/, `$1${freeResourceModules}`);
+  return html.replace(/<main class="main-wrapper">[\s\S]*?<\/main>/, `<main class="main-wrapper">${freeResourceModules}</main>`);
 }
 
 function replaceAboutContent(html) {
