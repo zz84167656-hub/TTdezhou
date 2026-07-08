@@ -299,11 +299,12 @@
 }
 @media (max-width: 767px) {
   .navbar_logo-link {
-    min-width: 270px;
+    min-width: 0;
+    flex: 0 1 auto;
   }
   .navbar2_logo.pokerrookie-nav-logo {
-    width: min(270px, calc(100vw - 82px)) !important;
-    max-width: min(270px, calc(100vw - 82px)) !important;
+    width: clamp(142px, 45vw, 176px) !important;
+    max-width: calc(100vw - 112px) !important;
   }
   .pokerrookie-profile-card {
     min-height: 0;
