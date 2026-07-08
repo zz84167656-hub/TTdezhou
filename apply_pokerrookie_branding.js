@@ -250,6 +250,8 @@ const bilibiliLink = `<a href="https://space.bilibili.com/443284341?spm_id_from=
 
 const newEmail = "23294069@qq.com";
 const wechatId = "liuyao3643";
+const inviteCode = "long999";
+const kookUrl = "https://kook.vip/cyBSvz";
 const wechatButton = `<button type="button" class="link-block-2 pokerrookie-wechat-copy" data-wechat="${wechatId}" aria-label="Copy WeChat ID ${wechatId}"><span class="pokerrookie-wechat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M9.5 4.2c-4.1 0-7.4 2.6-7.4 5.9 0 1.9 1.1 3.6 2.9 4.7l-.6 2.1 2.5-1.2c.8.2 1.7.4 2.6.4 4.1 0 7.4-2.6 7.4-5.9s-3.3-6-7.4-6zm-2.5 4.9c-.5 0-.9-.4-.9-.9s.4-.9.9-.9.9.4.9.9-.4.9-.9.9zm5.1 0c-.5 0-.9-.4-.9-.9s.4-.9.9-.9.9.4.9.9-.4.9-.9.9z"/><path d="M21.9 14.3c0-2.9-2.9-5.3-6.5-5.3h-.3c.1.4.2.8.2 1.2 0 3.8-3.8 6.8-8.4 6.8h-.5c1.1 1.6 3.3 2.7 5.8 2.7.8 0 1.5-.1 2.2-.3l2.1 1-.5-1.7c1.8-1 2.9-2.6 2.9-4.4zm-8.4-1c.4 0 .8.3.8.8s-.3.8-.8.8-.8-.3-.8-.8.4-.8.8-.8zm4.5 0c.4 0 .8.3.8.8s-.3.8-.8.8-.8-.3-.8-.8.4-.8.8-.8z"/></svg></span><span class="text-block-35 pokerrookie-wechat-label">${wechatId}</span></button>`;
 const footerScript = `<script id="pokerrookie-wechat-copy">
 (function() {
@@ -341,6 +343,27 @@ function replaceFooter(html) {
     .replace(/<div class="text-block-32">(?:&copy;|\u00a9) 2026 (?:Travis Poker|PokerRookie)<\/div>/g, '<div class="text-block-32">\u00a9 2026 PokerRookie</div>');
 }
 
+function replaceBrandText(html) {
+  return html
+    .replace(/Travis\s*战队/g, "我的战队")
+    .replace(/TravisPoker/g, "PokerRookie")
+    .replace(/Travis Poker/g, "PokerRookie")
+    .replace(/Travis/g, "PokerRookie");
+}
+
+function replaceDownloadContent(html) {
+  return html
+    .replace(/https:\/\/t\.me\/travispoker/g, kookUrl)
+    .replace(/加入\s*TG\s*群/g, "加入KOOK群")
+    .replace(/加入飞机群组/g, "加入KOOK群")
+    .replace(/TRAVISPOKER/g, inviteCode)
+    .replace(/<strong>18,888 CNY<\/strong>\s*<span>战队福利赛保底<\/span>/g, "<strong>每月高额保底战队赛免费参与</strong>")
+    .replace(/<strong>6月13日<\/strong>\s*<span>北京时间 20:00<\/span>/g, "<strong>每月现金奖励上不封顶</strong>")
+    .replace(/<strong>新人可参加<\/strong>\s*<span>有效供水玩家限定<\/span>/g, "<strong>新玩家免费送赏金赛门票</strong>")
+    .replace(/如果你已经下载过游戏，重新注册时必须填写 <strong>long999<\/strong> 折扣码，才能加入 (?:Travis|PokerRookie|我的) 战队。/g, "如果你已经下载过游戏，重新注册时必须填写 <strong>long999</strong> 折扣码，才能加入我的战队。")
+    .replace(/<span>① 四条9\+ \/ 同花顺：送1买入（每月5次）<\/span><br>\s*<span>② 锦标赛进 FT：送100红包（每月5次）<\/span>/g, "<span>1.击中四条及以上牌型可获得一个买入，无限领取</span><br>\n        <span>2.新用户注册可获赠赏金赛门票</span><br>\n        <span>3.新用户完成首存再加赠一张门票</span>");
+}
+
 const improveCardPattern = /<div class="choice-card is-red"><div class="card-badge">适合想认真提升的人<\/div>[\s\S]*?<div class="card-note">适合想长期提升的玩家<\/div><\/div>/g;
 
 function replaceHome(html) {
@@ -356,9 +379,13 @@ for (const fileName of htmlFiles) {
   const filePath = path.join(root, fileName);
   let html = fs.readFileSync(filePath, "utf8");
   html = ensureFooterScript(ensureCss(replaceFooter(removeLabNav(replaceLogos(html)))));
+  if (fileName === "download.html") {
+    html = replaceDownloadContent(html);
+  }
   if (fileName === "index.html" || fileName === "travis-poker.html") {
     html = replaceHome(html);
   }
+  html = replaceBrandText(html);
   fs.writeFileSync(filePath, html, "utf8");
   console.log(`Applied PokerRookie branding to ${fileName}`);
 }

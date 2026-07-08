@@ -8,13 +8,15 @@ const profileAsset = path.join(assetsDir, "pokerrookie-profile.jpg");
 const bilibiliUrl = "https://space.bilibili.com/443284341?spm_id_from=333.337.0.0";
 const contactEmail = "23294069@qq.com";
 const wechatId = "liuyao3643";
+const inviteCode = "long999";
+const kookUrl = "https://kook.vip/cyBSvz";
 const pages = {
-  "index.html": "Travis Poker｜德州扑克高级实战解析与策略学习",
-  "travis-poker.html": "Travis Poker｜德州扑克高级实战解析与策略学习",
-  "download.html": "游戏下载｜Travis Poker",
-  "free.html": "免费资源｜Travis Poker",
-  "about.html": "Travis Poker｜关于我",
-  "lab.html": "Travis Poker LAB"
+  "index.html": "PokerRookie｜德州扑克高级实战解析与策略学习",
+  "travis-poker.html": "PokerRookie｜德州扑克高级实战解析与策略学习",
+  "download.html": "游戏下载｜PokerRookie",
+  "free.html": "免费资源｜PokerRookie",
+  "about.html": "PokerRookie｜关于我",
+  "lab.html": "PokerRookie LAB"
 };
 
 function assert(condition, message) {
@@ -54,6 +56,7 @@ for (const [fileName, title] of Object.entries(pages)) {
   const html = read(fileName);
   assert(html.includes("<!doctype html>") || html.includes("<!DOCTYPE html>"), `${fileName} must be a complete document`);
   assert(html.includes(title), `${fileName} title/content must match the reference page`);
+  assert(!html.includes("Travis"), `${fileName} must not show the old Travis brand text`);
   assert(html.includes("assets/pokerrookie-logo.png"), `${fileName} must use the PokerRookie logo`);
   assert(!html.includes('class="navbar_link lab'), `${fileName} must not show Poker LAB in the nav`);
   assert(!html.includes(">Poker LAB</a>"), `${fileName} must not include the Poker LAB nav link`);
@@ -102,13 +105,29 @@ assert(homeMirror.includes(bilibiliUrl), "travis-poker.html must mirror the Bili
 
 const download = read("download.html");
 assert(download.includes("https://ggpuke888.com/travispoker"), "Download page must keep the external GG Poker download link");
-assert(download.includes("https://t.me/travispoker"), "Download page must keep the Telegram link");
+assert(download.includes(kookUrl), "Download page must link to the KOOK group");
+assert(!download.includes("https://t.me/travispoker"), "Download page must not keep the old Telegram link");
+assert(download.includes("加入KOOK群"), "Download page must show the KOOK group label");
+assert(!download.includes("加入 TG 群"), "Download page must remove the old TG group label");
+assert(!download.includes("加入飞机群组"), "Download page must remove the old Telegram group heading");
+assert(download.includes(inviteCode), "Download page must show the updated invite code");
+assert(!download.includes("TRAVISPOKER"), "Download page must remove the old invite code");
+assert(download.includes("每月高额保底战队赛免费参与"), "Download page must show the updated first prize box");
+assert(download.includes("每月现金奖励上不封顶"), "Download page must show the updated second prize box");
+assert(download.includes("新玩家免费送赏金赛门票"), "Download page must show the updated third prize box");
+assert(!download.includes("18,888 CNY"), "Download page must remove the old prize amount");
+assert(!download.includes("6月13日"), "Download page must remove the old event date");
+assert(!download.includes("新人可参加"), "Download page must remove the old event eligibility label");
+assert(download.includes("如果你已经下载过游戏，重新注册时必须填写 <strong>long999</strong> 折扣码，才能加入我的战队。"), "Download page must show the updated re-registration copy");
+assert(download.includes("1.击中四条及以上牌型可获得一个买入，无限领取"), "Download page must show the updated first benefit rule");
+assert(download.includes("2.新用户注册可获赠赏金赛门票"), "Download page must show the updated second benefit rule");
+assert(download.includes("3.新用户完成首存再加赠一张门票"), "Download page must show the updated third benefit rule");
+assert(!download.includes("四条9+ / 同花顺：送1买入（每月5次）"), "Download page must remove the old first benefit rule");
+assert(!download.includes("锦标赛进 FT：送100红包（每月5次）"), "Download page must remove the old second benefit rule");
 assert(download.includes("战队福利活动"), "Download page must include the lower benefits section");
-assert(download.includes("四条9+ / 同花顺"), "Download page must include the lower event benefit rules");
-assert(download.includes("加入飞机群组"), "Download page must include the lower Telegram group section");
 assert(download.includes(contactEmail), "Download page must include the updated footer contact section");
 
 const lab = read("lab.html");
 assert(lab.includes("https://travispoker.circle.so/checkout/travispoker_tier0?coupon_code=LAB25"), "LAB page must keep the Circle checkout link");
 
-console.log("All Travis Poker multi-page checks passed.");
+console.log("All PokerRookie multi-page checks passed.");
