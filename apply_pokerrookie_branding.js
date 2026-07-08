@@ -95,31 +95,32 @@ const css = `<style id="pokerrookie-branding">
   transition: color 160ms ease;
 }
 .pokerrookie-hero-title-link {
-  display: inline-block !important;
-  position: relative;
-  margin-top: 18px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: min(92vw, 920px);
   max-width: 100%;
-  color: #050505 !important;
-  font-family: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-weight: 950;
-  line-height: 0.98;
+  margin: 18px auto 0;
+  line-height: 0;
   text-decoration: none !important;
-  text-wrap: balance;
-  word-break: keep-all;
-  overflow-wrap: anywhere;
   cursor: pointer;
-  box-shadow: inset 0 -0.14em 0 rgba(239, 63, 63, 0.16);
-  transition: color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  transition: transform 160ms ease, filter 160ms ease;
 }
 .pokerrookie-hero-title-link:hover {
-  color: #ef3f3f !important;
-  box-shadow: inset 0 -0.22em 0 rgba(239, 63, 63, 0.24);
   transform: translateY(-2px);
+  filter: drop-shadow(0 10px 18px rgba(239, 63, 63, 0.16));
 }
 .pokerrookie-hero-title-link:focus-visible {
   outline: 3px solid rgba(239, 63, 63, 0.35);
   outline-offset: 8px;
   border-radius: 8px;
+}
+.pokerrookie-hero-slogan {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 .pokerrookie-bili-link {
   display: flex !important;
@@ -347,7 +348,7 @@ const css = `<style id="pokerrookie-branding">
 </style>`;
 
 const profileCard = `<div class="choice-card is-red is-green pokerrookie-profile-card"><div class="pokerrookie-profile-copy"><div class="pokerrookie-profile-label">人物介绍</div><h1 class="pokerrookie-profile-title">PokerRookie</h1><div class="pokerrookie-profile-subtitle">B站知名Up主</div><p class="pokerrookie-profile-desc">国内顶尖德州扑克、奥马哈与混合游戏玩家，拥有APT、GOP、RDPT、KPC等赛事的十余个冠军头衔。</p></div><div class="pokerrookie-profile-media"><img class="pokerrookie-profile-photo" src="assets/pokerrookie-profile.jpg" alt="PokerRookie 人物照片" loading="lazy"/></div></div>`;
-const heroTitleLink = `<a href="download.html" class="text-block-40 pokerrookie-hero-title-link w-inline-block">和PokerRookie一起游戏<br/></a>`;
+const heroTitleLink = `<a href="download.html" class="pokerrookie-hero-title-link w-inline-block" aria-label="下载游戏"><img class="pokerrookie-hero-slogan" src="assets/sologan.webp" alt="和PokerRookie一起游戏" loading="eager"/></a>`;
 const bilibiliLink = `<a href="https://space.bilibili.com/443284341?spm_id_from=333.337.0.0" class="pokerrookie-bili-link w-inline-block"><span>访问 PokerRookie 的 Bilibili 主页</span></a>`;
 
 const newEmail = "23294069@qq.com";
