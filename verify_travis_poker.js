@@ -176,7 +176,8 @@ assert(!free.includes('<div class="pr-video-label">精选视频</div>'), "Free p
 assert(!free.includes("精选视频、"), "Free page header label must not include punctuation");
 assert(free.includes("pr-free-download-float"), "Free page must include the floating download address CTA");
 assert(free.includes(`class="pr-free-download-float" href="${ggDownloadUrl}" target="_blank" rel="noopener"`), "Free page floating download CTA must match the main download URL");
-assert(free.includes(">下载地址</a>"), "Free page floating download CTA must show the requested label");
+assert(free.includes(">下载游戏</a>"), "Free page floating download CTA must show the requested label");
+assert(!free.includes(">下载地址</a>"), "Free page floating download CTA must not keep the old label");
 assert(free.includes("aspect-ratio: 49 / 20;"), "Free page PC video covers must use a 49:20 image ratio");
 assert(!free.includes("<h2>视频教学</h2>"), "Free page must remove the video teaching headline");
 assert(!free.includes("images.unsplash.com"), "Free page must not use remote placeholder video images");

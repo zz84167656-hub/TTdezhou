@@ -1052,7 +1052,7 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
 }
 </style></div>`;
 
-const freeDownloadFloatCta = `<a class="pr-free-download-float" href="${ggDownloadUrl}" target="_blank" rel="noopener" aria-label="下载地址">下载地址</a>`;
+const freeDownloadFloatCta = `<a class="pr-free-download-float" href="${ggDownloadUrl}" target="_blank" rel="noopener" aria-label="下载游戏">下载游戏</a>`;
 const freeResourceModules = `${videoTeachingSection}${freeDownloadFloatCta}`;
 
 function ensureCss(html) {
