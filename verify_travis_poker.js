@@ -163,7 +163,9 @@ assert(free.includes("pokerrookie-video-teaching-embed"), "Free page must includ
 assert(free.includes('<div class="w-embed pokerrookie-video-teaching-embed">'), "Free page video teaching module must not use hidden Webflow code-embed class");
 assert(free.includes("columns: 2 360px;"), "Free page video cards must use staggered columns instead of empty grid placeholders");
 assert(free.includes("break-inside: avoid;"), "Free page video cards must avoid splitting across staggered columns");
-assert(free.includes('<div class="pr-video-label">精选视频、</div>'), "Free page header label must be selected videos");
+assert(free.includes('<div class="pr-video-label">精选视频</div>'), "Free page header label must be selected videos");
+assert(!free.includes("精选视频、"), "Free page header label must not include punctuation");
+assert(free.includes("aspect-ratio: 49 / 20;"), "Free page PC video covers must use a 49:20 image ratio");
 assert(!free.includes("<h2>视频教学</h2>"), "Free page must remove the video teaching headline");
 assert(!free.includes("images.unsplash.com"), "Free page must not use remote placeholder video images");
 for (const fileName of freeVideoImageFiles) {
