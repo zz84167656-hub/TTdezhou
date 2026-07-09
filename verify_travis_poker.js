@@ -96,6 +96,10 @@ for (const [fileName, title] of Object.entries(pages)) {
   assert(html.includes("assets/pokerrookie-logo.png"), `${fileName} must use the PokerRookie logo`);
   assert(html.includes(logoSrc), `${fileName} must use the cache-busted PokerRookie logo`);
   assert(!html.includes('src="assets/pokerrookie-logo.png"'), `${fileName} must not use the unversioned PokerRookie logo path`);
+  assert(html.includes("--pokerrookie-font-sans"), `${fileName} must use the unified PokerRookie font stack`);
+  assert(html.includes("body *:not(svg):not(path)"), `${fileName} must override mixed Webflow font families`);
+  const brandingCss = (html.match(/<style id="pokerrookie-branding">[\s\S]*?<\/style>/) || [""])[0];
+  assert(!brandingCss.includes("Instrument Serif"), `${fileName} PokerRookie branding CSS must not use serif display fonts`);
   assert(html.includes(".main-wrapper {\n  border: 0 !important;"), `${fileName} must remove the generated main wrapper border`);
   assert(!html.includes('class="navbar_link lab'), `${fileName} must not show Poker LAB in the nav`);
   assert(!html.includes(">Poker LAB</a>"), `${fileName} must not include the Poker LAB nav link`);
