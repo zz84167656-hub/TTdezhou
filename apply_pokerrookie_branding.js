@@ -19,7 +19,7 @@ function versionedAsset(fileName) {
     ? crypto.createHash("sha1").update(fs.readFileSync(filePath)).digest("hex").slice(0, 8)
     : "missing";
 
-  return `assets/${fileName}?v=${version}`;
+  return `assets/${encodeURIComponent(fileName)}?v=${version}`;
 }
 
 const logoSrc = versionedAsset("pokerrookie-logo.png");
@@ -379,7 +379,7 @@ const videoTeachingGroups = [
   {
     title: "WSOP",
     kicker: "世界大赛精选",
-    image: "https://images.unsplash.com/photo-1670251400844-26c200b75a0f?auto=format&fit=crop&w=1200&q=75",
+    image: versionedAsset("wsop.webp"),
     links: [
       ["2022WSOP金手链系列赛", "https://space.bilibili.com/443284341/lists/459974?type=season"],
       ["2022WSOP主赛", "https://space.bilibili.com/443284341/lists/483527?type=season"],
@@ -392,7 +392,7 @@ const videoTeachingGroups = [
   {
     title: "HighStakesPoker",
     kicker: "高额桌经典季",
-    image: "https://images.unsplash.com/photo-1518133120397-258d5eb470c6?auto=format&fit=crop&w=1200&q=75",
+    image: versionedAsset("HighStakesPoker.webp"),
     links: [
       ["第九季", "https://space.bilibili.com/443284341/lists/210103?type=season"],
       ["第十季", "https://space.bilibili.com/443284341/lists/1050475?type=season"],
@@ -406,7 +406,7 @@ const videoTeachingGroups = [
   {
     title: "Hustler Casino Live",
     kicker: "直播名局复盘",
-    image: "https://images.unsplash.com/photo-1512767254318-423c816efbf3?auto=format&fit=crop&w=1200&q=75",
+    image: versionedAsset("Hustler Casino Live.webp"),
     links: [
       ["超高额之周S1", "https://space.bilibili.com/443284341/lists/657555?type=season"],
       ["超高额之周S2", "https://space.bilibili.com/443284341/lists/939271?type=season"],
@@ -419,7 +419,7 @@ const videoTeachingGroups = [
   {
     title: "传奇扑克",
     kicker: "现金桌与锦标赛",
-    image: "https://images.unsplash.com/photo-1518133196839-3aa1219f671d?auto=format&fit=crop&w=1200&q=75",
+    image: versionedAsset("chuanqipuke.webp"),
     links: [
       ["2023传奇扑克现金桌", "https://space.bilibili.com/443284341/lists/1417811?type=season"],
       ["2024传奇扑克现金桌", "https://space.bilibili.com/443284341/lists/2178695?type=season"],
@@ -436,7 +436,7 @@ const videoTeachingGroups = [
   {
     title: "PokerRookie精选",
     kicker: "实战与闲聊合集",
-    image: "https://images.unsplash.com/photo-1719228159232-48608b807a58?auto=format&fit=crop&w=1200&q=75",
+    image: versionedAsset("PokerRookie.webp"),
     links: [
       ["PokerRookie的扑克之旅", "https://space.bilibili.com/443284341/lists/6881653?type=season"],
       ["GG扑克超级百万赛", "https://space.bilibili.com/443284341/lists/488529?type=season"],

@@ -24,6 +24,13 @@ const toolImageFiles = [
   "Hand2Note.webp",
   "PokerTracker 4.webp"
 ];
+const freeVideoImageFiles = [
+  "wsop.webp",
+  "HighStakesPoker.webp",
+  "Hustler Casino Live.webp",
+  "chuanqipuke.webp",
+  "PokerRookie.webp"
+];
 const pages = {
   "index.html": "PokerRookie｜德州扑克高级实战解析与策略学习",
   "travis-poker.html": "PokerRookie｜德州扑克高级实战解析与策略学习",
@@ -69,6 +76,9 @@ assert(fs.existsSync(downloadPromoAsset), "Missing PokerRookie download promo as
 assert(fs.existsSync(sloganAsset), "Missing PokerRookie hero slogan asset");
 for (const fileName of toolImageFiles) {
   assert(fs.existsSync(path.join(assetsDir, fileName)), `Missing tools image asset: ${fileName}`);
+}
+for (const fileName of freeVideoImageFiles) {
+  assert(fs.existsSync(path.join(assetsDir, fileName)), `Missing free video image asset: ${fileName}`);
 }
 
 for (const [fileName, title] of Object.entries(pages)) {
@@ -144,6 +154,12 @@ assert(free.includes("columns: 2 360px;"), "Free page video cards must use stagg
 assert(free.includes("break-inside: avoid;"), "Free page video cards must avoid splitting across staggered columns");
 assert(free.includes('<div class="pr-video-label">精选视频、</div>'), "Free page header label must be selected videos");
 assert(!free.includes("<h2>视频教学</h2>"), "Free page must remove the video teaching headline");
+assert(!free.includes("images.unsplash.com"), "Free page must not use remote placeholder video images");
+for (const fileName of freeVideoImageFiles) {
+  const version = crypto.createHash("sha1").update(fs.readFileSync(path.join(assetsDir, fileName))).digest("hex").slice(0, 8);
+  const assetUrl = `assets/${encodeURIComponent(fileName)}?v=${version}`;
+  assert(free.includes(assetUrl), `Free page must reference local video image ${fileName}`);
+}
 assert(!free.includes("preflopchart.netlify.app"), "Free page must remove the old preflop chart iframe block");
 assert(!free.includes('<div class="w-embed w-iframe">'), "Free page must remove the old embedded iframe wrapper");
 assert(free.includes("WSOP"), "Free page video teaching module must include WSOP");
