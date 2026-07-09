@@ -63,10 +63,29 @@ body *:not(svg):not(path) {
   height: auto !important;
   object-fit: contain !important;
   display: block !important;
-  margin-bottom: 14px;
+  margin-bottom: 0;
 }
 .footer .div-block-28 {
   width: 190px !important;
+}
+.footer .div-block-27 {
+  display: flex !important;
+  width: 100%;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 32px;
+}
+.footer .div-block-29 {
+  display: flex !important;
+  width: auto !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 14px 26px;
+  flex-wrap: wrap;
+}
+.footer .div-block-30 {
+  margin-top: 22px;
 }
 .pokerrookie-email-link {
   display: inline-flex !important;
@@ -377,13 +396,24 @@ body *:not(svg):not(path) {
   .pokerrookie-footer-logo {
     width: 140px !important;
     max-width: 140px !important;
+    margin: 0 auto;
+  }
+  .footer .div-block-27 {
+    flex-direction: column;
+    justify-content: center !important;
+    gap: 18px;
+    text-align: center;
+  }
+  .footer .div-block-29 {
+    justify-content: center !important;
+    gap: 12px 18px;
   }
 }
 </style>`;
 
 const profileCard = `<div class="choice-card is-red is-green pokerrookie-profile-card"><div class="pokerrookie-profile-copy"><div class="pokerrookie-profile-label">人物介绍</div><h1 class="pokerrookie-profile-title">PokerRookie</h1><div class="pokerrookie-profile-subtitle">B站知名Up主</div><p class="pokerrookie-profile-desc">国内顶尖德州扑克、奥马哈与混合游戏玩家，拥有APT、GOP、RDPT、KPC等赛事的十余个冠军头衔。</p></div><div class="pokerrookie-profile-media"><img class="pokerrookie-profile-photo" src="assets/pokerrookie-profile.jpg" alt="PokerRookie 人物照片" loading="lazy"/></div></div>`;
 const heroTitleLink = `<a href="download.html" class="pokerrookie-hero-title-link w-inline-block" aria-label="下载游戏"><img class="pokerrookie-hero-slogan" src="assets/sologan.webp" alt="和PokerRookie一起游戏" loading="eager"/></a>`;
-const bilibiliLink = `<a href="https://space.bilibili.com/443284341?spm_id_from=333.337.0.0" class="pokerrookie-bili-link w-inline-block"><span>访问 PokerRookie 的 Bilibili 主页</span></a>`;
+const bilibiliLink = `<a href="https://space.bilibili.com/443284341?spm_id_from=333.337.0.0" target="_blank" rel="noopener" class="pokerrookie-bili-link w-inline-block"><span>访问 PokerRookie 的 Bilibili 主页</span></a>`;
 
 const newEmail = "23294069@qq.com";
 const wechatId = "liuyao3643";
@@ -392,6 +422,18 @@ const kookUrl = "https://kook.vip/cyBSvz";
 const ggDownloadUrl = "http://playgg8.fun/long999";
 const downloadPromoAsset = "assets/pokerrookie-download-promo.png?v=provided-a2da111";
 const videoTeachingGroups = [
+  {
+    title: "PokerRookie精选",
+    kicker: "实战与闲聊合集",
+    image: versionedAsset("PokerRookie.webp"),
+    links: [
+      ["PokerRookie的扑克之旅", "https://space.bilibili.com/443284341/lists/6881653?type=season"],
+      ["GG扑克超级百万赛", "https://space.bilibili.com/443284341/lists/488529?type=season"],
+      ["闲聊扑克", "https://space.bilibili.com/443284341/lists/4098922?type=season"],
+      ["好好学习，天天向上", "https://space.bilibili.com/443284341/lists/2522815?type=season"],
+      ["GG扑克实战", "https://space.bilibili.com/443284341/lists/2566567?type=season"]
+    ]
+  },
   {
     title: "WSOP",
     kicker: "世界大赛精选",
@@ -447,18 +489,6 @@ const videoTeachingGroups = [
       ["2022马德里站系列赛", "https://space.bilibili.com/443284341/lists/410912?type=season"],
       ["2023越南站主赛", "https://space.bilibili.com/443284341/lists/1185327?type=season"],
       ["百万传奇", "https://space.bilibili.com/443284341/lists/62809?type=season"]
-    ]
-  },
-  {
-    title: "PokerRookie精选",
-    kicker: "实战与闲聊合集",
-    image: versionedAsset("PokerRookie.webp"),
-    links: [
-      ["PokerRookie的扑克之旅", "https://space.bilibili.com/443284341/lists/6881653?type=season"],
-      ["GG扑克超级百万赛", "https://space.bilibili.com/443284341/lists/488529?type=season"],
-      ["闲聊扑克", "https://space.bilibili.com/443284341/lists/4098922?type=season"],
-      ["好好学习，天天向上", "https://space.bilibili.com/443284341/lists/2522815?type=season"],
-      ["GG扑克实战", "https://space.bilibili.com/443284341/lists/2566567?type=season"]
     ]
   }
 ];
@@ -627,7 +657,7 @@ function renderVideoTeachingCards() {
 const videoTeachingSection = `<div class="w-embed pokerrookie-video-teaching-embed"><section class="pr-video-section">
   <div class="pr-video-inner">
     <div class="pr-video-head">
-      <div class="pr-video-label">精选视频</div>
+      <div class="pr-video-label">视频教学</div>
       <p>按系列整理 PokerRookie 的 B 站教学与实战复盘合集，选择你想看的系列直接跳转观看。</p>
     </div>
     <div class="pr-video-grid">
@@ -741,6 +771,38 @@ const videoTeachingSection = `<div class="w-embed pokerrookie-video-teaching-emb
   background: #fff1ef;
   color: #df3f37;
 }
+.pr-free-download-float {
+  position: fixed;
+  z-index: 80;
+  top: 50%;
+  right: 0;
+  display: flex;
+  width: 68px;
+  min-height: 150px;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 12px;
+  border: 2px solid #ef4444;
+  border-right: 0;
+  border-radius: 14px 0 0 14px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #ef4444;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.45;
+  text-align: center;
+  text-decoration: none;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  transform: translateY(-50%);
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.12);
+  transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+.pr-free-download-float:hover {
+  background: #ef4444;
+  color: #fff;
+  transform: translateY(-50%) translateX(-3px);
+}
 @media (max-width: 900px) {
   .pr-video-section {
     padding: 4.5rem 1rem;
@@ -751,6 +813,24 @@ const videoTeachingSection = `<div class="w-embed pokerrookie-video-teaching-emb
   .pr-video-cover {
     aspect-ratio: auto;
     min-height: 190px;
+  }
+  .pr-free-download-float {
+    top: auto;
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    width: auto;
+    min-height: 48px;
+    padding: 13px 18px;
+    border: 1px solid #ef4444;
+    border-radius: 999px;
+    font-size: 16px;
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    transform: none;
+  }
+  .pr-free-download-float:hover {
+    transform: translateY(-2px);
   }
 }
 </style></div>`;
@@ -972,7 +1052,8 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
 }
 </style></div>`;
 
-const freeResourceModules = videoTeachingSection;
+const freeDownloadFloatCta = `<a class="pr-free-download-float" href="${ggDownloadUrl}" target="_blank" rel="noopener" aria-label="下载地址">下载地址</a>`;
+const freeResourceModules = `${videoTeachingSection}${freeDownloadFloatCta}`;
 
 function ensureCss(html) {
   const withoutOld = html.replace(/<style id="pokerrookie-branding">[\s\S]*?<\/style>/g, "");
@@ -996,7 +1077,9 @@ function removeLabNav(html) {
 }
 
 function replaceToolsNav(html) {
-  return html.replace(/(<a href="about\.html"[^>]*>)(?:关于我|实用工具)(<\/a>)/g, "$1实用工具$2");
+  return html
+    .replace(/(<a href="about\.html"[^>]*>)(?:关于我|实用工具)(<\/a>)/g, "$1实用工具$2")
+    .replace(/(<a href="free\.html"[^>]*>)(?:免费资源|精选视频|视频教学)(<\/a>)/g, "$1视频教学$2");
 }
 
 function escapeRegExp(value) {
@@ -1040,7 +1123,11 @@ function replaceDownloadContent(html) {
 }
 
 function replaceFreeContent(html) {
-  return html.replace(/<main class="main-wrapper">[\s\S]*?<\/main>/, `<main class="main-wrapper">${freeResourceModules}</main>`);
+  return html
+    .replace(/<title>[\s\S]*?<\/title>/, "<title>视频教学｜PokerRookie</title>")
+    .replace(/<meta content="[^"]*" property="og:title"\/>/, '<meta content="视频教学｜PokerRookie" property="og:title"/>')
+    .replace(/<meta content="[^"]*" name="twitter:title"\/>/, '<meta content="视频教学｜PokerRookie" name="twitter:title"/>')
+    .replace(/<main class="main-wrapper">[\s\S]*?<\/main>/, `<main class="main-wrapper">${freeResourceModules}</main>`);
 }
 
 function replaceAboutContent(html) {

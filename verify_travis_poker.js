@@ -42,7 +42,7 @@ const pages = {
   "index.html": "PokerRookie｜德州扑克高级实战解析与策略学习",
   "travis-poker.html": "PokerRookie｜德州扑克高级实战解析与策略学习",
   "download.html": "游戏下载｜PokerRookie",
-  "free.html": "免费资源｜PokerRookie",
+  "free.html": "视频教学｜PokerRookie",
   "about.html": "实用工具｜PokerRookie",
   "lab.html": "PokerRookie LAB"
 };
@@ -104,8 +104,11 @@ for (const [fileName, title] of Object.entries(pages)) {
   assert(!html.includes('class="navbar_link lab'), `${fileName} must not show Poker LAB in the nav`);
   assert(!html.includes(">Poker LAB</a>"), `${fileName} must not include the Poker LAB nav link`);
   assert(!html.includes(">关于我</a>"), `${fileName} must not show the old About nav label`);
+  assert(!html.includes(">免费资源</a>"), `${fileName} must not show the old free resources nav label`);
   assert(html.includes('href="about.html"'), `${fileName} must keep the local tools page link`);
   assert(html.includes(">实用工具</a>"), `${fileName} must show the tools nav label`);
+  assert(html.includes('href="free.html"'), `${fileName} must keep the local video teaching page link`);
+  assert(html.includes(">视频教学</a>"), `${fileName} must show the video teaching nav label`);
   assert(!html.includes("69d6fb774fb3fe709a3c22ef_1"), `${fileName} must not use the old TravisPoker nav logo`);
   assert(!html.includes("69973e9728086fd6a49a2e06_travispoker-28"), `${fileName} must not use the old TravisPoker footer logo`);
   assert(!html.includes('href="https://www.travispoker.com/download"'), `${fileName} must not route internal download link to remote site`);
@@ -129,6 +132,8 @@ for (const [fileName, title] of Object.entries(pages)) {
   assert(html.includes("pokerrookie-wechat-label"), `${fileName} must include the WeChat label`);
   assert(html.includes('script id="pokerrookie-wechat-copy"'), `${fileName} must include the WeChat copy script`);
   assert(html.includes("\u00a9 2026 PokerRookie"), `${fileName} must show the PokerRookie footer copyright`);
+  assert(html.includes(".footer .div-block-27 {\n  display: flex !important;"), `${fileName} must use horizontal footer layout`);
+  assert(html.includes("flex-direction: row !important;"), `${fileName} must lay footer contact items horizontally on desktop`);
 }
 
 const home = read("index.html");
@@ -142,6 +147,7 @@ assert(home.includes('alt="和PokerRookie一起游戏"'), "Home hero slogan imag
 assert(!home.includes('class="text-block-40 pokerrookie-hero-title-link'), "Home hero must not use the old text title class");
 assert(home.includes(bilibiliUrl), "Home must include the PokerRookie Bilibili profile link");
 assert(home.includes("pokerrookie-bili-link"), "Home must style the Bilibili profile link");
+assert(home.includes(`href="${bilibiliUrl}" target="_blank" rel="noopener"`), "Home Bilibili CTA must open as a safe external link");
 assert(home.includes("人物介绍"), "Home profile card must include the intro label");
 assert(home.includes("PokerRookie"), "Home profile card must include the name");
 assert(home.includes("B站知名Up主"), "Home profile card must include the subtitle");
@@ -157,14 +163,20 @@ const homeMirror = read("travis-poker.html");
 assert(homeMirror.includes('href="download.html" class="pokerrookie-hero-title-link w-inline-block"'), "travis-poker.html hero slogan must link to the download page");
 assert(homeMirror.includes('src="assets/sologan.webp"'), "travis-poker.html must use the slogan artwork");
 assert(homeMirror.includes(bilibiliUrl), "travis-poker.html must mirror the Bilibili profile link");
+assert(homeMirror.includes(`href="${bilibiliUrl}" target="_blank" rel="noopener"`), "travis-poker.html Bilibili CTA must open as a safe external link");
 
 const free = read("free.html");
+assert(free.includes("<title>视频教学｜PokerRookie</title>"), "Free page title must be renamed to video teaching");
 assert(free.includes("pokerrookie-video-teaching-embed"), "Free page must include the video teaching module");
 assert(free.includes('<div class="w-embed pokerrookie-video-teaching-embed">'), "Free page video teaching module must not use hidden Webflow code-embed class");
 assert(free.includes("columns: 2 360px;"), "Free page video cards must use staggered columns instead of empty grid placeholders");
 assert(free.includes("break-inside: avoid;"), "Free page video cards must avoid splitting across staggered columns");
-assert(free.includes('<div class="pr-video-label">精选视频</div>'), "Free page header label must be selected videos");
+assert(free.includes('<div class="pr-video-label">视频教学</div>'), "Free page header label must be video teaching");
+assert(!free.includes('<div class="pr-video-label">精选视频</div>'), "Free page header label must not keep selected videos");
 assert(!free.includes("精选视频、"), "Free page header label must not include punctuation");
+assert(free.includes("pr-free-download-float"), "Free page must include the floating download address CTA");
+assert(free.includes(`class="pr-free-download-float" href="${ggDownloadUrl}" target="_blank" rel="noopener"`), "Free page floating download CTA must match the main download URL");
+assert(free.includes(">下载地址</a>"), "Free page floating download CTA must show the requested label");
 assert(free.includes("aspect-ratio: 49 / 20;"), "Free page PC video covers must use a 49:20 image ratio");
 assert(!free.includes("<h2>视频教学</h2>"), "Free page must remove the video teaching headline");
 assert(!free.includes("images.unsplash.com"), "Free page must not use remote placeholder video images");
@@ -180,6 +192,7 @@ assert(free.includes("HighStakesPoker"), "Free page video teaching module must i
 assert(free.includes("Hustler Casino Live"), "Free page video teaching module must include Hustler Casino Live");
 assert(free.includes("传奇扑克"), "Free page video teaching module must include Triton/Poker series");
 assert(free.includes("PokerRookie精选"), "Free page video teaching module must include PokerRookie selections");
+assert(free.indexOf("PokerRookie精选") < free.indexOf("WSOP"), "Free page must place PokerRookie selections before WSOP");
 assert(free.includes("2022WSOP金手链系列赛"), "Free page must include the WSOP list items");
 assert(free.includes("PokerRookie的扑克之旅"), "Free page must include the PokerRookie journey list");
 assert(free.includes("https://space.bilibili.com/443284341/lists/459974?type=season"), "Free page must include the first WSOP Bilibili list");
