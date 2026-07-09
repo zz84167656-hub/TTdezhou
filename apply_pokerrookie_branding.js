@@ -775,33 +775,74 @@ const videoTeachingSection = `<div class="w-embed pokerrookie-video-teaching-emb
   position: fixed;
   z-index: 80;
   top: 50%;
-  right: 0;
+  right: 22px;
   display: flex;
-  width: 68px;
-  min-height: 150px;
+  width: 56px;
+  height: 56px;
+  min-height: 0;
   align-items: center;
   justify-content: center;
-  padding: 16px 12px;
-  border: 2px solid #ef4444;
-  border-right: 0;
-  border-radius: 14px 0 0 14px;
-  background: rgba(255, 255, 255, 0.96);
-  color: #ef4444;
-  font-size: 18px;
+  padding: 0;
+  border: 1px solid rgba(239, 68, 68, 0.24);
+  border-radius: 999px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0;
   font-weight: 900;
-  line-height: 1.45;
+  line-height: 1;
   text-align: center;
   text-decoration: none;
-  writing-mode: vertical-rl;
-  text-orientation: upright;
   transform: translateY(-50%);
-  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.12);
-  transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+  box-shadow: 0 14px 32px rgba(239, 68, 68, 0.28), 0 6px 16px rgba(15, 23, 42, 0.12);
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
 .pr-free-download-float:hover {
-  background: #ef4444;
-  color: #fff;
-  transform: translateY(-50%) translateX(-3px);
+  background: #dc2626;
+  color: #ffffff;
+  transform: translateY(-50%) translateX(-2px);
+  box-shadow: 0 18px 38px rgba(239, 68, 68, 0.34), 0 8px 18px rgba(15, 23, 42, 0.14);
+}
+.pr-free-download-icon {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+}
+.pr-free-download-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pr-free-download-text {
+  position: absolute;
+  top: 50%;
+  right: 68px;
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: #111827;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 900;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(8px, -50%);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.pr-free-download-float:hover .pr-free-download-text,
+.pr-free-download-float:focus-visible .pr-free-download-text {
+  opacity: 1;
+  transform: translate(0, -50%);
 }
 @media (max-width: 900px) {
   .pr-video-section {
@@ -816,21 +857,25 @@ const videoTeachingSection = `<div class="w-embed pokerrookie-video-teaching-emb
   }
   .pr-free-download-float {
     top: auto;
-    right: 16px;
-    bottom: 16px;
-    left: 16px;
-    width: auto;
-    min-height: 48px;
-    padding: 13px 18px;
-    border: 1px solid #ef4444;
+    right: 18px;
+    bottom: 18px;
+    left: auto;
+    width: 52px;
+    height: 52px;
+    min-height: 0;
+    padding: 0;
     border-radius: 999px;
-    font-size: 16px;
-    writing-mode: horizontal-tb;
-    text-orientation: mixed;
     transform: none;
   }
   .pr-free-download-float:hover {
     transform: translateY(-2px);
+  }
+  .pr-free-download-icon {
+    width: 23px;
+    height: 23px;
+  }
+  .pr-free-download-text {
+    display: none;
   }
 }
 </style></div>`;
@@ -1052,7 +1097,8 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
 }
 </style></div>`;
 
-const freeDownloadFloatCta = `<a class="pr-free-download-float" href="${ggDownloadUrl}" target="_blank" rel="noopener" aria-label="下载游戏">下载游戏</a>`;
+const downloadIconSvg = `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v11"/><path d="m7 10 5 5 5-5"/><path d="M5 19h14"/></svg>`;
+const freeDownloadFloatCta = `<a class="pr-free-download-float" href="${ggDownloadUrl}" target="_blank" rel="noopener" aria-label="下载游戏"><span class="pr-free-download-icon">${downloadIconSvg}</span><span class="pr-free-download-text">下载游戏</span></a>`;
 const freeResourceModules = `${videoTeachingSection}${freeDownloadFloatCta}`;
 
 function ensureCss(html) {
