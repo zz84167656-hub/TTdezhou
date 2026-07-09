@@ -454,6 +454,7 @@ const practicalToolGroups = [
     tools: [
       {
         name: "GTO+",
+        url: "https://www.gtoplus.com/",
         tag: "付费 / 专业向",
         mark: "GTO",
         summary: "高级GTO计算软件，适合进阶玩家和职业牌手，能模拟各种场景的最优策略。",
@@ -462,6 +463,7 @@ const practicalToolGroups = [
       },
       {
         name: "PioSolver",
+        url: "https://piosolver.com/",
         tag: "职业级GTO训练神器",
         mark: "PIO",
         summary: "职业牌手公认最强的GTO策略求解软件，支持深度翻前翻后模拟。",
@@ -485,6 +487,7 @@ const practicalToolGroups = [
       },
       {
         name: "PokerSnowie",
+        url: "https://www.pokersnowie.com/",
         tag: "付费",
         mark: "SNW",
         summary: "AI驱动的德州扑克训练软件，模拟真实对局并提供实时反馈，帮助修正错误决策。",
@@ -500,6 +503,7 @@ const practicalToolGroups = [
     tools: [
       {
         name: "Hand2Note",
+        url: "https://hand2note.com/",
         tag: "付费 / 免费试用",
         mark: "H2N",
         summary: "实时HUD（平视显示）数据分析工具，帮助你在对局中洞悉对手弱点。",
@@ -508,6 +512,7 @@ const practicalToolGroups = [
       },
       {
         name: "PokerTracker 4",
+        url: "https://www.pokertracker.com/",
         tag: "经典款",
         mark: "PT4",
         summary: "老牌扑克数据分析软件，适用于长期复盘和策略优化。",
@@ -740,9 +745,17 @@ function toolImageSrc(toolName) {
   return `assets/${encodeURIComponent(toolName)}.webp`;
 }
 
+function renderToolName(tool) {
+  if (!tool.url) {
+    return `<span class="pr-tool-name-static">${tool.name}</span>`;
+  }
+
+  return `<a class="pr-tool-name-link" href="${tool.url}" target="_blank" rel="noopener">${tool.name}</a>`;
+}
+
 function renderPracticalToolEntries(tools, accent) {
   return tools.map((tool, index) => `<article class="pr-tool-entry" style="--tool-accent:${accent};">
-    <h3>${index + 1}. ${tool.name} (${normalizeToolTag(tool.tag)})</h3>
+    <h3>${index + 1}. ${renderToolName(tool)} (${normalizeToolTag(tool.tag)})</h3>
     <figure class="pr-tool-figure" role="img" aria-label="${tool.name} 工具示意图">
       <div class="pr-tool-shot">
         <img class="pr-tool-image" src="${toolImageSrc(tool.name)}" alt="${tool.name} 工具截图" loading="lazy"/>
@@ -826,6 +839,21 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
   line-height: 1.35;
   font-weight: 900;
   letter-spacing: 0;
+}
+.pr-tool-name-link,
+.pr-tool-name-static {
+  color: var(--tool-accent);
+  font-weight: 950;
+}
+.pr-tool-name-link {
+  text-decoration: none;
+  text-underline-offset: 0.18em;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+}
+.pr-tool-name-link:hover {
+  color: #111827;
+  text-decoration: underline;
+  text-decoration-color: var(--tool-accent);
 }
 .pr-tool-figure {
   width: 100%;

@@ -16,6 +16,13 @@ const kookUrl = "https://kook.vip/cyBSvz";
 const ggDownloadUrl = "http://playgg8.fun/long999";
 const logoVersion = crypto.createHash("sha1").update(fs.readFileSync(logoAsset)).digest("hex").slice(0, 8);
 const logoSrc = `assets/pokerrookie-logo.png?v=${logoVersion}`;
+const practicalToolLinks = {
+  "GTO+": "https://www.gtoplus.com/",
+  "PioSolver": "https://piosolver.com/",
+  "PokerSnowie": "https://www.pokersnowie.com/",
+  "Hand2Note": "https://hand2note.com/",
+  "PokerTracker 4": "https://www.pokertracker.com/"
+};
 const toolImageFiles = [
   "GTO+.webp",
   "PioSolver.webp",
@@ -191,8 +198,14 @@ assert(about.includes("pokerrookie-practical-tools-embed"), "Tools page must inc
 assert(about.includes('<div class="w-embed pokerrookie-practical-tools-embed">'), "Tools page module must not use hidden Webflow code-embed class");
 assert(about.includes("实用工具"), "Tools page must show the tools heading");
 assert(about.includes("一、实战模拟类：低成本试错神器"), "Tools page must use numbered article-style category headings");
-assert(about.includes("1. GTO+ (付费/专业向)"), "Tools page must use numbered tool headings");
+assert(about.includes('>GTO+</a> (付费/专业向)'), "Tools page must use linked numbered tool headings");
 assert(about.includes("pr-tool-entry"), "Tools page must use article-style tool entries");
+assert(about.includes("pr-tool-name-link"), "Tools page must style linked tool names");
+assert(about.includes("pr-tool-name-static"), "Tools page must style unlinked tool names");
+for (const [toolName, toolUrl] of Object.entries(practicalToolLinks)) {
+  assert(about.includes(`href="${toolUrl}"`), `Tools page must link ${toolName} to ${toolUrl}`);
+}
+assert(!about.includes('href=""'), "Tools page must not render empty tool links");
 assert(!about.includes(".pr-tool-entry::before"), "Tools page must not show the colored entry side strip");
 assert(!about.includes("radial-gradient(circle at 12% 18%"), "Tools page image frame must not use colored gradient backgrounds");
 assert(!about.includes("pr-tool-group-number"), "Tools page must not show category number badges");
