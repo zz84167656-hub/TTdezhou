@@ -193,6 +193,8 @@ assert(about.includes("实用工具"), "Tools page must show the tools heading")
 assert(about.includes("一、实战模拟类：低成本试错神器"), "Tools page must use numbered article-style category headings");
 assert(about.includes("1. GTO+ (付费/专业向)"), "Tools page must use numbered tool headings");
 assert(about.includes("pr-tool-entry"), "Tools page must use article-style tool entries");
+assert(!about.includes(".pr-tool-entry::before"), "Tools page must not show the colored entry side strip");
+assert(!about.includes("radial-gradient(circle at 12% 18%"), "Tools page image frame must not use colored gradient backgrounds");
 assert(!about.includes("pr-tool-group-number"), "Tools page must not show category number badges");
 assert(!about.includes("pr-tool-index"), "Tools page must not show tool number badges");
 assert(!about.includes("pr-tool-heading"), "Tools page must not keep the old tool badge wrapper");
