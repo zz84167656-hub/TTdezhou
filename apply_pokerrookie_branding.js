@@ -750,7 +750,7 @@ function toolImageSrc(toolName) {
 
 function renderPracticalToolEntries(tools, accent) {
   return tools.map((tool, index) => `<article class="pr-tool-entry" style="--tool-accent:${accent};">
-    <h3><span class="pr-tool-index">${String(index + 1).padStart(2, "0")}</span><span class="pr-tool-heading">${index + 1}. ${tool.name} (${normalizeToolTag(tool.tag)})</span></h3>
+    <h3>${index + 1}. ${tool.name} (${normalizeToolTag(tool.tag)})</h3>
     <figure class="pr-tool-figure" role="img" aria-label="${tool.name} 工具示意图">
       <div class="pr-tool-shot">
         <img class="pr-tool-image" src="${toolImageSrc(tool.name)}" alt="${tool.name} 工具截图" loading="lazy"/>
@@ -768,7 +768,7 @@ const practicalGroupNumbers = ["一", "二", "三"];
 
 function renderPracticalToolGroups() {
   return practicalToolGroups.map((group, index) => `<section class="pr-tool-group" style="--tool-accent:${group.accent};">
-    <h2><span class="pr-tool-group-number">${String(index + 1).padStart(2, "0")}</span><span>${practicalGroupNumbers[index]}、${group.title}：${group.subtitle}</span></h2>
+    <h2>${practicalGroupNumbers[index]}、${group.title}：${group.subtitle}</h2>
     ${renderPracticalToolEntries(group.tools, group.accent)}
   </section>`).join("");
 }
@@ -803,31 +803,12 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
   padding-top: 0.25rem;
 }
 .pr-tool-group h2 {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
   margin: 0 0 1.5rem;
   color: #111827;
   font-size: clamp(1.42rem, 2.2vw, 1.86rem);
   line-height: 1.25;
   font-weight: 950;
   letter-spacing: 0;
-}
-.pr-tool-group-number {
-  display: inline-flex;
-  width: 2.45rem;
-  height: 2.45rem;
-  flex: 0 0 2.45rem;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(239, 68, 68, 0.18);
-  border-color: color-mix(in srgb, var(--tool-accent) 26%, transparent);
-  border-radius: 999px;
-  background: rgba(255, 244, 244, 0.96);
-  background: color-mix(in srgb, var(--tool-accent) 10%, #ffffff);
-  color: var(--tool-accent);
-  font-size: 0.95rem;
-  font-weight: 950;
 }
 .pr-tool-entry {
   position: relative;
@@ -854,31 +835,12 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
   box-shadow: 0 24px 54px rgba(15, 23, 42, 0.1);
 }
 .pr-tool-entry h3 {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
   margin: 0 0 1.05rem;
   color: #111827;
   font-size: clamp(1.12rem, 1.8vw, 1.36rem);
   line-height: 1.35;
   font-weight: 900;
   letter-spacing: 0;
-}
-.pr-tool-index {
-  display: inline-flex;
-  width: 2rem;
-  height: 2rem;
-  flex: 0 0 2rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  background: var(--tool-accent);
-  color: #ffffff;
-  font-size: 0.9rem;
-  font-weight: 950;
-}
-.pr-tool-heading {
-  min-width: 0;
 }
 .pr-tool-figure {
   width: 100%;
@@ -962,28 +924,13 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
     margin-bottom: 3rem;
   }
   .pr-tool-group h2 {
-    align-items: flex-start;
-    gap: 0.65rem;
     font-size: 1.18rem;
-  }
-  .pr-tool-group-number {
-    width: 2rem;
-    height: 2rem;
-    flex-basis: 2rem;
-    font-size: 0.82rem;
   }
   .pr-tool-entry {
     padding: 1rem;
   }
   .pr-tool-entry h3 {
-    align-items: flex-start;
     font-size: 1.04rem;
-  }
-  .pr-tool-index {
-    width: 1.75rem;
-    height: 1.75rem;
-    flex-basis: 1.75rem;
-    font-size: 0.8rem;
   }
   .pr-tool-shot {
     min-height: 190px;

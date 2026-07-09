@@ -176,8 +176,9 @@ assert(about.includes("实用工具"), "Tools page must show the tools heading")
 assert(about.includes("一、实战模拟类：低成本试错神器"), "Tools page must use numbered article-style category headings");
 assert(about.includes("1. GTO+ (付费/专业向)"), "Tools page must use numbered tool headings");
 assert(about.includes("pr-tool-entry"), "Tools page must use article-style tool entries");
-assert(about.includes("pr-tool-index"), "Tools page must include styled numbered tool badges");
-assert(about.includes("pr-tool-heading"), "Tools page must include styled tool headings");
+assert(!about.includes("pr-tool-group-number"), "Tools page must not show category number badges");
+assert(!about.includes("pr-tool-index"), "Tools page must not show tool number badges");
+assert(!about.includes("pr-tool-heading"), "Tools page must not keep the old tool badge wrapper");
 assert(about.includes("pr-tool-figure"), "Tools page must include a large figure for each tool");
 assert(about.includes("pr-tool-image"), "Tools page must render real local tool images");
 assert(about.includes("pr-tool-points"), "Tools page must use bullet-point tool explanations");
