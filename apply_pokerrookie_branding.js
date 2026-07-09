@@ -858,8 +858,11 @@ const practicalToolsSection = `<div class="w-embed pokerrookie-practical-tools-e
 }
 .pr-tool-name-link,
 .pr-tool-name-static {
+  font: inherit !important;
+  font-size: 1em !important;
+  line-height: inherit !important;
+  letter-spacing: 0 !important;
   color: var(--tool-accent);
-  font-weight: 950;
 }
 .pr-tool-name-link {
   text-decoration: none;

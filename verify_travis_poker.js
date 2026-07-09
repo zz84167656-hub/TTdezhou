@@ -206,6 +206,8 @@ assert(about.includes('>GTO+</a> (付费/专业向)'), "Tools page must use link
 assert(about.includes("pr-tool-entry"), "Tools page must use article-style tool entries");
 assert(about.includes("pr-tool-name-link"), "Tools page must style linked tool names");
 assert(about.includes("pr-tool-name-static"), "Tools page must style unlinked tool names");
+assert(about.includes("font: inherit !important;"), "Tools page tool names must inherit the heading font");
+assert(!about.includes("font-weight: 950;\n}\n.pr-tool-name-link"), "Tools page tool names must not use a different font weight");
 for (const [toolName, toolUrl] of Object.entries(practicalToolLinks)) {
   assert(about.includes(`href="${toolUrl}"`), `Tools page must link ${toolName} to ${toolUrl}`);
 }
