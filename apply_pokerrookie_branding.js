@@ -606,8 +606,7 @@ function renderVideoTeachingCards() {
 const videoTeachingSection = `<div class="w-embed pokerrookie-video-teaching-embed"><section class="pr-video-section">
   <div class="pr-video-inner">
     <div class="pr-video-head">
-      <div class="pr-video-label">免费资源</div>
-      <h2>视频教学</h2>
+      <div class="pr-video-label">精选视频、</div>
       <p>按系列整理 PokerRookie 的 B 站教学与实战复盘合集，选择你想看的系列直接跳转观看。</p>
     </div>
     <div class="pr-video-grid">
@@ -641,13 +640,6 @@ const videoTeachingSection = `<div class="w-embed pokerrookie-video-teaching-emb
   color: #fff;
   font-size: 0.82rem;
   font-weight: 800;
-}
-.pr-video-head h2 {
-  margin: 0;
-  color: #05070b;
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  line-height: 0.98;
-  font-weight: 950;
 }
 .pr-video-head p {
   margin: 0;
