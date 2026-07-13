@@ -23,6 +23,58 @@ function versionedAsset(fileName) {
 }
 
 const logoSrc = versionedAsset("pokerrookie-logo.png");
+const siteBaseUrl = "https://pokerrookie.top";
+const absoluteLogoUrl = `${siteBaseUrl}/assets/pokerrookie-logo.png`;
+const indexedSeoPages = [
+  {
+    fileName: "index.html",
+    path: "/",
+    title: "PokerRookie｜德州扑克实战复盘与视频教学",
+    description: "PokerRookie 德州扑克实战复盘、视频教学、GTO工具整理与游戏下载入口，帮助玩家系统提升德州扑克、奥马哈与混合游戏水平。",
+    priority: "1.0"
+  },
+  {
+    fileName: "download.html",
+    path: "/download.html",
+    title: "PokerRookie 游戏下载｜long999 邀请码与战队福利",
+    description: "通过 PokerRookie 专属链接下载游戏，使用 long999 邀请码加入战队，查看新人礼包、战队赛与现金奖励等福利说明。",
+    priority: "0.9"
+  },
+  {
+    fileName: "free.html",
+    path: "/free.html",
+    title: "视频教学｜PokerRookie 德州扑克实战复盘合集",
+    description: "精选 PokerRookie 的 B 站德州扑克视频教学、赛事复盘、现金桌与高额桌实战解析，按系列整理方便观看。",
+    priority: "0.9"
+  },
+  {
+    fileName: "about.html",
+    path: "/about.html",
+    title: "实用工具｜PokerRookie 德州扑克 GTO 与数据分析工具",
+    description: "整理 GTO+、PioSolver、PokerSnowie、Hand2Note、PokerTracker 4 等德州扑克训练、复盘与数据分析工具。",
+    priority: "0.8"
+  }
+];
+const duplicateSeoPages = [
+  {
+    fileName: "travis-poker.html",
+    path: "/travis-poker.html",
+    canonicalPath: "/",
+    title: "PokerRookie｜德州扑克实战复盘与视频教学",
+    description: "PokerRookie 德州扑克实战复盘、视频教学、GTO工具整理与游戏下载入口，帮助玩家系统提升德州扑克、奥马哈与混合游戏水平。"
+  },
+  {
+    fileName: "lab.html",
+    path: "/lab.html",
+    canonicalPath: "/",
+    title: "PokerRookie LAB｜会员社群",
+    description: "PokerRookie 会员社群入口。"
+  }
+];
+const seoConfig = new Map([
+  ...indexedSeoPages.map((page) => [page.fileName, { ...page, robots: "index,follow", canonicalPath: page.path }]),
+  ...duplicateSeoPages.map((page) => [page.fileName, { ...page, robots: "noindex,follow" }])
+]);
 
 const css = `<style id="pokerrookie-branding">
 :root {
@@ -1132,6 +1184,157 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function pageUrl(pagePath) {
+  return pagePath === "/" ? `${siteBaseUrl}/` : `${siteBaseUrl}${pagePath}`;
+}
+
+function buildStructuredData(fileName, page) {
+  const canonicalUrl = pageUrl(page.canonicalPath);
+  const graph = [
+    {
+      "@type": "Organization",
+      "@id": `${siteBaseUrl}/#organization`,
+      name: "PokerRookie",
+      url: siteBaseUrl,
+      logo: absoluteLogoUrl,
+      sameAs: [
+        "https://space.bilibili.com/443284341"
+      ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        email: newEmail,
+        contactType: "customer support",
+        availableLanguage: ["zh-CN"]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteBaseUrl}/#website`,
+      name: "PokerRookie",
+      url: siteBaseUrl,
+      inLanguage: "zh-CN",
+      publisher: {
+        "@id": `${siteBaseUrl}/#organization`
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonicalUrl}#webpage`,
+      url: canonicalUrl,
+      name: page.title,
+      description: page.description,
+      isPartOf: {
+        "@id": `${siteBaseUrl}/#website`
+      },
+      inLanguage: "zh-CN"
+    }
+  ];
+
+  if (fileName === "index.html" || fileName === "travis-poker.html") {
+    graph.push({
+      "@type": "Person",
+      "@id": `${siteBaseUrl}/#pokerrookie`,
+      name: "PokerRookie",
+      url: siteBaseUrl,
+      image: `${siteBaseUrl}/assets/pokerrookie-profile.jpg`,
+      description: "B站知名Up主，国内顶尖德州扑克、奥马哈与混合游戏玩家，拥有APT、GOP、RDPT、KPC等赛事的十余个冠军头衔。",
+      sameAs: [
+        "https://space.bilibili.com/443284341"
+      ]
+    });
+  }
+
+  if (fileName === "free.html") {
+    graph.push({
+      "@type": "ItemList",
+      "@id": `${canonicalUrl}#video-series`,
+      name: "PokerRookie 视频教学合集",
+      itemListElement: videoTeachingGroups.map((group, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: group.title,
+        url: group.links[0] ? group.links[0].url : canonicalUrl
+      }))
+    });
+  }
+
+  if (fileName === "about.html") {
+    graph.push({
+      "@type": "ItemList",
+      "@id": `${canonicalUrl}#tools`,
+      name: "PokerRookie 德州扑克实用工具清单",
+      itemListElement: practicalToolGroups.flatMap((group) => group.tools).map((tool, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: tool.name,
+        url: tool.url || canonicalUrl
+      }))
+    });
+  }
+
+  return `<script type="application/ld+json" id="pokerrookie-seo-jsonld">${JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": graph
+  })}</script>`;
+}
+
+function ensureSeo(html, fileName) {
+  const page = seoConfig.get(fileName);
+  if (!page) return html;
+
+  const canonicalUrl = pageUrl(page.canonicalPath);
+  const clean = html
+    .replace(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi, "")
+    .replace(/<link\b[^>]*rel=["']canonical["'][^>]*\/?>/gi, "")
+    .replace(/<meta\b[^>]*(?:name|property)=["'](?:description|robots|applicable-device|MobileOptimized|HandheldFriendly|og:title|og:description|og:image|og:url|og:site_name|og:locale|og:type|twitter:title|twitter:description|twitter:image|twitter:card)["'][^>]*\/?>/gi, "")
+    .replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(page.title)}</title>`);
+
+  const tags = [
+    `<meta name="description" content="${escapeHtml(page.description)}"/>`,
+    `<meta name="robots" content="${page.robots}"/>`,
+    `<meta name="applicable-device" content="pc,mobile"/>`,
+    `<meta name="MobileOptimized" content="width"/>`,
+    `<meta name="HandheldFriendly" content="true"/>`,
+    `<meta http-equiv="Cache-Control" content="no-transform"/>`,
+    `<link rel="canonical" href="${canonicalUrl}"/>`,
+    `<meta property="og:type" content="website"/>`,
+    `<meta property="og:site_name" content="PokerRookie"/>`,
+    `<meta property="og:locale" content="zh_CN"/>`,
+    `<meta property="og:url" content="${canonicalUrl}"/>`,
+    `<meta property="og:title" content="${escapeHtml(page.title)}"/>`,
+    `<meta property="og:description" content="${escapeHtml(page.description)}"/>`,
+    `<meta property="og:image" content="${absoluteLogoUrl}"/>`,
+    `<meta name="twitter:card" content="summary_large_image"/>`,
+    `<meta name="twitter:title" content="${escapeHtml(page.title)}"/>`,
+    `<meta name="twitter:description" content="${escapeHtml(page.description)}"/>`,
+    `<meta name="twitter:image" content="${absoluteLogoUrl}"/>`,
+    buildStructuredData(fileName, page)
+  ].join("");
+
+  return clean.replace("</head>", `${tags}</head>`);
+}
+
+function writeSeoFiles() {
+  const now = new Date().toISOString().slice(0, 10);
+  const urls = indexedSeoPages.map((page) => pageUrl(page.path));
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexedSeoPages.map((page) => `  <url>\n    <loc>${pageUrl(page.path)}</loc>\n    <lastmod>${now}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${page.priority}</priority>\n  </url>`).join("\n")}\n</urlset>\n`;
+  const robots = `User-agent: *\nAllow: /\n\nSitemap: ${siteBaseUrl}/sitemap.xml\n`;
+  const baiduUrls = `${urls.join("\n")}\n`;
+
+  fs.writeFileSync(path.join(root, "sitemap.xml"), sitemap, "utf8");
+  fs.writeFileSync(path.join(root, "robots.txt"), robots, "utf8");
+  fs.writeFileSync(path.join(root, "baidu_urls.txt"), baiduUrls, "utf8");
+  console.log("Wrote SEO files: sitemap.xml, robots.txt, baidu_urls.txt");
+}
+
 function replaceFooter(html) {
   const emailPattern = new RegExp(`<a href="mailto:${escapeRegExp(newEmail)}[^"]*" class="[^"]*link-block[^"]*"[^>]*>[\\s\\S]*?${escapeRegExp(newEmail)}[\\s\\S]*?</a>`, "g");
 
@@ -1219,9 +1422,12 @@ for (const fileName of htmlFiles) {
     html = replaceHome(html);
   }
   html = replaceBrandText(html);
+  html = ensureSeo(html, fileName);
   fs.writeFileSync(filePath, html, "utf8");
   console.log(`Applied PokerRookie branding to ${fileName}`);
 }
+
+writeSeoFiles();
 
 const profilePath = path.join(root, "assets", "pokerrookie-profile.jpg");
 if (!fs.existsSync(profilePath)) {

@@ -14,6 +14,7 @@ const wechatId = "liuyao3643";
 const inviteCode = "long999";
 const kookUrl = "https://kook.vip/cyBSvz";
 const ggDownloadUrl = "http://playgg8.fun/long999";
+const siteBaseUrl = "https://pokerrookie.top";
 const logoVersion = crypto.createHash("sha1").update(fs.readFileSync(logoAsset)).digest("hex").slice(0, 8);
 const logoSrc = `assets/pokerrookie-logo.png?v=${logoVersion}`;
 const practicalToolLinks = {
@@ -39,12 +40,18 @@ const freeVideoImageFiles = [
   "PokerRookie.webp"
 ];
 const pages = {
-  "index.html": "PokerRookie｜德州扑克高级实战解析与策略学习",
-  "travis-poker.html": "PokerRookie｜德州扑克高级实战解析与策略学习",
-  "download.html": "游戏下载｜PokerRookie",
-  "free.html": "视频教学｜PokerRookie",
-  "about.html": "实用工具｜PokerRookie",
-  "lab.html": "PokerRookie LAB"
+  "index.html": "PokerRookie｜德州扑克实战复盘与视频教学",
+  "travis-poker.html": "PokerRookie｜德州扑克实战复盘与视频教学",
+  "download.html": "PokerRookie 游戏下载｜long999 邀请码与战队福利",
+  "free.html": "视频教学｜PokerRookie 德州扑克实战复盘合集",
+  "about.html": "实用工具｜PokerRookie 德州扑克 GTO 与数据分析工具",
+  "lab.html": "PokerRookie LAB｜会员社群"
+};
+const seoPaths = {
+  "index.html": "/",
+  "download.html": "/download.html",
+  "free.html": "/free.html",
+  "about.html": "/about.html"
 };
 
 function assert(condition, message) {
@@ -88,10 +95,39 @@ for (const fileName of freeVideoImageFiles) {
   assert(fs.existsSync(path.join(assetsDir, fileName)), `Missing free video image asset: ${fileName}`);
 }
 
+const robots = read("robots.txt");
+const sitemap = read("sitemap.xml");
+const baiduUrls = read("baidu_urls.txt");
+assert(robots.includes("User-agent: *"), "robots.txt must allow crawlers");
+assert(robots.includes(`Sitemap: ${siteBaseUrl}/sitemap.xml`), "robots.txt must point to the public sitemap");
+assert(sitemap.includes('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'), "sitemap.xml must use the sitemap protocol");
+for (const [fileName, pagePath] of Object.entries(seoPaths)) {
+  const url = pagePath === "/" ? `${siteBaseUrl}/` : `${siteBaseUrl}${pagePath}`;
+  assert(sitemap.includes(`<loc>${url}</loc>`), `sitemap.xml must include ${fileName}`);
+  assert(baiduUrls.includes(url), `baidu_urls.txt must include ${fileName}`);
+}
+assert(!sitemap.includes("travis-poker.html"), "sitemap.xml must not include the duplicate home mirror");
+assert(!sitemap.includes("lab.html"), "sitemap.xml must not include the hidden LAB page");
+
 for (const [fileName, title] of Object.entries(pages)) {
   const html = read(fileName);
+  const seoPath = seoPaths[fileName] || "/";
+  const canonicalUrl = seoPath === "/" ? `${siteBaseUrl}/` : `${siteBaseUrl}${seoPath}`;
+  const expectedRobots = seoPaths[fileName] ? "index,follow" : "noindex,follow";
   assert(html.includes("<!doctype html>") || html.includes("<!DOCTYPE html>"), `${fileName} must be a complete document`);
   assert(html.includes(title), `${fileName} title/content must match the reference page`);
+  assert(html.includes(`<link rel="canonical" href="${canonicalUrl}"/>`), `${fileName} must use the PokerRookie canonical URL`);
+  assert(!html.includes('rel="canonical" href="https://travispoker.com'), `${fileName} must not point canonical metadata to the old Travis domain`);
+  assert(!html.includes('property="og:url" content="https://travispoker.com'), `${fileName} must not point Open Graph metadata to the old Travis domain`);
+  assert(html.includes(`<meta name="robots" content="${expectedRobots}"/>`), `${fileName} must declare the expected robots directive`);
+  assert(html.includes('<meta name="applicable-device" content="pc,mobile"/>'), `${fileName} must declare Baidu-friendly device support`);
+  assert(html.includes('<meta http-equiv="Cache-Control" content="no-transform"/>'), `${fileName} must discourage mobile page transcoding`);
+  assert(html.includes(`<meta property="og:url" content="${canonicalUrl}"/>`), `${fileName} must expose the canonical Open Graph URL`);
+  assert(html.includes('<meta property="og:site_name" content="PokerRookie"/>'), `${fileName} must expose the PokerRookie site name`);
+  assert(html.includes('<meta property="og:image" content="https://pokerrookie.top/assets/pokerrookie-logo.png"/>'), `${fileName} must use the public PokerRookie sharing image`);
+  assert(html.includes('<meta name="twitter:image" content="https://pokerrookie.top/assets/pokerrookie-logo.png"/>'), `${fileName} must use the public Twitter sharing image`);
+  assert(html.includes('id="pokerrookie-seo-jsonld"'), `${fileName} must include PokerRookie structured data`);
+  assert(!html.includes("Create refined, responsive"), `${fileName} must remove the old template structured data`);
   assert(!html.includes("Travis"), `${fileName} must not show the old Travis brand text`);
   assert(html.includes("assets/pokerrookie-logo.png"), `${fileName} must use the PokerRookie logo`);
   assert(html.includes(logoSrc), `${fileName} must use the cache-busted PokerRookie logo`);
@@ -166,7 +202,7 @@ assert(homeMirror.includes(bilibiliUrl), "travis-poker.html must mirror the Bili
 assert(homeMirror.includes(`href="${bilibiliUrl}" target="_blank" rel="noopener"`), "travis-poker.html Bilibili CTA must open as a safe external link");
 
 const free = read("free.html");
-assert(free.includes("<title>视频教学｜PokerRookie</title>"), "Free page title must be renamed to video teaching");
+assert(free.includes("<title>视频教学｜PokerRookie 德州扑克实战复盘合集</title>"), "Free page title must be renamed to video teaching");
 assert(free.includes("pokerrookie-video-teaching-embed"), "Free page must include the video teaching module");
 assert(free.includes('<div class="w-embed pokerrookie-video-teaching-embed">'), "Free page video teaching module must not use hidden Webflow code-embed class");
 assert(free.includes("columns: 2 360px;"), "Free page video cards must use staggered columns instead of empty grid placeholders");
