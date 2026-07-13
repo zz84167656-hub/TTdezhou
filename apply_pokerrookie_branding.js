@@ -23,7 +23,7 @@ function versionedAsset(fileName) {
 }
 
 const logoSrc = versionedAsset("pokerrookie-logo.png");
-const siteBaseUrl = "https://pokerrookie.top";
+const siteBaseUrl = "https://www.pokerrookie.top";
 const absoluteLogoUrl = `${siteBaseUrl}/assets/pokerrookie-logo.png`;
 const indexedSeoPages = [
   {

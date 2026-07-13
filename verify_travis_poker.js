@@ -14,7 +14,7 @@ const wechatId = "liuyao3643";
 const inviteCode = "long999";
 const kookUrl = "https://kook.vip/cyBSvz";
 const ggDownloadUrl = "http://playgg8.fun/long999";
-const siteBaseUrl = "https://pokerrookie.top";
+const siteBaseUrl = "https://www.pokerrookie.top";
 const logoVersion = crypto.createHash("sha1").update(fs.readFileSync(logoAsset)).digest("hex").slice(0, 8);
 const logoSrc = `assets/pokerrookie-logo.png?v=${logoVersion}`;
 const practicalToolLinks = {
@@ -124,8 +124,8 @@ for (const [fileName, title] of Object.entries(pages)) {
   assert(html.includes('<meta http-equiv="Cache-Control" content="no-transform"/>'), `${fileName} must discourage mobile page transcoding`);
   assert(html.includes(`<meta property="og:url" content="${canonicalUrl}"/>`), `${fileName} must expose the canonical Open Graph URL`);
   assert(html.includes('<meta property="og:site_name" content="PokerRookie"/>'), `${fileName} must expose the PokerRookie site name`);
-  assert(html.includes('<meta property="og:image" content="https://pokerrookie.top/assets/pokerrookie-logo.png"/>'), `${fileName} must use the public PokerRookie sharing image`);
-  assert(html.includes('<meta name="twitter:image" content="https://pokerrookie.top/assets/pokerrookie-logo.png"/>'), `${fileName} must use the public Twitter sharing image`);
+  assert(html.includes(`<meta property="og:image" content="${siteBaseUrl}/assets/pokerrookie-logo.png"/>`), `${fileName} must use the public PokerRookie sharing image`);
+  assert(html.includes(`<meta name="twitter:image" content="${siteBaseUrl}/assets/pokerrookie-logo.png"/>`), `${fileName} must use the public Twitter sharing image`);
   assert(html.includes('id="pokerrookie-seo-jsonld"'), `${fileName} must include PokerRookie structured data`);
   assert(!html.includes("Create refined, responsive"), `${fileName} must remove the old template structured data`);
   assert(!html.includes("Travis"), `${fileName} must not show the old Travis brand text`);
