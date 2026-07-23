@@ -53,8 +53,8 @@ const seoPaths = {
   "free.html": "/free.html",
   "about.html": "/about.html"
 };
-const articlePath = "articles/gto-plus-guide.html";
-const articleUrl = `${siteBaseUrl}/${articlePath}`;
+const articlePath = "articles/gto-plus-guide/index.html";
+const articleUrl = `${siteBaseUrl}/articles/gto-plus-guide/`;
 
 function assert(condition, message) {
   if (!condition) {
@@ -310,10 +310,10 @@ assert(article.includes('<meta name="robots" content="index,follow">'), "GTO+ ar
 assert(article.includes('<meta name="applicable-device" content="pc,mobile">'), "GTO+ article must declare Baidu-friendly device support");
 assert(article.includes('id="pokerrookie-seo-jsonld"'), "GTO+ article must include structured data");
 assert(article.includes("GTO+ 使用教程：用复盘工具看懂每一手牌"), "GTO+ article must include the article headline");
-assert(article.includes("../assets/GTO%2B.webp"), "GTO+ article must use the local GTO+ image");
-assert(article.includes('href="../free.html"'), "GTO+ article must link to video teaching");
-assert(article.includes('href="../about.html"'), "GTO+ article must link to practical tools");
-assert(article.includes('href="../download.html"'), "GTO+ article must link to download page");
+assert(article.includes("../../assets/GTO%2B.webp"), "GTO+ article must use the local GTO+ image");
+assert(article.includes('href="../../free.html"'), "GTO+ article must link to video teaching");
+assert(article.includes('href="../../about.html"'), "GTO+ article must link to practical tools");
+assert(article.includes('href="../../download.html"'), "GTO+ article must link to download page");
 assert(article.includes('href="https://www.gtoplus.com/" target="_blank" rel="noopener"'), "GTO+ article must link safely to the GTO+ website");
 assert(!about.includes("code-embed w-embed pokerrookie-practical-tools-embed"), "Tools page module must not be hidden by code-embed");
 assert(!about.includes("background: #0d1117"), "Tools page must not use the old dark tools design");

@@ -55,8 +55,8 @@ const indexedSeoPages = [
     priority: "0.8"
   },
   {
-    fileName: "articles/gto-plus-guide.html",
-    path: "/articles/gto-plus-guide.html",
+    fileName: "articles/gto-plus-guide/index.html",
+    path: "/articles/gto-plus-guide/",
     title: "GTO+ 使用教程｜德州扑克复盘工具入门 - PokerRookie",
     description: "了解 GTO+ 在德州扑克训练中的用途，包括范围构建、下注尺度、EV 对比和复盘流程，适合想系统提升决策质量的玩家。",
     priority: "0.7"
