@@ -53,6 +53,13 @@ const indexedSeoPages = [
     title: "实用工具｜PokerRookie 德州扑克 GTO 与数据分析工具",
     description: "整理 GTO+、PioSolver、PokerSnowie、Hand2Note、PokerTracker 4 等德州扑克训练、复盘与数据分析工具。",
     priority: "0.8"
+  },
+  {
+    fileName: "articles/gto-plus-guide.html",
+    path: "/articles/gto-plus-guide.html",
+    title: "GTO+ 使用教程｜德州扑克复盘工具入门 - PokerRookie",
+    description: "了解 GTO+ 在德州扑克训练中的用途，包括范围构建、下注尺度、EV 对比和复盘流程，适合想系统提升决策质量的玩家。",
+    priority: "0.7"
   }
 ];
 const duplicateSeoPages = [
@@ -1294,6 +1301,7 @@ function ensureSeo(html, fileName) {
   const clean = html
     .replace(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi, "")
     .replace(/<link\b[^>]*rel=["']canonical["'][^>]*\/?>/gi, "")
+    .replace(/<meta\b[^>]*http-equiv=["']Cache-Control["'][^>]*\/?>/gi, "")
     .replace(/<meta\b[^>]*(?:name|property)=["'](?:description|robots|applicable-device|MobileOptimized|HandheldFriendly|og:title|og:description|og:image|og:url|og:site_name|og:locale|og:type|twitter:title|twitter:description|twitter:image|twitter:card)["'][^>]*\/?>/gi, "")
     .replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(page.title)}</title>`);
 

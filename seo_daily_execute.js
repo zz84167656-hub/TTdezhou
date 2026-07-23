@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const root = __dirname;
-const site = "https://www.pokerrookie.top";
+const defaultSite = "https://www.pokerrookie.top";
 const configPath = path.join(root, "seo_config.local.json");
 const queuePath = path.join(root, "seo_submit_queue.txt");
 const coreUrlsPath = path.join(root, "baidu_urls.txt");
@@ -24,7 +24,7 @@ function loadConfig() {
 
   return {
     baiduPushToken: process.env.BAIDU_PUSH_TOKEN || config.baiduPushToken || "",
-    site: process.env.SEO_SITE || config.site || site
+    site: process.env.SEO_SITE || config.site || defaultSite
   };
 }
 
@@ -51,13 +51,13 @@ function shanghaiDateParts() {
 
 function contentTaskFor(weekday) {
   const tasks = {
-    "星期一": "选 3 个长尾关键词，确定本周文章标题。优先：德州扑克新手入门、GTO工具、PokerRookie视频教学。",
-    "星期二": "新增或完善 1 篇教学文章，例如：德州扑克新手入门：位置、范围和底池赔率。",
-    "星期三": "优化旧页面内链：首页增加 2 个入口指向视频教学/实用工具，文章页互相链接。",
-    "星期四": "新增或完善 1 篇工具文章，例如：GTO+ 使用教程 或 PioSolver 入门指南。",
-    "星期五": "做外链：B站主页简介、视频简介、知乎/公众号/KOOK公告放入 https://www.pokerrookie.top/。",
-    "星期六": "新增或完善 1 篇实战复盘文章，例如：河牌该不该诈唬，附关键决策点。",
-    "星期日": "复盘数据：记录百度索引量、抓取频次、抓取异常和本周新增页面。"
+    星期一: "选 3 个长尾关键词，确定本周文章标题。优先：德州扑克新手入门、GTO工具、PokerRookie视频教学。",
+    星期二: "新增或完善 1 篇教学文章，例如：德州扑克新手入门：位置、范围和底池赔率。",
+    星期三: "优化旧页面内链：首页增加入口指向视频教学和实用工具，文章页之间互相链接。",
+    星期四: "新增或完善 1 篇工具文章，例如：GTO+ 使用教程 或 PioSolver 入门指南。",
+    星期五: "做外链：B站主页简介、视频简介、知乎、公众号或 KOOK 公告放入 https://www.pokerrookie.top/。",
+    星期六: "新增或完善 1 篇实战复盘文章，例如：河牌该不该诈唬，附关键决策点。",
+    星期日: "复盘数据：记录百度索引量、抓取频次、抓取异常和本周新增页面。"
   };
 
   return tasks[weekday] || "检查站点健康、提交新增链接、补充 1 个内容入口。";
@@ -103,7 +103,7 @@ async function pushToBaidu(config, urls) {
   if (!config.baiduPushToken) {
     return {
       skipped: true,
-      message: "Missing BAIDU_PUSH_TOKEN or seo_config.local.json baiduPushToken."
+      message: "缺少 BAIDU_PUSH_TOKEN 或 seo_config.local.json 里的 baiduPushToken。"
     };
   }
 
@@ -146,6 +146,12 @@ function markdownTable(rows) {
   return lines.join("\n");
 }
 
+function pushSucceeded(pushResult) {
+  if (pushResult.skipped || !pushResult.ok) return false;
+  if (!pushResult.parsed) return true;
+  return !pushResult.parsed.error && !pushResult.parsed.message;
+}
+
 async function main() {
   const config = loadConfig();
   const dateParts = shanghaiDateParts();
@@ -159,9 +165,8 @@ async function main() {
     ...coreUrls
   ];
 
-  const uniqueHealthUrls = [...new Set(healthUrls)];
   const health = [];
-  for (const url of uniqueHealthUrls) {
+  for (const url of [...new Set(healthUrls)]) {
     health.push(await checkUrl(url));
   }
 
@@ -170,6 +175,10 @@ async function main() {
   const sitemapMissing = coreUrls.filter((url) => !sitemap.text.includes(url));
   const robotsHasSitemap = robots.text.includes(`${config.site}/sitemap.xml`);
   const pushResult = await pushToBaidu(config, submitUrls);
+
+  if (queuedUrls.length && pushSucceeded(pushResult) && fs.existsSync(queuePath)) {
+    fs.unlinkSync(queuePath);
+  }
 
   if (!fs.existsSync(logsDir)) fs.mkdirSync(logsDir, { recursive: true });
   const logPath = path.join(logsDir, `${dateParts.date}.md`);
@@ -188,9 +197,10 @@ async function main() {
     "## 百度 API 推送",
     `- 提交来源：${queuedUrls.length ? "seo_submit_queue.txt" : "baidu_urls.txt"}`,
     `- 提交 URL 数：${submitUrls.length}`,
-    `- 提交 URL：`,
+    "- 提交 URL：",
     ...submitUrls.map((url) => `  - ${url}`),
     `- 结果：${pushResult.skipped ? pushResult.message : pushResult.raw}`,
+    queuedUrls.length && pushSucceeded(pushResult) ? "- 队列状态：已提交成功，并清空 seo_submit_queue.txt" : "",
     "",
     "## 今日内容任务",
     contentTaskFor(dateParts.weekday),
@@ -201,7 +211,7 @@ async function main() {
     "- 抓取异常：待填",
     "- 展现/点击关键词：待填",
     ""
-  ].join("\n");
+  ].filter(Boolean).join("\n");
 
   fs.writeFileSync(logPath, log, "utf8");
 

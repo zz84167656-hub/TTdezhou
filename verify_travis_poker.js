@@ -53,6 +53,8 @@ const seoPaths = {
   "free.html": "/free.html",
   "about.html": "/about.html"
 };
+const articlePath = "articles/gto-plus-guide.html";
+const articleUrl = `${siteBaseUrl}/${articlePath}`;
 
 function assert(condition, message) {
   if (!condition) {
@@ -106,6 +108,8 @@ for (const [fileName, pagePath] of Object.entries(seoPaths)) {
   assert(sitemap.includes(`<loc>${url}</loc>`), `sitemap.xml must include ${fileName}`);
   assert(baiduUrls.includes(url), `baidu_urls.txt must include ${fileName}`);
 }
+assert(sitemap.includes(`<loc>${articleUrl}</loc>`), "sitemap.xml must include the GTO+ guide article");
+assert(baiduUrls.includes(articleUrl), "baidu_urls.txt must include the GTO+ guide article");
 assert(!sitemap.includes("travis-poker.html"), "sitemap.xml must not include the duplicate home mirror");
 assert(!sitemap.includes("lab.html"), "sitemap.xml must not include the hidden LAB page");
 
@@ -298,6 +302,19 @@ assert(!about.includes("pr-article-head"), "Tools page must remove the top artic
 assert(!about.includes("pr-article-alert"), "Tools page must remove the top article alert");
 assert(!about.includes("pr-article-cover"), "Tools page must remove the top article cover");
 assert(!about.includes("assets/poker-tools-cover.svg"), "Tools page must not reference the removed tools cover image");
+
+const article = read(articlePath);
+assert(article.includes("<title>GTO+ 使用教程｜德州扑克复盘工具入门 - PokerRookie</title>"), "GTO+ article must use the SEO title");
+assert(article.includes(`<link rel="canonical" href="${articleUrl}">`), "GTO+ article must use the canonical article URL");
+assert(article.includes('<meta name="robots" content="index,follow">'), "GTO+ article must be indexable");
+assert(article.includes('<meta name="applicable-device" content="pc,mobile">'), "GTO+ article must declare Baidu-friendly device support");
+assert(article.includes('id="pokerrookie-seo-jsonld"'), "GTO+ article must include structured data");
+assert(article.includes("GTO+ 使用教程：用复盘工具看懂每一手牌"), "GTO+ article must include the article headline");
+assert(article.includes("../assets/GTO%2B.webp"), "GTO+ article must use the local GTO+ image");
+assert(article.includes('href="../free.html"'), "GTO+ article must link to video teaching");
+assert(article.includes('href="../about.html"'), "GTO+ article must link to practical tools");
+assert(article.includes('href="../download.html"'), "GTO+ article must link to download page");
+assert(article.includes('href="https://www.gtoplus.com/" target="_blank" rel="noopener"'), "GTO+ article must link safely to the GTO+ website");
 assert(!about.includes("code-embed w-embed pokerrookie-practical-tools-embed"), "Tools page module must not be hidden by code-embed");
 assert(!about.includes("background: #0d1117"), "Tools page must not use the old dark tools design");
 assert(!about.includes("pr-tool-card"), "Tools page must not use the old card grid tools design");
