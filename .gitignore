@@ -1,1 +1,4 @@
 *.zip
+seo_config.local.json
+seo_logs/
+seo_submit_queue.txt
