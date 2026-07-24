@@ -53,8 +53,10 @@ const seoPaths = {
   "free.html": "/free.html",
   "about.html": "/about.html"
 };
-const articlePath = "articles/gto-plus-guide/index.html";
-const articleUrl = `${siteBaseUrl}/articles/gto-plus-guide/`;
+const gtoArticlePath = "articles/gto-plus-guide/index.html";
+const gtoArticleUrl = `${siteBaseUrl}/articles/gto-plus-guide/`;
+const pioArticlePath = "articles/piosolver-guide/index.html";
+const pioArticleUrl = `${siteBaseUrl}/articles/piosolver-guide/`;
 
 function assert(condition, message) {
   if (!condition) {
@@ -108,8 +110,10 @@ for (const [fileName, pagePath] of Object.entries(seoPaths)) {
   assert(sitemap.includes(`<loc>${url}</loc>`), `sitemap.xml must include ${fileName}`);
   assert(baiduUrls.includes(url), `baidu_urls.txt must include ${fileName}`);
 }
-assert(sitemap.includes(`<loc>${articleUrl}</loc>`), "sitemap.xml must include the GTO+ guide article");
-assert(baiduUrls.includes(articleUrl), "baidu_urls.txt must include the GTO+ guide article");
+assert(sitemap.includes(`<loc>${gtoArticleUrl}</loc>`), "sitemap.xml must include the GTO+ guide article");
+assert(baiduUrls.includes(gtoArticleUrl), "baidu_urls.txt must include the GTO+ guide article");
+assert(sitemap.includes(`<loc>${pioArticleUrl}</loc>`), "sitemap.xml must include the PioSolver guide article");
+assert(baiduUrls.includes(pioArticleUrl), "baidu_urls.txt must include the PioSolver guide article");
 assert(!sitemap.includes("travis-poker.html"), "sitemap.xml must not include the duplicate home mirror");
 assert(!sitemap.includes("lab.html"), "sitemap.xml must not include the hidden LAB page");
 
@@ -303,18 +307,33 @@ assert(!about.includes("pr-article-alert"), "Tools page must remove the top arti
 assert(!about.includes("pr-article-cover"), "Tools page must remove the top article cover");
 assert(!about.includes("assets/poker-tools-cover.svg"), "Tools page must not reference the removed tools cover image");
 
-const article = read(articlePath);
-assert(article.includes("<title>GTO+ 使用教程｜德州扑克复盘工具入门 - PokerRookie</title>"), "GTO+ article must use the SEO title");
-assert(article.includes(`<link rel="canonical" href="${articleUrl}">`), "GTO+ article must use the canonical article URL");
-assert(article.includes('<meta name="robots" content="index,follow">'), "GTO+ article must be indexable");
-assert(article.includes('<meta name="applicable-device" content="pc,mobile">'), "GTO+ article must declare Baidu-friendly device support");
-assert(article.includes('id="pokerrookie-seo-jsonld"'), "GTO+ article must include structured data");
-assert(article.includes("GTO+ 使用教程：用复盘工具看懂每一手牌"), "GTO+ article must include the article headline");
-assert(article.includes("../../assets/GTO%2B.webp"), "GTO+ article must use the local GTO+ image");
-assert(article.includes('href="../../free.html"'), "GTO+ article must link to video teaching");
-assert(article.includes('href="../../about.html"'), "GTO+ article must link to practical tools");
-assert(article.includes('href="../../download.html"'), "GTO+ article must link to download page");
-assert(article.includes('href="https://www.gtoplus.com/" target="_blank" rel="noopener"'), "GTO+ article must link safely to the GTO+ website");
+const gtoArticle = read(gtoArticlePath);
+assert(gtoArticle.includes("<title>GTO+ 使用教程｜德州扑克复盘工具入门 - PokerRookie</title>"), "GTO+ article must use the SEO title");
+assert(gtoArticle.includes(`<link rel="canonical" href="${gtoArticleUrl}">`), "GTO+ article must use the canonical article URL");
+assert(gtoArticle.includes('<meta name="robots" content="index,follow">'), "GTO+ article must be indexable");
+assert(gtoArticle.includes('<meta name="applicable-device" content="pc,mobile">'), "GTO+ article must declare Baidu-friendly device support");
+assert(gtoArticle.includes('id="pokerrookie-seo-jsonld"'), "GTO+ article must include structured data");
+assert(gtoArticle.includes("GTO+ 使用教程：用复盘工具看懂每一手牌"), "GTO+ article must include the article headline");
+assert(gtoArticle.includes("../../assets/GTO%2B.webp"), "GTO+ article must use the local GTO+ image");
+assert(gtoArticle.includes('href="../../free.html"'), "GTO+ article must link to video teaching");
+assert(gtoArticle.includes('href="../../about.html"'), "GTO+ article must link to practical tools");
+assert(gtoArticle.includes('href="../../download.html"'), "GTO+ article must link to download page");
+assert(gtoArticle.includes('href="../piosolver-guide/"'), "GTO+ article must link to the PioSolver guide");
+assert(gtoArticle.includes('href="https://www.gtoplus.com/" target="_blank" rel="noopener"'), "GTO+ article must link safely to the GTO+ website");
+
+const pioArticle = read(pioArticlePath);
+assert(pioArticle.includes("<title>PioSolver 入门指南｜德州扑克求解器训练方法 - PokerRookie</title>"), "PioSolver article must use the SEO title");
+assert(pioArticle.includes(`<link rel="canonical" href="${pioArticleUrl}">`), "PioSolver article must use the canonical article URL");
+assert(pioArticle.includes('<meta name="robots" content="index,follow">'), "PioSolver article must be indexable");
+assert(pioArticle.includes('<meta name="applicable-device" content="pc,mobile">'), "PioSolver article must declare Baidu-friendly device support");
+assert(pioArticle.includes('id="pokerrookie-seo-jsonld"'), "PioSolver article must include structured data");
+assert(pioArticle.includes("PioSolver 入门指南：把复杂牌局拆成可训练的决策"), "PioSolver article must include the article headline");
+assert(pioArticle.includes("../../assets/PioSolver.webp"), "PioSolver article must use the local PioSolver image");
+assert(pioArticle.includes('href="../gto-plus-guide/"'), "PioSolver article must link to the GTO+ guide");
+assert(pioArticle.includes('href="../../free.html"'), "PioSolver article must link to video teaching");
+assert(pioArticle.includes('href="../../about.html"'), "PioSolver article must link to practical tools");
+assert(pioArticle.includes('href="../../download.html"'), "PioSolver article must link to download page");
+assert(pioArticle.includes('href="https://piosolver.com/" target="_blank" rel="noopener"'), "PioSolver article must link safely to the PioSolver website");
 assert(!about.includes("code-embed w-embed pokerrookie-practical-tools-embed"), "Tools page module must not be hidden by code-embed");
 assert(!about.includes("background: #0d1117"), "Tools page must not use the old dark tools design");
 assert(!about.includes("pr-tool-card"), "Tools page must not use the old card grid tools design");

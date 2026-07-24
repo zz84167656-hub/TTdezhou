@@ -60,6 +60,13 @@ const indexedSeoPages = [
     title: "GTO+ 使用教程｜德州扑克复盘工具入门 - PokerRookie",
     description: "了解 GTO+ 在德州扑克训练中的用途，包括范围构建、下注尺度、EV 对比和复盘流程，适合想系统提升决策质量的玩家。",
     priority: "0.7"
+  },
+  {
+    fileName: "articles/piosolver-guide/index.html",
+    path: "/articles/piosolver-guide/",
+    title: "PioSolver 入门指南｜德州扑克求解器训练方法 - PokerRookie",
+    description: "PioSolver 入门教程，说明德州扑克求解器适合分析什么问题、如何设置范围和下注尺度，以及新手如何把结果转化为实战复盘结论。",
+    priority: "0.7"
   }
 ];
 const duplicateSeoPages = [
