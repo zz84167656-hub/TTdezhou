@@ -67,6 +67,13 @@ const indexedSeoPages = [
     title: "PioSolver 入门指南｜德州扑克求解器训练方法 - PokerRookie",
     description: "PioSolver 入门教程，说明德州扑克求解器适合分析什么问题、如何设置范围和下注尺度，以及新手如何把结果转化为实战复盘结论。",
     priority: "0.7"
+  },
+  {
+    fileName: "articles/poker-position-range-pot-odds/index.html",
+    path: "/articles/poker-position-range-pot-odds/",
+    title: "德州扑克新手入门｜位置、范围和底池赔率 - PokerRookie",
+    description: "德州扑克新手入门教程，讲清楚位置优势、起手牌范围和底池赔率三个基础概念，帮助玩家建立更稳定的翻前和翻后决策框架。",
+    priority: "0.7"
   }
 ];
 const duplicateSeoPages = [
