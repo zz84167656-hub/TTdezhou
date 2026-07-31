@@ -51,16 +51,16 @@ function shanghaiDateParts() {
 
 function contentTaskFor(weekday) {
   const tasks = {
-    星期一: "选 3 个长尾关键词，确定本周文章标题。优先：德州扑克新手入门、GTO工具、PokerRookie视频教学。",
-    星期二: "新增或完善 1 篇教学文章，例如：德州扑克新手入门：位置、范围和底池赔率。",
-    星期三: "优化旧页面内链：首页增加入口指向视频教学和实用工具，文章页之间互相链接。",
-    星期四: "新增或完善 1 篇工具文章，例如：GTO+ 使用教程 或 PioSolver 入门指南。",
-    星期五: "做外链：B站主页简介、视频简介、知乎、公众号或 KOOK 公告放入 https://www.pokerrookie.top/。",
-    星期六: "新增或完善 1 篇实战复盘文章，例如：河牌该不该诈唬，附关键决策点。",
-    星期日: "复盘数据：记录百度索引量、抓取频次、抓取异常和本周新增页面。"
+    星期一: "发布 2 篇新手基础文章，并选择本周长尾关键词。优先：位置、范围、底池赔率和翻前决策。",
+    星期二: "发布 2 篇实战教学文章。优先：翻牌、转牌、河牌的典型决策与复盘。",
+    星期三: "发布 1 篇视频复盘文章和 1 篇常见错误文章，同时优化新旧文章之间的内链。",
+    星期四: "发布 2 篇工具使用文章。优先：GTO+、PioSolver、PokerSnowie、Hand2Note 和 PokerTracker 4。",
+    星期五: "发布 1 篇赛事复盘文章和 1 篇玩家进阶文章，同时在 B站、知乎、公众号或 KOOK 增加网站外链。",
+    星期六: "发布 2 篇实战复盘文章，覆盖关键行动线、下注尺度和范围判断。",
+    星期日: "发布 1 篇一周学习总结和 1 篇新手问答文章，同时记录百度索引量、抓取频次和异常。"
   };
 
-  return tasks[weekday] || "检查站点健康、提交新增链接、补充 1 个内容入口。";
+  return tasks[weekday] || "发布 2 篇可独立收录的 SEO 文章，检查站点健康并提交新增链接。";
 }
 
 async function checkUrl(url) {
@@ -203,6 +203,7 @@ async function main() {
     queuedUrls.length && pushSucceeded(pushResult) ? "- 队列状态：已提交成功，并清空 seo_submit_queue.txt" : "",
     "",
     "## 今日内容任务",
+    "- 固定文章数量：2 篇",
     contentTaskFor(dateParts.weekday),
     "",
     "## 后台手动记录",
