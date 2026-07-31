@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>德州扑克转牌常见错误｜减少翻后持续亏损 - PokerRookie</title>
+  <meta name="description" content="总结德州扑克玩家在转牌阶段最常见的五类错误，包括自动持续下注、忽略范围变化、跟注赔率失衡和缺少河牌计划，帮助玩家提高翻后决策质量。">
+  <meta name="robots" content="index,follow">
+  <meta name="applicable-device" content="pc,mobile">
+  <meta name="MobileOptimized" content="width">
+  <meta name="HandheldFriendly" content="true">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <link rel="canonical" href="https://www.pokerrookie.top/articles/turn-card-leaks/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="PokerRookie">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:url" content="https://www.pokerrookie.top/articles/turn-card-leaks/">
+  <meta property="og:title" content="德州扑克转牌常见错误｜减少翻后持续亏损 - PokerRookie">
+  <meta property="og:description" content="从范围变化、下注目的、赔率和河牌计划四个角度，检查德州扑克转牌阶段最容易被忽略的决策漏洞。">
+  <meta property="og:image" content="https://www.pokerrookie.top/assets/PokerRookie.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="德州扑克转牌常见错误｜减少翻后持续亏损 - PokerRookie">
+  <meta name="twitter:description" content="从范围变化、下注目的、赔率和河牌计划四个角度，检查德州扑克转牌阶段最容易被忽略的决策漏洞。">
+  <meta name="twitter:image" content="https://www.pokerrookie.top/assets/PokerRookie.webp">
+  <style>
+    :root {
+      --ink: #07111f;
+      --muted: #58708e;
+      --line: #d9e4f0;
+      --bg: #f4f8fc;
+      --card: #fff;
+      --red: #ef3f46;
+      --blue: #173a66;
+      --green: #11a83c;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--bg);
+      letter-spacing: 0;
+    }
+    a { color: inherit; text-decoration: none; }
+    .site-header, .site-footer { background: #fff; border-bottom: 1px solid var(--line); }
+    .nav, .footer-inner {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .nav { min-height: 96px; }
+    .logo img { width: 190px; height: auto; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 34px; font-size: 15px; }
+    .nav-links a:hover { color: var(--red); }
+    .article-wrap { width: min(980px, calc(100% - 40px)); margin: 0 auto; padding: 64px 0 80px; }
+    .eyebrow {
+      display: inline-flex;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    h1 { margin: 22px 0 16px; font-size: clamp(36px, 6vw, 66px); line-height: 1.08; font-weight: 950; }
+    .lead { max-width: 840px; margin: 0 0 28px; color: var(--muted); font-size: 19px; line-height: 1.9; }
+    .meta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 36px; color: var(--muted); font-size: 14px; }
+    .hero-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+      box-shadow: 0 18px 48px rgba(23, 58, 102, .08);
+    }
+    .hero-card img { width: 100%; aspect-ratio: 49 / 20; object-fit: cover; object-position: center; display: block; }
+    .hero-note { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); }
+    .hero-note span { padding: 18px; background: #fff; color: var(--blue); font-weight: 800; text-align: center; }
+    .content { display: grid; gap: 22px; margin-top: 42px; }
+    .section { padding: clamp(24px, 4vw, 36px); border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+    .section h2 { margin: 0 0 16px; font-size: 28px; line-height: 1.25; }
+    .section p, .section li { color: #24384f; font-size: 17px; line-height: 1.95; }
+    .section p { margin: 0 0 14px; }
+    .section ul, .section ol { margin: 0; padding-left: 22px; }
+    .section li + li { margin-top: 8px; }
+    .checklist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+    .checklist span { padding: 16px; border: 1px solid var(--line); border-radius: 6px; background: #f8fbff; color: var(--blue); font-weight: 800; }
+    .link-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+    .pill-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #f8fbff;
+      color: var(--blue);
+      font-weight: 800;
+    }
+    .pill-link.primary { border-color: var(--red); background: var(--red); color: #fff; }
+    .site-footer { border-top: 1px solid var(--line); border-bottom: 0; }
+    .footer-inner { min-height: 136px; }
+    .footer-inner img { width: 170px; height: auto; display: block; }
+    .contact { display: flex; flex-wrap: wrap; gap: 14px 26px; color: #1b2a3f; font-size: 15px; }
+    .contact a, .contact span { display: inline-flex; align-items: center; gap: 8px; }
+    .contact svg { width: 18px; height: 18px; stroke: var(--green); fill: none; stroke-width: 2; }
+    @media (max-width: 760px) {
+      .nav { min-height: 84px; align-items: flex-start; flex-direction: column; padding: 18px 0; }
+      .logo img { width: 165px; }
+      .nav-links { width: 100%; gap: 18px; overflow-x: auto; }
+      .article-wrap { width: min(100% - 28px, 980px); padding: 38px 0 56px; }
+      .lead { font-size: 17px; }
+      .hero-note, .checklist { grid-template-columns: 1fr; }
+      .footer-inner { width: min(100% - 28px, 1120px); align-items: flex-start; flex-direction: column; padding: 26px 0; }
+      .contact { flex-direction: column; }
+    }
+  </style>
+  <script type="application/ld+json" id="pokerrookie-seo-jsonld">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.pokerrookie.top/#organization","name":"PokerRookie","url":"https://www.pokerrookie.top","logo":"https://www.pokerrookie.top/assets/pokerrookie-logo.png","sameAs":["https://space.bilibili.com/443284341"]},{"@type":"WebSite","@id":"https://www.pokerrookie.top/#website","name":"PokerRookie","url":"https://www.pokerrookie.top","inLanguage":"zh-CN","publisher":{"@id":"https://www.pokerrookie.top/#organization"}},{"@type":"Article","@id":"https://www.pokerrookie.top/articles/turn-card-leaks/#article","headline":"德州扑克转牌常见错误：为什么很多亏损发生在第二枪","description":"总结德州扑克玩家在转牌阶段最常见的五类错误，帮助玩家提高翻后决策质量。","image":"https://www.pokerrookie.top/assets/PokerRookie.webp","author":{"@type":"Person","name":"PokerRookie","url":"https://space.bilibili.com/443284341"},"publisher":{"@id":"https://www.pokerrookie.top/#organization"},"mainEntityOfPage":"https://www.pokerrookie.top/articles/turn-card-leaks/","inLanguage":"zh-CN","datePublished":"2026-07-31","dateModified":"2026-07-31"}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="主导航">
+      <a class="logo" href="../../index.html" aria-label="PokerRookie 首页"><img src="../../assets/pokerrookie-logo.png" alt="PokerRookie"></a>
+      <div class="nav-links">
+        <a href="../../index.html">主页</a>
+        <a href="../../download.html">下载游戏</a>
+        <a href="../../free.html">视频教学</a>
+        <a href="../../about.html">实用工具</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="article-wrap">
+    <span class="eyebrow">实战复盘</span>
+    <h1>德州扑克转牌常见错误：为什么很多亏损发生在第二枪</h1>
+    <p class="lead">翻牌圈只是信息的开始，转牌才是很多底池真正拉开差距的位置。牌面变化、有效筹码和范围收窄会同时影响决策，如果仍沿用翻牌圈的思路，第二枪很容易从主动进攻变成持续亏损。</p>
+    <div class="meta">
+      <span>作者：PokerRookie</span>
+      <span>更新：2026-07-31</span>
+      <span>主题：德州扑克实战 / 转牌策略 / 范围思维 / 复盘</span>
+    </div>
+
+    <section class="hero-card" aria-label="PokerRookie 德州扑克转牌复盘">
+      <img src="../../assets/PokerRookie.webp" alt="PokerRookie 德州扑克转牌策略教学">
+      <div class="hero-note">
+        <span>重新评估范围</span>
+        <span>明确下注目的</span>
+        <span>提前规划河牌</span>
+      </div>
+    </section>
+
+    <div class="content">
+      <section class="section">
+        <h2>一、不要把翻牌持续下注变成自动持续下注</h2>
+        <p>翻牌圈下注被跟注后，双方范围已经发生变化。转牌继续下注之前，要重新判断这张牌更有利于谁、还能从哪些更差的牌获得价值，以及对手会弃掉哪些更好的牌。没有清晰答案时，过牌通常比机械开第二枪更稳健。</p>
+        <ul>
+          <li>价值下注：明确哪些更差的成牌或听牌会跟注。</li>
+          <li>诈唬下注：明确哪些更好的牌会弃牌，以及自己是否有合适的阻断牌。</li>
+          <li>保护下注：不要用“怕被反超”代替对范围和赔率的判断。</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>二、转牌改变的不只是牌力，还有范围优势</h2>
+        <p>高张、成顺张、同花完成张和对子牌面会以不同方式改变双方的强牌密度。一张看起来无关的转牌，也可能让跟注方增加两对、暗三条或强听牌。复盘时应比较双方完整范围，不要只盯着自己的绝对牌力。</p>
+        <div class="checklist">
+          <span>这张转牌更击中谁的翻前范围？</span>
+          <span>双方新增了哪些强价值组合？</span>
+          <span>哪些翻牌听牌现在完成或失效？</span>
+          <span>我的下注尺度能代表哪些强牌？</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>三、跟注前先检查价格和隐含风险</h2>
+        <p>拿着听牌面对第二枪时，不能只看自己有多少出路。要先算当前底池赔率，再考虑出路是否干净、击中后能否继续获得价值，以及河牌面对大额下注时是否容易犯错。表面上“差一点成牌”的跟注，长期成本可能很高。</p>
+        <ul>
+          <li>下注越大，跟注需要的即时胜率越高。</li>
+          <li>同花面或配对面上的部分出路可能并不干净。</li>
+          <li>位置不利时，河牌实现权益的难度更高。</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>四、每次转牌决定都要带着河牌计划</h2>
+        <p>下注或跟注之前，先回答三个问题：哪些河牌继续进攻，哪些河牌转为摊牌，哪些河牌面对压力直接放弃。缺少河牌计划，常见结果就是转牌投入过多，河牌再被迫做一个代价更高的猜测。</p>
+        <ol>
+          <li>记录转牌时双方可能的价值范围与诈唬范围。</li>
+          <li>把河牌分成改善牌面、中性牌和明显不利牌。</li>
+          <li>复盘时用 GTO+ 或 PioSolver 验证关键节点，不追求照搬频率。</li>
+        </ol>
+      </section>
+
+      <section class="section">
+        <h2>五、建立可重复的转牌复盘清单</h2>
+        <p>稳定提升来自固定流程。每次筛选大底池时，依次检查范围变化、下注目的、尺度、赔率和河牌计划。先找出重复出现的错误，再用视频教学和求解工具验证，训练效率会比随机研究单手牌更高。</p>
+        <div class="link-row">
+          <a class="pill-link primary" href="../../free.html">去看视频教学</a>
+          <a class="pill-link" href="../poker-position-range-pot-odds/">阅读新手入门</a>
+          <a class="pill-link" href="../gto-plus-guide/">阅读 GTO+ 使用教程</a>
+          <a class="pill-link" href="../piosolver-guide/">阅读 PioSolver 入门指南</a>
+          <a class="pill-link" href="../../about.html">查看实用工具</a>
+          <a class="pill-link" href="../../download.html">下载游戏</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a href="../../index.html" aria-label="PokerRookie 首页"><img src="../../assets/pokerrookie-logo.png" alt="PokerRookie"></a>
+      <div class="contact">
+        <a href="mailto:23294069@qq.com">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>
+          <span>23294069@qq.com</span>
+        </a>
+        <span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 4.2c-4.1 0-7.4 2.6-7.4 5.9 0 1.9 1.1 3.6 2.9 4.7l-.6 2.1 2.5-1.2c.8.2 1.7.4 2.6.4 4.1 0 7.4-2.6 7.4-5.9s-3.3-6-7.4-6z"></path><path d="M21.9 14.3c0-2.9-2.9-5.3-6.5-5.3h-.3c.1.4.2.8.2 1.2 0 3.8-3.8 6.8-8.4 6.8h-.5c1.1 1.6 3.3 2.7 5.8 2.7.8 0 1.5-.1 2.2-.3l2.1 1-.5-1.7c1.8-1 2.9-2.6 2.9-4.4z"></path></svg>
+          <span>liuyao3643</span>
+        </span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

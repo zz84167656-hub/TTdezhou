@@ -74,6 +74,13 @@ const indexedSeoPages = [
     title: "德州扑克新手入门｜位置、范围和底池赔率 - PokerRookie",
     description: "德州扑克新手入门教程，讲清楚位置优势、起手牌范围和底池赔率三个基础概念，帮助玩家建立更稳定的翻前和翻后决策框架。",
     priority: "0.7"
+  },
+  {
+    fileName: "articles/turn-card-leaks/index.html",
+    path: "/articles/turn-card-leaks/",
+    title: "德州扑克转牌常见错误｜减少翻后持续亏损 - PokerRookie",
+    description: "总结德州扑克玩家在转牌阶段最常见的五类错误，包括自动持续下注、忽略范围变化、跟注赔率失衡和缺少河牌计划，帮助玩家提高翻后决策质量。",
+    priority: "0.7"
   }
 ];
 const duplicateSeoPages = [

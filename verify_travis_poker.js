@@ -59,6 +59,8 @@ const pioArticlePath = "articles/piosolver-guide/index.html";
 const pioArticleUrl = `${siteBaseUrl}/articles/piosolver-guide/`;
 const beginnerArticlePath = "articles/poker-position-range-pot-odds/index.html";
 const beginnerArticleUrl = `${siteBaseUrl}/articles/poker-position-range-pot-odds/`;
+const turnArticlePath = "articles/turn-card-leaks/index.html";
+const turnArticleUrl = `${siteBaseUrl}/articles/turn-card-leaks/`;
 
 function assert(condition, message) {
   if (!condition) {
@@ -118,6 +120,8 @@ assert(sitemap.includes(`<loc>${pioArticleUrl}</loc>`), "sitemap.xml must includ
 assert(baiduUrls.includes(pioArticleUrl), "baidu_urls.txt must include the PioSolver guide article");
 assert(sitemap.includes(`<loc>${beginnerArticleUrl}</loc>`), "sitemap.xml must include the beginner guide article");
 assert(baiduUrls.includes(beginnerArticleUrl), "baidu_urls.txt must include the beginner guide article");
+assert(sitemap.includes(`<loc>${turnArticleUrl}</loc>`), "sitemap.xml must include the turn strategy article");
+assert(baiduUrls.includes(turnArticleUrl), "baidu_urls.txt must include the turn strategy article");
 assert(!sitemap.includes("travis-poker.html"), "sitemap.xml must not include the duplicate home mirror");
 assert(!sitemap.includes("lab.html"), "sitemap.xml must not include the hidden LAB page");
 
@@ -324,6 +328,7 @@ assert(gtoArticle.includes('href="../../about.html"'), "GTO+ article must link t
 assert(gtoArticle.includes('href="../../download.html"'), "GTO+ article must link to download page");
 assert(gtoArticle.includes('href="../piosolver-guide/"'), "GTO+ article must link to the PioSolver guide");
 assert(gtoArticle.includes('href="../poker-position-range-pot-odds/"'), "GTO+ article must link to the beginner guide");
+assert(gtoArticle.includes('href="../turn-card-leaks/"'), "GTO+ article must link to the turn strategy guide");
 assert(gtoArticle.includes('href="https://www.gtoplus.com/" target="_blank" rel="noopener"'), "GTO+ article must link safely to the GTO+ website");
 
 const pioArticle = read(pioArticlePath);
@@ -339,6 +344,7 @@ assert(pioArticle.includes('href="../../free.html"'), "PioSolver article must li
 assert(pioArticle.includes('href="../../about.html"'), "PioSolver article must link to practical tools");
 assert(pioArticle.includes('href="../../download.html"'), "PioSolver article must link to download page");
 assert(pioArticle.includes('href="../poker-position-range-pot-odds/"'), "PioSolver article must link to the beginner guide");
+assert(pioArticle.includes('href="../turn-card-leaks/"'), "PioSolver article must link to the turn strategy guide");
 assert(pioArticle.includes('href="https://piosolver.com/" target="_blank" rel="noopener"'), "PioSolver article must link safely to the PioSolver website");
 
 const beginnerArticle = read(beginnerArticlePath);
@@ -354,9 +360,27 @@ assert(beginnerArticle.includes("起手牌范围"), "Beginner article must cover
 assert(beginnerArticle.includes("底池赔率"), "Beginner article must cover pot odds");
 assert(beginnerArticle.includes('href="../gto-plus-guide/"'), "Beginner article must link to the GTO+ guide");
 assert(beginnerArticle.includes('href="../piosolver-guide/"'), "Beginner article must link to the PioSolver guide");
+assert(beginnerArticle.includes('href="../turn-card-leaks/"'), "Beginner article must link to the turn strategy guide");
 assert(beginnerArticle.includes('href="../../free.html"'), "Beginner article must link to video teaching");
 assert(beginnerArticle.includes('href="../../about.html"'), "Beginner article must link to practical tools");
 assert(beginnerArticle.includes('href="../../download.html"'), "Beginner article must link to download page");
+
+const turnArticle = read(turnArticlePath);
+assert(turnArticle.includes("<title>德州扑克转牌常见错误｜减少翻后持续亏损 - PokerRookie</title>"), "Turn article must use the SEO title");
+assert(turnArticle.includes(`<link rel="canonical" href="${turnArticleUrl}">`), "Turn article must use the canonical article URL");
+assert(turnArticle.includes('<meta name="robots" content="index,follow">'), "Turn article must be indexable");
+assert(turnArticle.includes('<meta name="applicable-device" content="pc,mobile">'), "Turn article must declare Baidu-friendly device support");
+assert(turnArticle.includes('id="pokerrookie-seo-jsonld"'), "Turn article must include structured data");
+assert(turnArticle.includes("德州扑克转牌常见错误：为什么很多亏损发生在第二枪"), "Turn article must include the article headline");
+assert(turnArticle.includes("../../assets/PokerRookie.webp"), "Turn article must use the local PokerRookie image");
+assert(turnArticle.includes("自动持续下注"), "Turn article must cover automatic continuation betting");
+assert(turnArticle.includes("河牌计划"), "Turn article must cover river planning");
+assert(turnArticle.includes('href="../poker-position-range-pot-odds/"'), "Turn article must link to the beginner guide");
+assert(turnArticle.includes('href="../gto-plus-guide/"'), "Turn article must link to the GTO+ guide");
+assert(turnArticle.includes('href="../piosolver-guide/"'), "Turn article must link to the PioSolver guide");
+assert(turnArticle.includes('href="../../free.html"'), "Turn article must link to video teaching");
+assert(turnArticle.includes('href="../../about.html"'), "Turn article must link to practical tools");
+assert(turnArticle.includes('href="../../download.html"'), "Turn article must link to download page");
 assert(!about.includes("code-embed w-embed pokerrookie-practical-tools-embed"), "Tools page module must not be hidden by code-embed");
 assert(!about.includes("background: #0d1117"), "Tools page must not use the old dark tools design");
 assert(!about.includes("pr-tool-card"), "Tools page must not use the old card grid tools design");
