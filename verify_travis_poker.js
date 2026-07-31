@@ -61,6 +61,10 @@ const beginnerArticlePath = "articles/poker-position-range-pot-odds/index.html";
 const beginnerArticleUrl = `${siteBaseUrl}/articles/poker-position-range-pot-odds/`;
 const turnArticlePath = "articles/turn-card-leaks/index.html";
 const turnArticleUrl = `${siteBaseUrl}/articles/turn-card-leaks/`;
+const finalTableArticlePath = "articles/final-table-review/index.html";
+const finalTableArticleUrl = `${siteBaseUrl}/articles/final-table-review/`;
+const rangeArticlePath = "articles/range-reading-advanced/index.html";
+const rangeArticleUrl = `${siteBaseUrl}/articles/range-reading-advanced/`;
 
 function assert(condition, message) {
   if (!condition) {
@@ -122,6 +126,10 @@ assert(sitemap.includes(`<loc>${beginnerArticleUrl}</loc>`), "sitemap.xml must i
 assert(baiduUrls.includes(beginnerArticleUrl), "baidu_urls.txt must include the beginner guide article");
 assert(sitemap.includes(`<loc>${turnArticleUrl}</loc>`), "sitemap.xml must include the turn strategy article");
 assert(baiduUrls.includes(turnArticleUrl), "baidu_urls.txt must include the turn strategy article");
+assert(sitemap.includes(`<loc>${finalTableArticleUrl}</loc>`), "sitemap.xml must include the final table article");
+assert(baiduUrls.includes(finalTableArticleUrl), "baidu_urls.txt must include the final table article");
+assert(sitemap.includes(`<loc>${rangeArticleUrl}</loc>`), "sitemap.xml must include the range reading article");
+assert(baiduUrls.includes(rangeArticleUrl), "baidu_urls.txt must include the range reading article");
 assert(!sitemap.includes("travis-poker.html"), "sitemap.xml must not include the duplicate home mirror");
 assert(!sitemap.includes("lab.html"), "sitemap.xml must not include the hidden LAB page");
 
@@ -381,6 +389,34 @@ assert(turnArticle.includes('href="../piosolver-guide/"'), "Turn article must li
 assert(turnArticle.includes('href="../../free.html"'), "Turn article must link to video teaching");
 assert(turnArticle.includes('href="../../about.html"'), "Turn article must link to practical tools");
 assert(turnArticle.includes('href="../../download.html"'), "Turn article must link to download page");
+assert(turnArticle.includes('href="../final-table-review/"'), "Turn article must link to the final table guide");
+assert(turnArticle.includes('href="../range-reading-advanced/"'), "Turn article must link to the range reading guide");
+
+const finalTableArticle = read(finalTableArticlePath);
+assert(finalTableArticle.includes("<title>德州扑克锦标赛决赛桌复盘｜ICM、筹码压力与位置 - PokerRookie</title>"), "Final table article must use the SEO title");
+assert(finalTableArticle.includes(`<link rel="canonical" href="${finalTableArticleUrl}">`), "Final table article must use the canonical URL");
+assert(finalTableArticle.includes('<meta name="robots" content="index,follow">'), "Final table article must be indexable");
+assert(finalTableArticle.includes('id="pokerrookie-seo-jsonld"'), "Final table article must include structured data");
+assert(finalTableArticle.includes("德州扑克锦标赛决赛桌复盘：ICM、筹码压力与位置"), "Final table article must include the headline");
+assert(finalTableArticle.includes("../../assets/wsop.webp"), "Final table article must use the WSOP image");
+assert(finalTableArticle.includes("有效筹码"), "Final table article must cover effective stacks");
+assert(finalTableArticle.includes("ICM"), "Final table article must cover ICM");
+assert(finalTableArticle.includes('href="../range-reading-advanced/"'), "Final table article must link to the range reading guide");
+assert(finalTableArticle.includes('href="../poker-position-range-pot-odds/"'), "Final table article must link to the beginner guide");
+assert(finalTableArticle.includes('href="../../free.html"'), "Final table article must link to video teaching");
+
+const rangeArticle = read(rangeArticlePath);
+assert(rangeArticle.includes("<title>德州扑克范围阅读进阶｜从行动线判断组合 - PokerRookie</title>"), "Range article must use the SEO title");
+assert(rangeArticle.includes(`<link rel="canonical" href="${rangeArticleUrl}">`), "Range article must use the canonical URL");
+assert(rangeArticle.includes('<meta name="robots" content="index,follow">'), "Range article must be indexable");
+assert(rangeArticle.includes('id="pokerrookie-seo-jsonld"'), "Range article must include structured data");
+assert(rangeArticle.includes("德州扑克范围阅读进阶：从行动线判断对手组合"), "Range article must include the headline");
+assert(rangeArticle.includes("../../assets/PokerRookie.webp"), "Range article must use the local PokerRookie image");
+assert(rangeArticle.includes("下注尺度"), "Range article must cover bet sizing");
+assert(rangeArticle.includes("阻断牌"), "Range article must cover blockers");
+assert(rangeArticle.includes('href="../final-table-review/"'), "Range article must link to the final table guide");
+assert(rangeArticle.includes('href="../poker-position-range-pot-odds/"'), "Range article must link to the beginner guide");
+assert(rangeArticle.includes('href="../../about.html"'), "Range article must link to practical tools");
 assert(!about.includes("code-embed w-embed pokerrookie-practical-tools-embed"), "Tools page module must not be hidden by code-embed");
 assert(!about.includes("background: #0d1117"), "Tools page must not use the old dark tools design");
 assert(!about.includes("pr-tool-card"), "Tools page must not use the old card grid tools design");

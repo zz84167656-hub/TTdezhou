@@ -81,6 +81,20 @@ const indexedSeoPages = [
     title: "德州扑克转牌常见错误｜减少翻后持续亏损 - PokerRookie",
     description: "总结德州扑克玩家在转牌阶段最常见的五类错误，包括自动持续下注、忽略范围变化、跟注赔率失衡和缺少河牌计划，帮助玩家提高翻后决策质量。",
     priority: "0.7"
+  },
+  {
+    fileName: "articles/final-table-review/index.html",
+    path: "/articles/final-table-review/",
+    title: "德州扑克锦标赛决赛桌复盘｜ICM、筹码压力与位置 - PokerRookie",
+    description: "德州扑克锦标赛决赛桌复盘方法，讲解如何结合有效筹码、ICM、奖励阶梯和位置分析关键牌局，建立可重复的赛事复盘流程。",
+    priority: "0.7"
+  },
+  {
+    fileName: "articles/range-reading-advanced/index.html",
+    path: "/articles/range-reading-advanced/",
+    title: "德州扑克范围阅读进阶｜从行动线判断组合 - PokerRookie",
+    description: "德州扑克范围阅读进阶教程，从翻前位置、公共牌结构、下注尺度和阻断牌出发，逐街收窄对手范围并形成更清晰的实战判断。",
+    priority: "0.7"
   }
 ];
 const duplicateSeoPages = [
