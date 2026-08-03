@@ -65,6 +65,11 @@ const finalTableArticlePath = "articles/final-table-review/index.html";
 const finalTableArticleUrl = `${siteBaseUrl}/articles/final-table-review/`;
 const rangeArticlePath = "articles/range-reading-advanced/index.html";
 const rangeArticleUrl = `${siteBaseUrl}/articles/range-reading-advanced/`;
+const preflopArticlePath = "articles/preflop-opening-ranges/index.html";
+const preflopArticleUrl = `${siteBaseUrl}/articles/preflop-opening-ranges/`;
+const sizingArticlePath = "articles/bet-sizing-basics/index.html";
+const sizingArticleUrl = `${siteBaseUrl}/articles/bet-sizing-basics/`;
+const articleCss = read("assets/article.css");
 
 function assert(condition, message) {
   if (!condition) {
@@ -130,6 +135,10 @@ assert(sitemap.includes(`<loc>${finalTableArticleUrl}</loc>`), "sitemap.xml must
 assert(baiduUrls.includes(finalTableArticleUrl), "baidu_urls.txt must include the final table article");
 assert(sitemap.includes(`<loc>${rangeArticleUrl}</loc>`), "sitemap.xml must include the range reading article");
 assert(baiduUrls.includes(rangeArticleUrl), "baidu_urls.txt must include the range reading article");
+assert(sitemap.includes(`<loc>${preflopArticleUrl}</loc>`), "sitemap.xml must include the preflop ranges article");
+assert(baiduUrls.includes(preflopArticleUrl), "baidu_urls.txt must include the preflop ranges article");
+assert(sitemap.includes(`<loc>${sizingArticleUrl}</loc>`), "sitemap.xml must include the bet sizing article");
+assert(baiduUrls.includes(sizingArticleUrl), "baidu_urls.txt must include the bet sizing article");
 assert(!sitemap.includes("travis-poker.html"), "sitemap.xml must not include the duplicate home mirror");
 assert(!sitemap.includes("lab.html"), "sitemap.xml must not include the hidden LAB page");
 
@@ -372,6 +381,8 @@ assert(beginnerArticle.includes('href="../turn-card-leaks/"'), "Beginner article
 assert(beginnerArticle.includes('href="../../free.html"'), "Beginner article must link to video teaching");
 assert(beginnerArticle.includes('href="../../about.html"'), "Beginner article must link to practical tools");
 assert(beginnerArticle.includes('href="../../download.html"'), "Beginner article must link to download page");
+assert(beginnerArticle.includes('href="../preflop-opening-ranges/"'), "Beginner article must link to the preflop ranges guide");
+assert(beginnerArticle.includes('href="../bet-sizing-basics/"'), "Beginner article must link to the bet sizing guide");
 
 const turnArticle = read(turnArticlePath);
 assert(turnArticle.includes("<title>德州扑克转牌常见错误｜减少翻后持续亏损 - PokerRookie</title>"), "Turn article must use the SEO title");
@@ -391,6 +402,7 @@ assert(turnArticle.includes('href="../../about.html"'), "Turn article must link 
 assert(turnArticle.includes('href="../../download.html"'), "Turn article must link to download page");
 assert(turnArticle.includes('href="../final-table-review/"'), "Turn article must link to the final table guide");
 assert(turnArticle.includes('href="../range-reading-advanced/"'), "Turn article must link to the range reading guide");
+assert(turnArticle.includes('href="../bet-sizing-basics/"'), "Turn article must link to the bet sizing guide");
 
 const finalTableArticle = read(finalTableArticlePath);
 assert(finalTableArticle.includes("<title>德州扑克锦标赛决赛桌复盘｜ICM、筹码压力与位置 - PokerRookie</title>"), "Final table article must use the SEO title");
@@ -417,6 +429,36 @@ assert(rangeArticle.includes("阻断牌"), "Range article must cover blockers");
 assert(rangeArticle.includes('href="../final-table-review/"'), "Range article must link to the final table guide");
 assert(rangeArticle.includes('href="../poker-position-range-pot-odds/"'), "Range article must link to the beginner guide");
 assert(rangeArticle.includes('href="../../about.html"'), "Range article must link to practical tools");
+assert(rangeArticle.includes('href="../preflop-opening-ranges/"'), "Range article must link to the preflop ranges guide");
+
+const preflopArticle = read(preflopArticlePath);
+assert(articleCss.includes("--article-font"), "Shared article CSS must define the standard article font");
+assert(preflopArticle.includes('<link rel="stylesheet" href="../../assets/article.css">'), "Preflop article must use the shared article CSS");
+assert(preflopArticle.includes("<title>德州扑克翻前开池范围｜不同位置怎么调整 - PokerRookie</title>"), "Preflop article must use the SEO title");
+assert(preflopArticle.includes(`<link rel="canonical" href="${preflopArticleUrl}">`), "Preflop article must use the canonical URL");
+assert(preflopArticle.includes('<meta name="robots" content="index,follow">'), "Preflop article must be indexable");
+assert(preflopArticle.includes('id="pokerrookie-seo-jsonld"'), "Preflop article must include structured data");
+assert(preflopArticle.includes("德州扑克翻前开池范围：不同位置应该怎么调整"), "Preflop article must include the headline");
+assert(preflopArticle.includes("../../assets/PokerRookie.webp"), "Preflop article must use the PokerRookie image");
+assert(preflopArticle.includes("前位"), "Preflop article must cover early position");
+assert(preflopArticle.includes("按钮位"), "Preflop article must cover the button");
+assert(preflopArticle.includes('href="../bet-sizing-basics/"'), "Preflop article must link to the bet sizing guide");
+assert(preflopArticle.includes('href="../poker-position-range-pot-odds/"'), "Preflop article must link to the beginner guide");
+assert(preflopArticle.includes('href="../../free.html"'), "Preflop article must link to video teaching");
+
+const sizingArticle = read(sizingArticlePath);
+assert(sizingArticle.includes('<link rel="stylesheet" href="../../assets/article.css">'), "Sizing article must use the shared article CSS");
+assert(sizingArticle.includes("<title>德州扑克下注尺度入门｜小注、中注与大注怎么选 - PokerRookie</title>"), "Sizing article must use the SEO title");
+assert(sizingArticle.includes(`<link rel="canonical" href="${sizingArticleUrl}">`), "Sizing article must use the canonical URL");
+assert(sizingArticle.includes('<meta name="robots" content="index,follow">'), "Sizing article must be indexable");
+assert(sizingArticle.includes('id="pokerrookie-seo-jsonld"'), "Sizing article must include structured data");
+assert(sizingArticle.includes("德州扑克下注尺度入门：小注、中注与大注怎么选"), "Sizing article must include the headline");
+assert(sizingArticle.includes("../../assets/HighStakesPoker.webp"), "Sizing article must use the local poker image");
+assert(sizingArticle.includes("范围优势"), "Sizing article must cover range advantage");
+assert(sizingArticle.includes("底池"), "Sizing article must cover pot-relative sizing");
+assert(sizingArticle.includes('href="../preflop-opening-ranges/"'), "Sizing article must link to the preflop ranges guide");
+assert(sizingArticle.includes('href="../turn-card-leaks/"'), "Sizing article must link to the turn strategy guide");
+assert(sizingArticle.includes('href="../../about.html"'), "Sizing article must link to practical tools");
 assert(!about.includes("code-embed w-embed pokerrookie-practical-tools-embed"), "Tools page module must not be hidden by code-embed");
 assert(!about.includes("background: #0d1117"), "Tools page must not use the old dark tools design");
 assert(!about.includes("pr-tool-card"), "Tools page must not use the old card grid tools design");

@@ -95,6 +95,20 @@ const indexedSeoPages = [
     title: "德州扑克范围阅读进阶｜从行动线判断组合 - PokerRookie",
     description: "德州扑克范围阅读进阶教程，从翻前位置、公共牌结构、下注尺度和阻断牌出发，逐街收窄对手范围并形成更清晰的实战判断。",
     priority: "0.7"
+  },
+  {
+    fileName: "articles/preflop-opening-ranges/index.html",
+    path: "/articles/preflop-opening-ranges/",
+    title: "德州扑克翻前开池范围｜不同位置怎么调整 - PokerRookie",
+    description: "德州扑克翻前开池范围入门教程，讲解前位、中位、关煞位、按钮位和小盲位的范围差异，以及如何根据筹码深度和对手特点调整。",
+    priority: "0.7"
+  },
+  {
+    fileName: "articles/bet-sizing-basics/index.html",
+    path: "/articles/bet-sizing-basics/",
+    title: "德州扑克下注尺度入门｜小注、中注与大注怎么选 - PokerRookie",
+    description: "德州扑克下注尺度入门教程，从下注目的、牌面结构和范围优势出发，说明小注、中等下注与大注的适用场景和常见错误。",
+    priority: "0.7"
   }
 ];
 const duplicateSeoPages = [
