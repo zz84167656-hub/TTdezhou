@@ -204,6 +204,7 @@ async function main() {
     "",
     "## 今日内容任务",
     "- 固定文章数量：2 篇",
+    "- 单篇正文标准：500–1000 个汉字，至少 4 个章节、1 个具体场景和 1 组复盘要点",
     contentTaskFor(dateParts.weekday),
     "",
     "## 后台手动记录",

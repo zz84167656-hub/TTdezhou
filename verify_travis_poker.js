@@ -83,6 +83,11 @@ function read(fileName) {
   return fs.readFileSync(filePath, "utf8");
 }
 
+function countMainChineseCharacters(html) {
+  const main = html.match(/<main[\s\S]*?<\/main>/i)?.[0] || "";
+  return (main.match(/[\u3400-\u4dbf\u4e00-\u9fff]/g) || []).length;
+}
+
 function findPrdMarkdown() {
   const searchDirs = [path.join(root, "1"), root];
   for (const dir of searchDirs) {
@@ -459,6 +464,21 @@ assert(sizingArticle.includes("底池"), "Sizing article must cover pot-relative
 assert(sizingArticle.includes('href="../preflop-opening-ranges/"'), "Sizing article must link to the preflop ranges guide");
 assert(sizingArticle.includes('href="../turn-card-leaks/"'), "Sizing article must link to the turn strategy guide");
 assert(sizingArticle.includes('href="../../about.html"'), "Sizing article must link to practical tools");
+
+for (const [label, article] of [
+  ["GTO+", gtoArticle],
+  ["PioSolver", pioArticle],
+  ["Beginner", beginnerArticle],
+  ["Turn", turnArticle],
+  ["Final table", finalTableArticle],
+  ["Range", rangeArticle],
+  ["Preflop", preflopArticle],
+  ["Sizing", sizingArticle]
+]) {
+  const chineseCharacters = countMainChineseCharacters(article);
+  assert(chineseCharacters >= 500, `${label} article must contain at least 500 Chinese characters in main content`);
+  assert(chineseCharacters <= 1000, `${label} article must contain no more than 1000 Chinese characters in main content`);
+}
 assert(!about.includes("code-embed w-embed pokerrookie-practical-tools-embed"), "Tools page module must not be hidden by code-embed");
 assert(!about.includes("background: #0d1117"), "Tools page must not use the old dark tools design");
 assert(!about.includes("pr-tool-card"), "Tools page must not use the old card grid tools design");
