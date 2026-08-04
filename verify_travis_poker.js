@@ -44,6 +44,7 @@ const pages = {
   "travis-poker.html": "PokerRookie｜德州扑克实战复盘与视频教学",
   "download.html": "PokerRookie 游戏下载｜long999 邀请码与战队福利",
   "free.html": "视频教学｜PokerRookie 德州扑克实战复盘合集",
+  "daily.html": "每日分享｜PokerRookie 德州扑克学习文章",
   "about.html": "实用工具｜PokerRookie 德州扑克 GTO 与数据分析工具",
   "lab.html": "PokerRookie LAB｜会员社群"
 };
@@ -51,6 +52,7 @@ const seoPaths = {
   "index.html": "/",
   "download.html": "/download.html",
   "free.html": "/free.html",
+  "daily.html": "/daily.html",
   "about.html": "/about.html"
 };
 const gtoArticlePath = "articles/gto-plus-guide/index.html";
@@ -191,6 +193,8 @@ for (const [fileName, title] of Object.entries(pages)) {
   assert(html.includes(">实用工具</a>"), `${fileName} must show the tools nav label`);
   assert(html.includes('href="free.html"'), `${fileName} must keep the local video teaching page link`);
   assert(html.includes(">视频教学</a>"), `${fileName} must show the video teaching nav label`);
+  assert(html.includes('href="daily.html"'), `${fileName} must keep the local daily sharing page link`);
+  assert(html.includes(">每日分享</a>"), `${fileName} must show the daily sharing nav label`);
   assert(!html.includes("69d6fb774fb3fe709a3c22ef_1"), `${fileName} must not use the old TravisPoker nav logo`);
   assert(!html.includes("69973e9728086fd6a49a2e06_travispoker-28"), `${fileName} must not use the old TravisPoker footer logo`);
   assert(!html.includes('href="https://www.travispoker.com/download"'), `${fileName} must not route internal download link to remote site`);
@@ -235,6 +239,25 @@ assert(home.includes("PokerRookie"), "Home profile card must include the name");
 assert(home.includes("B站知名Up主"), "Home profile card must include the subtitle");
 assert(home.includes("国内顶尖德州扑克、奥马哈与混合游戏玩家，拥有APT、GOP、RDPT、KPC等赛事的十余个冠军头衔。"), "Home profile copy must match the provided text");
 assert(home.includes("assets/pokerrookie-profile.jpg"), "Home must use the PokerRookie profile photo");
+assert(home.includes('id="pokerrookie-home-articles-title"'), "Home must include the strategy article section");
+assert(home.includes("从翻前范围到河牌决策"), "Home article section must include its heading");
+assert(home.includes('"@id":"https://www.pokerrookie.top/#articles"'), "Home structured data must include the article ItemList");
+assert((home.match(/class="pokerrookie-home-article-item"/g) || []).length === 10, "Home must list all 10 strategy articles exactly once");
+for (const articleHref of [
+  "articles/gto-plus-guide/",
+  "articles/piosolver-guide/",
+  "articles/poker-position-range-pot-odds/",
+  "articles/turn-card-leaks/",
+  "articles/final-table-review/",
+  "articles/range-reading-advanced/",
+  "articles/preflop-opening-ranges/",
+  "articles/bet-sizing-basics/",
+  "articles/flop-cbet-mistakes/",
+  "articles/river-bluff-catching/"
+]) {
+  assert(home.includes(`href="${articleHref}"`), `Home must link to ${articleHref}`);
+}
+assert(home.indexOf('href="articles/river-bluff-catching/"') < home.indexOf('href="articles/flop-cbet-mistakes/"'), "Home must show the newest article first");
 assert(!home.includes('<h1 class="card-title">轻松娱乐</h1>'), "Home must replace the old entertainment card title");
 assert(!home.includes("只是随便玩玩的话"), "Home must replace the old entertainment card badge");
 assert(!home.includes("玩有趣的扑克牌小游戏"), "Home must replace the old entertainment card body");
@@ -246,6 +269,19 @@ assert(homeMirror.includes('href="download.html" class="pokerrookie-hero-title-l
 assert(homeMirror.includes('src="assets/sologan.webp"'), "travis-poker.html must use the slogan artwork");
 assert(homeMirror.includes(bilibiliUrl), "travis-poker.html must mirror the Bilibili profile link");
 assert(homeMirror.includes(`href="${bilibiliUrl}" target="_blank" rel="noopener"`), "travis-poker.html Bilibili CTA must open as a safe external link");
+assert((homeMirror.match(/class="pokerrookie-home-article-item"/g) || []).length === 10, "travis-poker.html must mirror all strategy articles");
+assert(homeMirror.includes('"@id":"https://www.pokerrookie.top/#articles"'), "travis-poker.html structured data must include the article ItemList");
+
+const daily = read("daily.html");
+assert(daily.includes('class="pokerrookie-daily-sharing"'), "Daily page must include the daily sharing interface");
+assert(daily.includes('id="pokerrookie-daily-title"'), "Daily page must expose an accessible page heading");
+assert(daily.includes("每天两篇，持续积累"), "Daily page must include the daily publishing message");
+assert(daily.includes("2026年8月4日"), "Daily page must show the latest publishing date");
+assert(daily.includes("2026年7月23日"), "Daily page must show the earliest publishing date");
+assert((daily.match(/class="pokerrookie-daily-article"/g) || []).length === 10, "Daily page must list all 10 strategy articles exactly once");
+assert(daily.indexOf('href="articles/river-bluff-catching/"') < daily.indexOf('href="articles/gto-plus-guide/"'), "Daily page must order articles from newest to oldest");
+assert(daily.includes('"@id":"https://www.pokerrookie.top/daily.html#daily-articles"'), "Daily page structured data must include the article ItemList");
+assert(daily.includes('href="daily.html" aria-current="page"'), "Daily page nav must mark Daily Sharing as current");
 
 const free = read("free.html");
 assert(free.includes("<title>视频教学｜PokerRookie 德州扑克实战复盘合集</title>"), "Free page title must be renamed to video teaching");

@@ -9,6 +9,7 @@ const htmlFiles = [
   "travis-poker.html",
   "download.html",
   "free.html",
+  "daily.html",
   "about.html",
   "lab.html"
 ];
@@ -53,6 +54,13 @@ const indexedSeoPages = [
     title: "实用工具｜PokerRookie 德州扑克 GTO 与数据分析工具",
     description: "整理 GTO+、PioSolver、PokerSnowie、Hand2Note、PokerTracker 4 等德州扑克训练、复盘与数据分析工具。",
     priority: "0.8"
+  },
+  {
+    fileName: "daily.html",
+    path: "/daily.html",
+    title: "每日分享｜PokerRookie 德州扑克学习文章",
+    description: "按发布日期整理 PokerRookie 的德州扑克学习文章，每日分享翻前范围、下注尺度、范围阅读、赛事复盘与逐街实战判断。",
+    priority: "0.9"
   },
   {
     fileName: "articles/gto-plus-guide/index.html",
@@ -383,6 +391,249 @@ body *:not(svg):not(path) {
   border-radius: 16px;
   background: #f4f4f2;
 }
+.pokerrookie-home-articles {
+  padding: 96px 0 104px;
+  border-top: 1px solid #d9e4f0;
+  background: #fff;
+}
+.pokerrookie-home-articles-inner {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+.pokerrookie-home-articles-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 52px;
+}
+.pokerrookie-home-articles-label {
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 20px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #07111f;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+}
+.pokerrookie-home-articles-title {
+  max-width: 640px;
+  margin: 0;
+  color: #07111f;
+  font-size: 48px;
+  font-weight: 950;
+  line-height: 1.12;
+}
+.pokerrookie-home-articles-intro {
+  margin: 0;
+  color: #58708e;
+  font-size: 17px;
+  line-height: 1.8;
+}
+.pokerrookie-home-articles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 44px;
+  border-top: 1px solid #cbd8e6;
+}
+.pokerrookie-home-article-item {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 38px;
+  gap: 16px;
+  align-items: start;
+  min-height: 184px;
+  padding: 26px 0;
+  border-bottom: 1px solid #d9e4f0;
+  text-decoration: none !important;
+}
+.pokerrookie-home-article-number {
+  color: #ef3f46;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.4;
+}
+.pokerrookie-home-article-category {
+  display: block;
+  margin-bottom: 8px;
+  color: #58708e;
+  font-size: 13px;
+  font-weight: 800;
+}
+.pokerrookie-home-article-title {
+  margin: 0 0 10px;
+  color: #07111f;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.35;
+  transition: color 160ms ease;
+}
+.pokerrookie-home-article-desc {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: #58708e;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.pokerrookie-home-article-arrow {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid #cbd8e6;
+  border-radius: 50%;
+  color: #173a66;
+  font-size: 18px;
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+.pokerrookie-home-article-item:hover .pokerrookie-home-article-title {
+  color: #ef3f46;
+}
+.pokerrookie-home-article-item:hover .pokerrookie-home-article-arrow {
+  border-color: #ef3f46;
+  color: #fff;
+  background: #ef3f46;
+}
+.pokerrookie-daily-sharing {
+  min-height: 70vh;
+  padding: 88px 0 112px;
+  background: #f4f7fb;
+}
+.pokerrookie-daily-inner {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+.pokerrookie-daily-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  gap: 48px;
+  align-items: end;
+  padding-bottom: 54px;
+  border-bottom: 1px solid #cbd8e6;
+}
+.pokerrookie-daily-label {
+  display: inline-flex;
+  margin-bottom: 20px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  color: #fff;
+  background: #07111f;
+  font-size: 13px;
+  font-weight: 800;
+}
+.pokerrookie-daily-title {
+  margin: 0;
+  color: #07111f;
+  font-size: 52px;
+  font-weight: 950;
+  line-height: 1.12;
+}
+.pokerrookie-daily-intro {
+  margin: 0;
+  color: #58708e;
+  font-size: 17px;
+  line-height: 1.8;
+}
+.pokerrookie-daily-groups {
+  display: grid;
+}
+.pokerrookie-daily-group {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 40px;
+  padding: 52px 0;
+  border-bottom: 1px solid #cbd8e6;
+}
+.pokerrookie-daily-date {
+  position: sticky;
+  top: 28px;
+  align-self: start;
+}
+.pokerrookie-daily-date strong,
+.pokerrookie-daily-date span {
+  display: block;
+}
+.pokerrookie-daily-date strong {
+  color: #07111f;
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1.3;
+}
+.pokerrookie-daily-date span {
+  margin-top: 6px;
+  color: #ef3f46;
+  font-size: 13px;
+  font-weight: 800;
+}
+.pokerrookie-daily-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.pokerrookie-daily-article {
+  display: flex;
+  min-height: 220px;
+  padding: 26px;
+  flex-direction: column;
+  border: 1px solid #d9e4f0;
+  border-radius: 8px;
+  color: #07111f !important;
+  background: #fff;
+  text-decoration: none !important;
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+.pokerrookie-daily-article:hover {
+  border-color: #9fb7d1;
+  box-shadow: 0 16px 34px rgba(23, 58, 102, 0.09);
+  transform: translateY(-2px);
+}
+.pokerrookie-daily-category {
+  margin-bottom: 12px;
+  color: #ef3f46;
+  font-size: 13px;
+  font-weight: 850;
+}
+.pokerrookie-daily-article-title {
+  margin: 0 0 12px;
+  color: #07111f;
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1.4;
+}
+.pokerrookie-daily-article-desc {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: #58708e;
+  font-size: 14px;
+  line-height: 1.75;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.pokerrookie-daily-article-link {
+  display: inline-flex;
+  margin-top: auto;
+  padding-top: 22px;
+  align-items: center;
+  justify-content: space-between;
+  color: #173a66;
+  font-size: 13px;
+  font-weight: 850;
+}
+.pokerrookie-daily-article-link b {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #173a66;
+  font-size: 16px;
+}
 .gg-hero-img-card {
   padding: 10px !important;
   background: linear-gradient(145deg, #ffffff 0%, #fff7e6 100%) !important;
@@ -470,6 +721,27 @@ body *:not(svg):not(path) {
     grid-template-columns: 1fr;
     gap: 28px;
   }
+  .pokerrookie-home-articles-head {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .pokerrookie-home-articles-title {
+    font-size: 40px;
+  }
+  .pokerrookie-daily-hero {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .pokerrookie-daily-title {
+    font-size: 42px;
+  }
+  .pokerrookie-daily-group {
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: 28px;
+  }
+  .pokerrookie-daily-list {
+    grid-template-columns: 1fr;
+  }
 }
 @media (max-width: 767px) {
   .navbar_logo-link {
@@ -504,6 +776,70 @@ body *:not(svg):not(path) {
   .pokerrookie-profile-photo {
     border-radius: 12px;
   }
+  .pokerrookie-home-articles {
+    padding: 64px 0 72px;
+  }
+  .pokerrookie-home-articles-inner {
+    width: min(100% - 28px, 1120px);
+  }
+  .pokerrookie-home-articles-head {
+    margin-bottom: 34px;
+  }
+  .pokerrookie-home-articles-title {
+    font-size: 34px;
+  }
+  .pokerrookie-home-articles-intro {
+    font-size: 16px;
+  }
+  .pokerrookie-home-articles-grid {
+    grid-template-columns: 1fr;
+  }
+  .pokerrookie-home-article-item {
+    grid-template-columns: 34px minmax(0, 1fr) 34px;
+    gap: 12px;
+    min-height: 0;
+    padding: 22px 0;
+  }
+  .pokerrookie-home-article-title {
+    font-size: 19px;
+  }
+  .pokerrookie-home-article-arrow {
+    width: 32px;
+    height: 32px;
+  }
+  .pokerrookie-daily-sharing {
+    padding: 64px 0 80px;
+  }
+  .pokerrookie-daily-inner {
+    width: min(100% - 28px, 1120px);
+  }
+  .pokerrookie-daily-hero {
+    padding-bottom: 36px;
+  }
+  .pokerrookie-daily-title {
+    font-size: 36px;
+  }
+  .pokerrookie-daily-intro {
+    font-size: 16px;
+  }
+  .pokerrookie-daily-group {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 36px 0;
+  }
+  .pokerrookie-daily-date {
+    position: static;
+  }
+  .pokerrookie-daily-date strong {
+    font-size: 21px;
+  }
+  .pokerrookie-daily-article {
+    min-height: 0;
+    padding: 22px;
+  }
+  .pokerrookie-daily-article-title {
+    font-size: 19px;
+  }
   .gg-prize-box {
     min-height: 92px;
   }
@@ -534,6 +870,50 @@ body *:not(svg):not(path) {
 </style>`;
 
 const profileCard = `<div class="choice-card is-red is-green pokerrookie-profile-card"><div class="pokerrookie-profile-copy"><div class="pokerrookie-profile-label">人物介绍</div><h1 class="pokerrookie-profile-title">PokerRookie</h1><div class="pokerrookie-profile-subtitle">B站知名Up主</div><p class="pokerrookie-profile-desc">国内顶尖德州扑克、奥马哈与混合游戏玩家，拥有APT、GOP、RDPT、KPC等赛事的十余个冠军头衔。</p></div><div class="pokerrookie-profile-media"><img class="pokerrookie-profile-photo" src="assets/pokerrookie-profile.jpg" alt="PokerRookie 人物照片" loading="lazy"/></div></div>`;
+
+const homepageArticlePages = indexedSeoPages
+  .filter((page) => page.fileName.startsWith("articles/"))
+  .slice()
+  .reverse();
+
+function homepageArticleCategory(page) {
+  if (/gto-plus|piosolver/.test(page.fileName)) return "实用工具";
+  if (/position-range|preflop|bet-sizing/.test(page.fileName)) return "新手基础";
+  if (/final-table/.test(page.fileName)) return "赛事复盘";
+  if (/range-reading/.test(page.fileName)) return "玩家进阶";
+  return "实战教学";
+}
+
+const homepageArticleSection = `<!-- pokerrookie-home-articles:start --><section class="pokerrookie-home-articles" aria-labelledby="pokerrookie-home-articles-title"><div class="pokerrookie-home-articles-inner"><div class="pokerrookie-home-articles-head"><div><span class="pokerrookie-home-articles-label">策略文章</span><h2 id="pokerrookie-home-articles-title" class="pokerrookie-home-articles-title">从翻前范围到河牌决策</h2></div><p class="pokerrookie-home-articles-intro">按学习路径整理 PokerRookie 的策略文章，覆盖新手基础、下注尺度、范围阅读、赛事复盘与逐街实战判断。</p></div><div class="pokerrookie-home-articles-grid">${homepageArticlePages.map((page, index) => `<a class="pokerrookie-home-article-item" href="${page.path.replace(/^\//, "")}"><span class="pokerrookie-home-article-number">${String(index + 1).padStart(2, "0")}</span><span><span class="pokerrookie-home-article-category">${homepageArticleCategory(page)}</span><span class="pokerrookie-home-article-title">${escapeHtml(page.title.replace(/ - PokerRookie$/, ""))}</span><span class="pokerrookie-home-article-desc">${escapeHtml(page.description)}</span></span><span class="pokerrookie-home-article-arrow" aria-hidden="true">&rarr;</span></a>`).join("")}</div></div></section><!-- pokerrookie-home-articles:end -->`;
+
+function articlePublishedDate(page) {
+  const articlePath = path.join(root, page.fileName);
+  if (!fs.existsSync(articlePath)) return "";
+  const articleHtml = fs.readFileSync(articlePath, "utf8");
+  const match = articleHtml.match(/"datePublished":"(\d{4}-\d{2}-\d{2})"/);
+  return match ? match[1] : "";
+}
+
+function formatChineseDate(date) {
+  const [year, month, day] = date.split("-").map(Number);
+  return `${year}年${month}月${day}日`;
+}
+
+function formatChineseWeekday(date) {
+  const [year, month, day] = date.split("-").map(Number);
+  const weekdays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+  return weekdays[new Date(Date.UTC(year, month - 1, day)).getUTCDay()];
+}
+
+const dailyArticleGroups = Object.entries(homepageArticlePages.reduce((groups, page) => {
+  const publishedDate = articlePublishedDate(page);
+  if (!publishedDate) return groups;
+  if (!groups[publishedDate]) groups[publishedDate] = [];
+  groups[publishedDate].push(page);
+  return groups;
+}, {})).sort(([leftDate], [rightDate]) => rightDate.localeCompare(leftDate));
+
+const dailySharingSection = `<section class="pokerrookie-daily-sharing" aria-labelledby="pokerrookie-daily-title"><div class="pokerrookie-daily-inner"><header class="pokerrookie-daily-hero"><div><span class="pokerrookie-daily-label">每日分享</span><h1 id="pokerrookie-daily-title" class="pokerrookie-daily-title">每天两篇，持续积累</h1></div><p class="pokerrookie-daily-intro">把复杂的牌局拆成可以复习的判断框架。按日期查看 PokerRookie 的德州扑克策略文章，从基础概念逐步进入范围、尺度与逐街决策。</p></header><div class="pokerrookie-daily-groups">${dailyArticleGroups.map(([date, articles]) => `<section class="pokerrookie-daily-group"><div class="pokerrookie-daily-date"><strong>${formatChineseDate(date)}</strong><span>${formatChineseWeekday(date)} · ${articles.length} 篇</span></div><div class="pokerrookie-daily-list">${articles.map((article) => `<a class="pokerrookie-daily-article" href="${article.path.replace(/^\//, "")}"><span class="pokerrookie-daily-category">${homepageArticleCategory(article)}</span><h2 class="pokerrookie-daily-article-title">${escapeHtml(article.title.replace(/ - PokerRookie$/, ""))}</h2><p class="pokerrookie-daily-article-desc">${escapeHtml(article.description)}</p><span class="pokerrookie-daily-article-link">阅读全文<b aria-hidden="true">&rarr;</b></span></a>`).join("")}</div></section>`).join("")}</div></div></section>`;
 const heroTitleLink = `<a href="download.html" class="pokerrookie-hero-title-link w-inline-block" aria-label="下载游戏"><img class="pokerrookie-hero-slogan" src="assets/sologan.webp" alt="和PokerRookie一起游戏" loading="eager"/></a>`;
 const bilibiliLink = `<a href="https://space.bilibili.com/443284341?spm_id_from=333.337.0.0" target="_blank" rel="noopener" class="pokerrookie-bili-link w-inline-block"><span>访问 PokerRookie 的 Bilibili 主页</span></a>`;
 
@@ -1250,6 +1630,17 @@ function replaceToolsNav(html) {
     .replace(/(<a href="free\.html"[^>]*>)(?:免费资源|精选视频|视频教学)(<\/a>)/g, "$1视频教学$2");
 }
 
+function ensureDailyNav(html, fileName) {
+  const withoutDailyLink = html.replace(/<a href="daily\.html"[^>]*class="[^"]*navbar_link[^"]*"[^>]*>每日分享<\/a>/g, "");
+  const dailyLink = fileName === "daily.html"
+    ? '<a href="daily.html" aria-current="page" class="navbar_link w-nav-link w--current">每日分享</a>'
+    : '<a href="daily.html" class="navbar_link w-nav-link">每日分享</a>';
+  const withDailyLink = withoutDailyLink.replace(/(<a href="about\.html"[^>]*class="[^"]*navbar_link[^"]*"[^>]*>实用工具<\/a>)/, `${dailyLink}$1`);
+
+  if (fileName !== "daily.html") return withDailyLink;
+  return withDailyLink.replace(/<a href="about\.html" aria-current="page" class="navbar_link w-nav-link w--current">实用工具<\/a>/, '<a href="about.html" class="navbar_link w-nav-link">实用工具</a>');
+}
+
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -1319,6 +1710,31 @@ function buildStructuredData(fileName, page) {
       sameAs: [
         "https://space.bilibili.com/443284341"
       ]
+    });
+    graph.push({
+      "@type": "ItemList",
+      "@id": `${siteBaseUrl}/#articles`,
+      name: "PokerRookie 德州扑克策略文章",
+      itemListElement: homepageArticlePages.map((article, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: article.title.replace(/ - PokerRookie$/, ""),
+        url: pageUrl(article.path)
+      }))
+    });
+  }
+
+  if (fileName === "daily.html") {
+    graph.push({
+      "@type": "ItemList",
+      "@id": `${canonicalUrl}#daily-articles`,
+      name: "PokerRookie 每日德州扑克分享",
+      itemListElement: homepageArticlePages.map((article, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: article.title.replace(/ - PokerRookie$/, ""),
+        url: pageUrl(article.path)
+      }))
     });
   }
 
@@ -1463,23 +1879,29 @@ function replaceAboutContent(html) {
     .replace(/<main class="main-wrapper">[\s\S]*?<\/main>/, `<main class="main-wrapper">${practicalToolsSection}</main>`);
 }
 
+function replaceDailyContent(html) {
+  return html.replace(/<main class="main-wrapper">[\s\S]*?<\/main>/, `<main class="main-wrapper">${dailySharingSection}</main>`);
+}
+
 const improveCardPattern = /<div class="choice-card is-red"><div class="card-badge">适合想认真提升的人<\/div>[\s\S]*?<div class="card-note">适合想长期提升的玩家<\/div><\/div>/g;
 
 function replaceHome(html) {
   return html
+    .replace(/<!-- pokerrookie-home-articles:start -->[\s\S]*?<!-- pokerrookie-home-articles:end -->/g, "")
     .replace(/<a\b(?=[^>]*class="[^"]*pokerrookie-bili-link)[\s\S]*?<\/a>/g, "")
     .replace(/<a\b(?=[^>]*class="[^"]*pokerrookie-hero-title-link)[\s\S]*?<\/a>\s*/g, "")
     .replace(/<div class="text-block-40">欢迎你的加入<br\/><\/div>\s*/g, "")
     .replace(/<div class="text-block-40">和PokerRookie一起游戏<br\/><\/div>\s*/g, "")
     .replace(/<div class="eyebrow-line"><\/div>/g, `<div class="eyebrow-line"></div>${heroTitleLink}${bilibiliLink}`)
     .replace(/<div class="choice-card is-red is-green">[\s\S]*?<div class="choice-card is-red">/, `${profileCard}<div class="choice-card is-red">`)
-    .replace(improveCardPattern, "");
+    .replace(improveCardPattern, "")
+    .replace("</main>", `${homepageArticleSection}</main>`);
 }
 
 for (const fileName of htmlFiles) {
   const filePath = path.join(root, fileName);
   let html = fs.readFileSync(filePath, "utf8");
-  html = ensureFooterScript(ensureCss(replaceFooter(replaceToolsNav(removeLabNav(replaceLogos(html))))));
+  html = ensureFooterScript(ensureCss(replaceFooter(ensureDailyNav(replaceToolsNav(removeLabNav(replaceLogos(html))), fileName))));
   if (fileName === "download.html") {
     html = replaceDownloadContent(html);
   }
@@ -1488,6 +1910,9 @@ for (const fileName of htmlFiles) {
   }
   if (fileName === "about.html") {
     html = replaceAboutContent(html);
+  }
+  if (fileName === "daily.html") {
+    html = replaceDailyContent(html);
   }
   if (fileName === "index.html" || fileName === "travis-poker.html") {
     html = replaceHome(html);

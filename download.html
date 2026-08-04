@@ -248,6 +248,249 @@ body *:not(svg):not(path) {
   border-radius: 16px;
   background: #f4f4f2;
 }
+.pokerrookie-home-articles {
+  padding: 96px 0 104px;
+  border-top: 1px solid #d9e4f0;
+  background: #fff;
+}
+.pokerrookie-home-articles-inner {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+.pokerrookie-home-articles-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 52px;
+}
+.pokerrookie-home-articles-label {
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 20px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #07111f;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+}
+.pokerrookie-home-articles-title {
+  max-width: 640px;
+  margin: 0;
+  color: #07111f;
+  font-size: 48px;
+  font-weight: 950;
+  line-height: 1.12;
+}
+.pokerrookie-home-articles-intro {
+  margin: 0;
+  color: #58708e;
+  font-size: 17px;
+  line-height: 1.8;
+}
+.pokerrookie-home-articles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 44px;
+  border-top: 1px solid #cbd8e6;
+}
+.pokerrookie-home-article-item {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 38px;
+  gap: 16px;
+  align-items: start;
+  min-height: 184px;
+  padding: 26px 0;
+  border-bottom: 1px solid #d9e4f0;
+  text-decoration: none !important;
+}
+.pokerrookie-home-article-number {
+  color: #ef3f46;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.4;
+}
+.pokerrookie-home-article-category {
+  display: block;
+  margin-bottom: 8px;
+  color: #58708e;
+  font-size: 13px;
+  font-weight: 800;
+}
+.pokerrookie-home-article-title {
+  margin: 0 0 10px;
+  color: #07111f;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.35;
+  transition: color 160ms ease;
+}
+.pokerrookie-home-article-desc {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: #58708e;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.pokerrookie-home-article-arrow {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid #cbd8e6;
+  border-radius: 50%;
+  color: #173a66;
+  font-size: 18px;
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+.pokerrookie-home-article-item:hover .pokerrookie-home-article-title {
+  color: #ef3f46;
+}
+.pokerrookie-home-article-item:hover .pokerrookie-home-article-arrow {
+  border-color: #ef3f46;
+  color: #fff;
+  background: #ef3f46;
+}
+.pokerrookie-daily-sharing {
+  min-height: 70vh;
+  padding: 88px 0 112px;
+  background: #f4f7fb;
+}
+.pokerrookie-daily-inner {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+.pokerrookie-daily-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  gap: 48px;
+  align-items: end;
+  padding-bottom: 54px;
+  border-bottom: 1px solid #cbd8e6;
+}
+.pokerrookie-daily-label {
+  display: inline-flex;
+  margin-bottom: 20px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  color: #fff;
+  background: #07111f;
+  font-size: 13px;
+  font-weight: 800;
+}
+.pokerrookie-daily-title {
+  margin: 0;
+  color: #07111f;
+  font-size: 52px;
+  font-weight: 950;
+  line-height: 1.12;
+}
+.pokerrookie-daily-intro {
+  margin: 0;
+  color: #58708e;
+  font-size: 17px;
+  line-height: 1.8;
+}
+.pokerrookie-daily-groups {
+  display: grid;
+}
+.pokerrookie-daily-group {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 40px;
+  padding: 52px 0;
+  border-bottom: 1px solid #cbd8e6;
+}
+.pokerrookie-daily-date {
+  position: sticky;
+  top: 28px;
+  align-self: start;
+}
+.pokerrookie-daily-date strong,
+.pokerrookie-daily-date span {
+  display: block;
+}
+.pokerrookie-daily-date strong {
+  color: #07111f;
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1.3;
+}
+.pokerrookie-daily-date span {
+  margin-top: 6px;
+  color: #ef3f46;
+  font-size: 13px;
+  font-weight: 800;
+}
+.pokerrookie-daily-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.pokerrookie-daily-article {
+  display: flex;
+  min-height: 220px;
+  padding: 26px;
+  flex-direction: column;
+  border: 1px solid #d9e4f0;
+  border-radius: 8px;
+  color: #07111f !important;
+  background: #fff;
+  text-decoration: none !important;
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+.pokerrookie-daily-article:hover {
+  border-color: #9fb7d1;
+  box-shadow: 0 16px 34px rgba(23, 58, 102, 0.09);
+  transform: translateY(-2px);
+}
+.pokerrookie-daily-category {
+  margin-bottom: 12px;
+  color: #ef3f46;
+  font-size: 13px;
+  font-weight: 850;
+}
+.pokerrookie-daily-article-title {
+  margin: 0 0 12px;
+  color: #07111f;
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1.4;
+}
+.pokerrookie-daily-article-desc {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: #58708e;
+  font-size: 14px;
+  line-height: 1.75;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.pokerrookie-daily-article-link {
+  display: inline-flex;
+  margin-top: auto;
+  padding-top: 22px;
+  align-items: center;
+  justify-content: space-between;
+  color: #173a66;
+  font-size: 13px;
+  font-weight: 850;
+}
+.pokerrookie-daily-article-link b {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #173a66;
+  font-size: 16px;
+}
 .gg-hero-img-card {
   padding: 10px !important;
   background: linear-gradient(145deg, #ffffff 0%, #fff7e6 100%) !important;
@@ -335,6 +578,27 @@ body *:not(svg):not(path) {
     grid-template-columns: 1fr;
     gap: 28px;
   }
+  .pokerrookie-home-articles-head {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .pokerrookie-home-articles-title {
+    font-size: 40px;
+  }
+  .pokerrookie-daily-hero {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .pokerrookie-daily-title {
+    font-size: 42px;
+  }
+  .pokerrookie-daily-group {
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: 28px;
+  }
+  .pokerrookie-daily-list {
+    grid-template-columns: 1fr;
+  }
 }
 @media (max-width: 767px) {
   .navbar_logo-link {
@@ -369,6 +633,70 @@ body *:not(svg):not(path) {
   .pokerrookie-profile-photo {
     border-radius: 12px;
   }
+  .pokerrookie-home-articles {
+    padding: 64px 0 72px;
+  }
+  .pokerrookie-home-articles-inner {
+    width: min(100% - 28px, 1120px);
+  }
+  .pokerrookie-home-articles-head {
+    margin-bottom: 34px;
+  }
+  .pokerrookie-home-articles-title {
+    font-size: 34px;
+  }
+  .pokerrookie-home-articles-intro {
+    font-size: 16px;
+  }
+  .pokerrookie-home-articles-grid {
+    grid-template-columns: 1fr;
+  }
+  .pokerrookie-home-article-item {
+    grid-template-columns: 34px minmax(0, 1fr) 34px;
+    gap: 12px;
+    min-height: 0;
+    padding: 22px 0;
+  }
+  .pokerrookie-home-article-title {
+    font-size: 19px;
+  }
+  .pokerrookie-home-article-arrow {
+    width: 32px;
+    height: 32px;
+  }
+  .pokerrookie-daily-sharing {
+    padding: 64px 0 80px;
+  }
+  .pokerrookie-daily-inner {
+    width: min(100% - 28px, 1120px);
+  }
+  .pokerrookie-daily-hero {
+    padding-bottom: 36px;
+  }
+  .pokerrookie-daily-title {
+    font-size: 36px;
+  }
+  .pokerrookie-daily-intro {
+    font-size: 16px;
+  }
+  .pokerrookie-daily-group {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 36px 0;
+  }
+  .pokerrookie-daily-date {
+    position: static;
+  }
+  .pokerrookie-daily-date strong {
+    font-size: 21px;
+  }
+  .pokerrookie-daily-article {
+    min-height: 0;
+    padding: 22px;
+  }
+  .pokerrookie-daily-article-title {
+    font-size: 19px;
+  }
   .gg-prize-box {
     min-height: 92px;
   }
@@ -396,7 +724,7 @@ body *:not(svg):not(path) {
     gap: 12px 18px;
   }
 }
-</style><meta name="description" content="通过 PokerRookie 专属链接下载游戏，使用 long999 邀请码加入战队，查看新人礼包、战队赛与现金奖励等福利说明。"/><meta name="robots" content="index,follow"/><meta name="applicable-device" content="pc,mobile"/><meta name="MobileOptimized" content="width"/><meta name="HandheldFriendly" content="true"/><meta http-equiv="Cache-Control" content="no-transform"/><link rel="canonical" href="https://www.pokerrookie.top/download.html"/><meta property="og:type" content="website"/><meta property="og:site_name" content="PokerRookie"/><meta property="og:locale" content="zh_CN"/><meta property="og:url" content="https://www.pokerrookie.top/download.html"/><meta property="og:title" content="PokerRookie 游戏下载｜long999 邀请码与战队福利"/><meta property="og:description" content="通过 PokerRookie 专属链接下载游戏，使用 long999 邀请码加入战队，查看新人礼包、战队赛与现金奖励等福利说明。"/><meta property="og:image" content="https://www.pokerrookie.top/assets/pokerrookie-logo.png"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="PokerRookie 游戏下载｜long999 邀请码与战队福利"/><meta name="twitter:description" content="通过 PokerRookie 专属链接下载游戏，使用 long999 邀请码加入战队，查看新人礼包、战队赛与现金奖励等福利说明。"/><meta name="twitter:image" content="https://www.pokerrookie.top/assets/pokerrookie-logo.png"/><script type="application/ld+json" id="pokerrookie-seo-jsonld">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.pokerrookie.top/#organization","name":"PokerRookie","url":"https://www.pokerrookie.top","logo":"https://www.pokerrookie.top/assets/pokerrookie-logo.png","sameAs":["https://space.bilibili.com/443284341"],"contactPoint":{"@type":"ContactPoint","email":"23294069@qq.com","contactType":"customer support","availableLanguage":["zh-CN"]}},{"@type":"WebSite","@id":"https://www.pokerrookie.top/#website","name":"PokerRookie","url":"https://www.pokerrookie.top","inLanguage":"zh-CN","publisher":{"@id":"https://www.pokerrookie.top/#organization"}},{"@type":"WebPage","@id":"https://www.pokerrookie.top/download.html#webpage","url":"https://www.pokerrookie.top/download.html","name":"PokerRookie 游戏下载｜long999 邀请码与战队福利","description":"通过 PokerRookie 专属链接下载游戏，使用 long999 邀请码加入战队，查看新人礼包、战队赛与现金奖励等福利说明。","isPartOf":{"@id":"https://www.pokerrookie.top/#website"},"inLanguage":"zh-CN"}]}</script></head><body><div class="page-wrapper game"><div data-animation="default" class="navbar w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="98c51488-9cc7-4945-64f7-0c3069363f27" role="banner" data-duration="400"><div data-w-id="98c51488-9cc7-4945-64f7-0c3069363f28" class="navbar_container"><a href="index.html" class="navbar_logo-link w-nav-brand"><img src="assets/pokerrookie-logo.png?v=1c2b0b18" alt="PokerRookie" loading="lazy" class="navbar2_logo pokerrookie-nav-logo"/></a><nav role="navigation" id="w-node-_98c51488-9cc7-4945-64f7-0c3069363f2b-69363f27" class="navbar_menu is-page-height-tablet w-nav-menu"><a href="index.html" class="navbar_link w-nav-link">主页</a><a href="download.html" aria-current="page" class="navbar_link download w-nav-link w--current">下载游戏</a><a href="free.html" class="navbar_link w-nav-link">视频教学</a><a href="about.html" class="navbar_link w-nav-link">实用工具</a></nav><div id="w-node-_98c51488-9cc7-4945-64f7-0c3069363f36-69363f27" class="navbar_button-wrapper"><a href="https://travispoker.circle.so/checkout/travispoker_tier0?coupon_code=LAB25" target="_blank" class="button is-navbar2-button hide-mobile-portrait w-button">加入社区</a><div class="navbar_menu-button w-nav-button"><div class="menu-icon2"><div class="menu-icon2_line-top"></div><div class="menu-icon2_line-middle"><div class="menu-icon2_line-middle-inner"></div></div><div class="menu-icon2_line-bottom"></div></div></div></div></div></div><main class="main-wrapper"><div class="code-embed-2 w-embed"><style>
+</style><meta name="description" content="通过 PokerRookie 专属链接下载游戏，使用 long999 邀请码加入战队，查看新人礼包、战队赛与现金奖励等福利说明。"/><meta name="robots" content="index,follow"/><meta name="applicable-device" content="pc,mobile"/><meta name="MobileOptimized" content="width"/><meta name="HandheldFriendly" content="true"/><meta http-equiv="Cache-Control" content="no-transform"/><link rel="canonical" href="https://www.pokerrookie.top/download.html"/><meta property="og:type" content="website"/><meta property="og:site_name" content="PokerRookie"/><meta property="og:locale" content="zh_CN"/><meta property="og:url" content="https://www.pokerrookie.top/download.html"/><meta property="og:title" content="PokerRookie 游戏下载｜long999 邀请码与战队福利"/><meta property="og:description" content="通过 PokerRookie 专属链接下载游戏，使用 long999 邀请码加入战队，查看新人礼包、战队赛与现金奖励等福利说明。"/><meta property="og:image" content="https://www.pokerrookie.top/assets/pokerrookie-logo.png"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="PokerRookie 游戏下载｜long999 邀请码与战队福利"/><meta name="twitter:description" content="通过 PokerRookie 专属链接下载游戏，使用 long999 邀请码加入战队，查看新人礼包、战队赛与现金奖励等福利说明。"/><meta name="twitter:image" content="https://www.pokerrookie.top/assets/pokerrookie-logo.png"/><script type="application/ld+json" id="pokerrookie-seo-jsonld">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.pokerrookie.top/#organization","name":"PokerRookie","url":"https://www.pokerrookie.top","logo":"https://www.pokerrookie.top/assets/pokerrookie-logo.png","sameAs":["https://space.bilibili.com/443284341"],"contactPoint":{"@type":"ContactPoint","email":"23294069@qq.com","contactType":"customer support","availableLanguage":["zh-CN"]}},{"@type":"WebSite","@id":"https://www.pokerrookie.top/#website","name":"PokerRookie","url":"https://www.pokerrookie.top","inLanguage":"zh-CN","publisher":{"@id":"https://www.pokerrookie.top/#organization"}},{"@type":"WebPage","@id":"https://www.pokerrookie.top/download.html#webpage","url":"https://www.pokerrookie.top/download.html","name":"PokerRookie 游戏下载｜long999 邀请码与战队福利","description":"通过 PokerRookie 专属链接下载游戏，使用 long999 邀请码加入战队，查看新人礼包、战队赛与现金奖励等福利说明。","isPartOf":{"@id":"https://www.pokerrookie.top/#website"},"inLanguage":"zh-CN"}]}</script></head><body><div class="page-wrapper game"><div data-animation="default" class="navbar w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="98c51488-9cc7-4945-64f7-0c3069363f27" role="banner" data-duration="400"><div data-w-id="98c51488-9cc7-4945-64f7-0c3069363f28" class="navbar_container"><a href="index.html" class="navbar_logo-link w-nav-brand"><img src="assets/pokerrookie-logo.png?v=1c2b0b18" alt="PokerRookie" loading="lazy" class="navbar2_logo pokerrookie-nav-logo"/></a><nav role="navigation" id="w-node-_98c51488-9cc7-4945-64f7-0c3069363f2b-69363f27" class="navbar_menu is-page-height-tablet w-nav-menu"><a href="index.html" class="navbar_link w-nav-link">主页</a><a href="download.html" aria-current="page" class="navbar_link download w-nav-link w--current">下载游戏</a><a href="free.html" class="navbar_link w-nav-link">视频教学</a><a href="daily.html" class="navbar_link w-nav-link">每日分享</a><a href="about.html" class="navbar_link w-nav-link">实用工具</a></nav><div id="w-node-_98c51488-9cc7-4945-64f7-0c3069363f36-69363f27" class="navbar_button-wrapper"><a href="https://travispoker.circle.so/checkout/travispoker_tier0?coupon_code=LAB25" target="_blank" class="button is-navbar2-button hide-mobile-portrait w-button">加入社区</a><div class="navbar_menu-button w-nav-button"><div class="menu-icon2"><div class="menu-icon2_line-top"></div><div class="menu-icon2_line-middle"><div class="menu-icon2_line-middle-inner"></div></div><div class="menu-icon2_line-bottom"></div></div></div></div></div></div><main class="main-wrapper"><div class="code-embed-2 w-embed"><style>
 :root{
   --bg:#f4f4f2;
   --card:#ffffff;
