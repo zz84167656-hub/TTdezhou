@@ -109,6 +109,20 @@ const indexedSeoPages = [
     title: "德州扑克下注尺度入门｜小注、中注与大注怎么选 - PokerRookie",
     description: "德州扑克下注尺度入门教程，从下注目的、牌面结构和范围优势出发，说明小注、中等下注与大注的适用场景和常见错误。",
     priority: "0.7"
+  },
+  {
+    fileName: "articles/flop-cbet-mistakes/index.html",
+    path: "/articles/flop-cbet-mistakes/",
+    title: "德州扑克翻牌持续下注常见错误｜C-bet 什么时候该停 - PokerRookie",
+    description: "深入讲解德州扑克翻牌持续下注的常见错误，从范围优势、坚果优势、牌面结构、下注尺度和转牌计划判断什么时候该下注或过牌。",
+    priority: "0.7"
+  },
+  {
+    fileName: "articles/river-bluff-catching/index.html",
+    path: "/articles/river-bluff-catching/",
+    title: "德州扑克河牌抓诈唬指南｜如何判断该不该跟注 - PokerRookie",
+    description: "德州扑克河牌抓诈唬深度指南，结合底池赔率、价值组合、错过听牌、阻断牌和行动线一致性，建立可重复的河牌跟注判断流程。",
+    priority: "0.7"
   }
 ];
 const duplicateSeoPages = [

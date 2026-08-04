@@ -69,6 +69,10 @@ const preflopArticlePath = "articles/preflop-opening-ranges/index.html";
 const preflopArticleUrl = `${siteBaseUrl}/articles/preflop-opening-ranges/`;
 const sizingArticlePath = "articles/bet-sizing-basics/index.html";
 const sizingArticleUrl = `${siteBaseUrl}/articles/bet-sizing-basics/`;
+const flopArticlePath = "articles/flop-cbet-mistakes/index.html";
+const flopArticleUrl = `${siteBaseUrl}/articles/flop-cbet-mistakes/`;
+const riverArticlePath = "articles/river-bluff-catching/index.html";
+const riverArticleUrl = `${siteBaseUrl}/articles/river-bluff-catching/`;
 const articleCss = read("assets/article.css");
 
 function assert(condition, message) {
@@ -144,6 +148,10 @@ assert(sitemap.includes(`<loc>${preflopArticleUrl}</loc>`), "sitemap.xml must in
 assert(baiduUrls.includes(preflopArticleUrl), "baidu_urls.txt must include the preflop ranges article");
 assert(sitemap.includes(`<loc>${sizingArticleUrl}</loc>`), "sitemap.xml must include the bet sizing article");
 assert(baiduUrls.includes(sizingArticleUrl), "baidu_urls.txt must include the bet sizing article");
+assert(sitemap.includes(`<loc>${flopArticleUrl}</loc>`), "sitemap.xml must include the flop c-bet article");
+assert(baiduUrls.includes(flopArticleUrl), "baidu_urls.txt must include the flop c-bet article");
+assert(sitemap.includes(`<loc>${riverArticleUrl}</loc>`), "sitemap.xml must include the river bluff-catching article");
+assert(baiduUrls.includes(riverArticleUrl), "baidu_urls.txt must include the river bluff-catching article");
 assert(!sitemap.includes("travis-poker.html"), "sitemap.xml must not include the duplicate home mirror");
 assert(!sitemap.includes("lab.html"), "sitemap.xml must not include the hidden LAB page");
 
@@ -408,6 +416,7 @@ assert(turnArticle.includes('href="../../download.html"'), "Turn article must li
 assert(turnArticle.includes('href="../final-table-review/"'), "Turn article must link to the final table guide");
 assert(turnArticle.includes('href="../range-reading-advanced/"'), "Turn article must link to the range reading guide");
 assert(turnArticle.includes('href="../bet-sizing-basics/"'), "Turn article must link to the bet sizing guide");
+assert(turnArticle.includes('href="../river-bluff-catching/"'), "Turn article must link to the river bluff-catching guide");
 
 const finalTableArticle = read(finalTableArticlePath);
 assert(finalTableArticle.includes("<title>德州扑克锦标赛决赛桌复盘｜ICM、筹码压力与位置 - PokerRookie</title>"), "Final table article must use the SEO title");
@@ -435,6 +444,8 @@ assert(rangeArticle.includes('href="../final-table-review/"'), "Range article mu
 assert(rangeArticle.includes('href="../poker-position-range-pot-odds/"'), "Range article must link to the beginner guide");
 assert(rangeArticle.includes('href="../../about.html"'), "Range article must link to practical tools");
 assert(rangeArticle.includes('href="../preflop-opening-ranges/"'), "Range article must link to the preflop ranges guide");
+assert(rangeArticle.includes('href="../flop-cbet-mistakes/"'), "Range article must link to the flop c-bet guide");
+assert(rangeArticle.includes('href="../river-bluff-catching/"'), "Range article must link to the river bluff-catching guide");
 
 const preflopArticle = read(preflopArticlePath);
 assert(articleCss.includes("--article-font"), "Shared article CSS must define the standard article font");
@@ -464,6 +475,7 @@ assert(sizingArticle.includes("底池"), "Sizing article must cover pot-relative
 assert(sizingArticle.includes('href="../preflop-opening-ranges/"'), "Sizing article must link to the preflop ranges guide");
 assert(sizingArticle.includes('href="../turn-card-leaks/"'), "Sizing article must link to the turn strategy guide");
 assert(sizingArticle.includes('href="../../about.html"'), "Sizing article must link to practical tools");
+assert(sizingArticle.includes('href="../flop-cbet-mistakes/"'), "Sizing article must link to the flop c-bet guide");
 
 for (const [label, article] of [
   ["GTO+", gtoArticle],
@@ -478,6 +490,41 @@ for (const [label, article] of [
   const chineseCharacters = countMainChineseCharacters(article);
   assert(chineseCharacters >= 500, `${label} article must contain at least 500 Chinese characters in main content`);
   assert(chineseCharacters <= 1000, `${label} article must contain no more than 1000 Chinese characters in main content`);
+}
+
+const flopArticle = read(flopArticlePath);
+assert(flopArticle.includes("<title>德州扑克翻牌持续下注常见错误｜C-bet 什么时候该停 - PokerRookie</title>"), "Flop article must use the SEO title");
+assert(flopArticle.includes(`<link rel="canonical" href="${flopArticleUrl}">`), "Flop article must use the canonical URL");
+assert(flopArticle.includes('<meta name="robots" content="index,follow">'), "Flop article must be indexable");
+assert(flopArticle.includes('id="pokerrookie-seo-jsonld"'), "Flop article must include structured data");
+assert(flopArticle.includes("德州扑克翻牌持续下注常见错误：C-bet 什么时候该停"), "Flop article must include the headline");
+assert(flopArticle.includes("../../assets/Hustler%20Casino%20Live.webp"), "Flop article must use the local cash-game image");
+assert(flopArticle.includes("范围优势"), "Flop article must cover range advantage");
+assert(flopArticle.includes("坚果优势"), "Flop article must cover nut advantage");
+assert(flopArticle.includes("完整场景"), "Flop article must include a complete scenario");
+assert(flopArticle.includes('href="../river-bluff-catching/"'), "Flop article must link to the river guide");
+assert(flopArticle.includes('href="../bet-sizing-basics/"'), "Flop article must link to the sizing guide");
+
+const riverArticle = read(riverArticlePath);
+assert(riverArticle.includes("<title>德州扑克河牌抓诈唬指南｜如何判断该不该跟注 - PokerRookie</title>"), "River article must use the SEO title");
+assert(riverArticle.includes(`<link rel="canonical" href="${riverArticleUrl}">`), "River article must use the canonical URL");
+assert(riverArticle.includes('<meta name="robots" content="index,follow">'), "River article must be indexable");
+assert(riverArticle.includes('id="pokerrookie-seo-jsonld"'), "River article must include structured data");
+assert(riverArticle.includes("德州扑克河牌抓诈唬指南：如何判断该不该跟注"), "River article must include the headline");
+assert(riverArticle.includes("../../assets/chuanqipuke.webp"), "River article must use the local poker image");
+assert(riverArticle.includes("底池赔率"), "River article must cover pot odds");
+assert(riverArticle.includes("阻断牌"), "River article must cover blockers");
+assert(riverArticle.includes("完整场景"), "River article must include a complete scenario");
+assert(riverArticle.includes('href="../flop-cbet-mistakes/"'), "River article must link to the flop guide");
+assert(riverArticle.includes('href="../range-reading-advanced/"'), "River article must link to the range guide");
+
+for (const [label, article] of [
+  ["Flop c-bet", flopArticle],
+  ["River bluff-catching", riverArticle]
+]) {
+  const chineseCharacters = countMainChineseCharacters(article);
+  assert(chineseCharacters >= 1000, `${label} article must contain at least 1000 Chinese characters in main content`);
+  assert(chineseCharacters <= 2000, `${label} article must contain no more than 2000 Chinese characters in main content`);
 }
 assert(!about.includes("code-embed w-embed pokerrookie-practical-tools-embed"), "Tools page module must not be hidden by code-embed");
 assert(!about.includes("background: #0d1117"), "Tools page must not use the old dark tools design");
