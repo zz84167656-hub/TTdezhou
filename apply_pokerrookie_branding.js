@@ -24,6 +24,7 @@ function versionedAsset(fileName) {
 }
 
 const logoSrc = versionedAsset("pokerrookie-logo.png");
+const articleCssHref = `../../${versionedAsset("article.css")}`;
 const siteBaseUrl = "https://www.pokerrookie.top";
 const absoluteLogoUrl = `${siteBaseUrl}/assets/pokerrookie-logo.png`;
 const indexedSeoPages = [
@@ -131,6 +132,20 @@ const indexedSeoPages = [
     title: "德州扑克河牌抓诈唬指南｜如何判断该不该跟注 - PokerRookie",
     description: "德州扑克河牌抓诈唬深度指南，结合底池赔率、价值组合、错过听牌、阻断牌和行动线一致性，建立可重复的河牌跟注判断流程。",
     priority: "0.7"
+  },
+  {
+    fileName: "articles/poker-video-review-method/index.html",
+    path: "/articles/poker-video-review-method/",
+    title: "德州扑克视频复盘方法｜把牌局变成决策框架 - PokerRookie",
+    description: "一套可重复执行的德州扑克视频复盘方法：从记录事实、重建范围、判断牌面、分析下注尺度到建立后续街计划，把观看视频转化为可迁移的实战能力。",
+    priority: "0.8"
+  },
+  {
+    fileName: "articles/three-bet-pot-mistakes/index.html",
+    path: "/articles/three-bet-pot-mistakes/",
+    title: "德州扑克3-bet底池常见错误｜低SPR实战指南 - PokerRookie",
+    description: "深入分析德州扑克3-bet底池的常见错误，从低SPR、收紧范围、翻牌尺度、转牌几何增长到河牌计划，帮助玩家减少大底池中的系统性失误。",
+    priority: "0.8"
   }
 ];
 const duplicateSeoPages = [
@@ -878,6 +893,8 @@ const homepageArticlePages = indexedSeoPages
 
 function homepageArticleCategory(page) {
   if (/gto-plus|piosolver/.test(page.fileName)) return "实用工具";
+  if (/video-review/.test(page.fileName)) return "视频复盘";
+  if (/three-bet-pot/.test(page.fileName)) return "常见错误";
   if (/position-range|preflop|bet-sizing/.test(page.fileName)) return "新手基础";
   if (/final-table/.test(page.fileName)) return "赛事复盘";
   if (/range-reading/.test(page.fileName)) return "玩家进阶";
@@ -1641,6 +1658,13 @@ function ensureDailyNav(html, fileName) {
   return withDailyLink.replace(/<a href="about\.html" aria-current="page" class="navbar_link w-nav-link w--current">实用工具<\/a>/, '<a href="about.html" class="navbar_link w-nav-link">实用工具</a>');
 }
 
+function ensureArticleDailyNav(html) {
+  const withoutDailyLink = html.replace(/<a href="\.\.\/\.\.\/daily\.html">每日分享<\/a>/g, "");
+  return withoutDailyLink
+    .replace(/href="\.\.\/\.\.\/assets\/article\.css(?:\?v=[^"]+)?"/g, `href="${articleCssHref}"`)
+    .replace('<a href="../../about.html">实用工具</a>', '<a href="../../daily.html">每日分享</a><a href="../../about.html">实用工具</a>');
+}
+
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -1921,6 +1945,12 @@ for (const fileName of htmlFiles) {
   html = ensureSeo(html, fileName);
   fs.writeFileSync(filePath, html, "utf8");
   console.log(`Applied PokerRookie branding to ${fileName}`);
+}
+
+for (const page of indexedSeoPages.filter((item) => item.fileName.startsWith("articles/"))) {
+  const articlePath = path.join(root, page.fileName);
+  const articleHtml = ensureArticleDailyNav(fs.readFileSync(articlePath, "utf8"));
+  fs.writeFileSync(articlePath, articleHtml, "utf8");
 }
 
 writeSeoFiles();

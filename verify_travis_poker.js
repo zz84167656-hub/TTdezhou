@@ -75,6 +75,10 @@ const flopArticlePath = "articles/flop-cbet-mistakes/index.html";
 const flopArticleUrl = `${siteBaseUrl}/articles/flop-cbet-mistakes/`;
 const riverArticlePath = "articles/river-bluff-catching/index.html";
 const riverArticleUrl = `${siteBaseUrl}/articles/river-bluff-catching/`;
+const videoReviewArticlePath = "articles/poker-video-review-method/index.html";
+const videoReviewArticleUrl = `${siteBaseUrl}/articles/poker-video-review-method/`;
+const threeBetArticlePath = "articles/three-bet-pot-mistakes/index.html";
+const threeBetArticleUrl = `${siteBaseUrl}/articles/three-bet-pot-mistakes/`;
 const articleCss = read("assets/article.css");
 
 function assert(condition, message) {
@@ -154,6 +158,10 @@ assert(sitemap.includes(`<loc>${flopArticleUrl}</loc>`), "sitemap.xml must inclu
 assert(baiduUrls.includes(flopArticleUrl), "baidu_urls.txt must include the flop c-bet article");
 assert(sitemap.includes(`<loc>${riverArticleUrl}</loc>`), "sitemap.xml must include the river bluff-catching article");
 assert(baiduUrls.includes(riverArticleUrl), "baidu_urls.txt must include the river bluff-catching article");
+assert(sitemap.includes(`<loc>${videoReviewArticleUrl}</loc>`), "sitemap.xml must include the video review article");
+assert(baiduUrls.includes(videoReviewArticleUrl), "baidu_urls.txt must include the video review article");
+assert(sitemap.includes(`<loc>${threeBetArticleUrl}</loc>`), "sitemap.xml must include the 3-bet article");
+assert(baiduUrls.includes(threeBetArticleUrl), "baidu_urls.txt must include the 3-bet article");
 assert(!sitemap.includes("travis-poker.html"), "sitemap.xml must not include the duplicate home mirror");
 assert(!sitemap.includes("lab.html"), "sitemap.xml must not include the hidden LAB page");
 
@@ -242,7 +250,7 @@ assert(home.includes("assets/pokerrookie-profile.jpg"), "Home must use the Poker
 assert(home.includes('id="pokerrookie-home-articles-title"'), "Home must include the strategy article section");
 assert(home.includes("从翻前范围到河牌决策"), "Home article section must include its heading");
 assert(home.includes('"@id":"https://www.pokerrookie.top/#articles"'), "Home structured data must include the article ItemList");
-assert((home.match(/class="pokerrookie-home-article-item"/g) || []).length === 10, "Home must list all 10 strategy articles exactly once");
+assert((home.match(/class="pokerrookie-home-article-item"/g) || []).length === 12, "Home must list all 12 strategy articles exactly once");
 for (const articleHref of [
   "articles/gto-plus-guide/",
   "articles/piosolver-guide/",
@@ -253,11 +261,13 @@ for (const articleHref of [
   "articles/preflop-opening-ranges/",
   "articles/bet-sizing-basics/",
   "articles/flop-cbet-mistakes/",
-  "articles/river-bluff-catching/"
+  "articles/river-bluff-catching/",
+  "articles/poker-video-review-method/",
+  "articles/three-bet-pot-mistakes/"
 ]) {
   assert(home.includes(`href="${articleHref}"`), `Home must link to ${articleHref}`);
 }
-assert(home.indexOf('href="articles/river-bluff-catching/"') < home.indexOf('href="articles/flop-cbet-mistakes/"'), "Home must show the newest article first");
+assert(home.indexOf('href="articles/three-bet-pot-mistakes/"') < home.indexOf('href="articles/river-bluff-catching/"'), "Home must show the newest article first");
 assert(!home.includes('<h1 class="card-title">轻松娱乐</h1>'), "Home must replace the old entertainment card title");
 assert(!home.includes("只是随便玩玩的话"), "Home must replace the old entertainment card badge");
 assert(!home.includes("玩有趣的扑克牌小游戏"), "Home must replace the old entertainment card body");
@@ -269,17 +279,18 @@ assert(homeMirror.includes('href="download.html" class="pokerrookie-hero-title-l
 assert(homeMirror.includes('src="assets/sologan.webp"'), "travis-poker.html must use the slogan artwork");
 assert(homeMirror.includes(bilibiliUrl), "travis-poker.html must mirror the Bilibili profile link");
 assert(homeMirror.includes(`href="${bilibiliUrl}" target="_blank" rel="noopener"`), "travis-poker.html Bilibili CTA must open as a safe external link");
-assert((homeMirror.match(/class="pokerrookie-home-article-item"/g) || []).length === 10, "travis-poker.html must mirror all strategy articles");
+assert((homeMirror.match(/class="pokerrookie-home-article-item"/g) || []).length === 12, "travis-poker.html must mirror all strategy articles");
 assert(homeMirror.includes('"@id":"https://www.pokerrookie.top/#articles"'), "travis-poker.html structured data must include the article ItemList");
 
 const daily = read("daily.html");
 assert(daily.includes('class="pokerrookie-daily-sharing"'), "Daily page must include the daily sharing interface");
 assert(daily.includes('id="pokerrookie-daily-title"'), "Daily page must expose an accessible page heading");
 assert(daily.includes("每天两篇，持续积累"), "Daily page must include the daily publishing message");
-assert(daily.includes("2026年8月4日"), "Daily page must show the latest publishing date");
+assert(daily.includes("2026年8月5日"), "Daily page must show the latest publishing date");
 assert(daily.includes("2026年7月23日"), "Daily page must show the earliest publishing date");
-assert((daily.match(/class="pokerrookie-daily-article"/g) || []).length === 10, "Daily page must list all 10 strategy articles exactly once");
-assert(daily.indexOf('href="articles/river-bluff-catching/"') < daily.indexOf('href="articles/gto-plus-guide/"'), "Daily page must order articles from newest to oldest");
+assert((daily.match(/class="pokerrookie-daily-group"/g) || []).length === 7, "Daily page must group articles under all 7 publishing dates");
+assert((daily.match(/class="pokerrookie-daily-article"/g) || []).length === 12, "Daily page must list all 12 strategy articles exactly once");
+assert(daily.indexOf('href="articles/three-bet-pot-mistakes/"') < daily.indexOf('href="articles/gto-plus-guide/"'), "Daily page must order articles from newest to oldest");
 assert(daily.includes('"@id":"https://www.pokerrookie.top/daily.html#daily-articles"'), "Daily page structured data must include the article ItemList");
 assert(daily.includes('href="daily.html" aria-current="page"'), "Daily page nav must mark Daily Sharing as current");
 
@@ -485,7 +496,7 @@ assert(rangeArticle.includes('href="../river-bluff-catching/"'), "Range article 
 
 const preflopArticle = read(preflopArticlePath);
 assert(articleCss.includes("--article-font"), "Shared article CSS must define the standard article font");
-assert(preflopArticle.includes('<link rel="stylesheet" href="../../assets/article.css">'), "Preflop article must use the shared article CSS");
+assert(preflopArticle.includes('<link rel="stylesheet" href="../../assets/article.css?v='), "Preflop article must use the cache-busted shared article CSS");
 assert(preflopArticle.includes("<title>德州扑克翻前开池范围｜不同位置怎么调整 - PokerRookie</title>"), "Preflop article must use the SEO title");
 assert(preflopArticle.includes(`<link rel="canonical" href="${preflopArticleUrl}">`), "Preflop article must use the canonical URL");
 assert(preflopArticle.includes('<meta name="robots" content="index,follow">'), "Preflop article must be indexable");
@@ -499,7 +510,7 @@ assert(preflopArticle.includes('href="../poker-position-range-pot-odds/"'), "Pre
 assert(preflopArticle.includes('href="../../free.html"'), "Preflop article must link to video teaching");
 
 const sizingArticle = read(sizingArticlePath);
-assert(sizingArticle.includes('<link rel="stylesheet" href="../../assets/article.css">'), "Sizing article must use the shared article CSS");
+assert(sizingArticle.includes('<link rel="stylesheet" href="../../assets/article.css?v='), "Sizing article must use the cache-busted shared article CSS");
 assert(sizingArticle.includes("<title>德州扑克下注尺度入门｜小注、中注与大注怎么选 - PokerRookie</title>"), "Sizing article must use the SEO title");
 assert(sizingArticle.includes(`<link rel="canonical" href="${sizingArticleUrl}">`), "Sizing article must use the canonical URL");
 assert(sizingArticle.includes('<meta name="robots" content="index,follow">'), "Sizing article must be indexable");
@@ -561,6 +572,55 @@ for (const [label, article] of [
   const chineseCharacters = countMainChineseCharacters(article);
   assert(chineseCharacters >= 1000, `${label} article must contain at least 1000 Chinese characters in main content`);
   assert(chineseCharacters <= 2000, `${label} article must contain no more than 2000 Chinese characters in main content`);
+}
+
+const videoReviewArticle = read(videoReviewArticlePath);
+assert(videoReviewArticle.includes("<title>德州扑克视频复盘方法｜把牌局变成决策框架 - PokerRookie</title>"), "Video review article must use the SEO title");
+assert(videoReviewArticle.includes(`<link rel="canonical" href="${videoReviewArticleUrl}">`), "Video review article must use the canonical URL");
+assert(videoReviewArticle.includes('<meta name="robots" content="index,follow">'), "Video review article must be indexable");
+assert(videoReviewArticle.includes('id="pokerrookie-seo-jsonld"'), "Video review article must include structured data");
+assert(videoReviewArticle.includes('"datePublished":"2026-08-05"'), "Video review article must use today's publication date");
+assert(videoReviewArticle.includes("完整场景"), "Video review article must include a complete decision scene");
+assert(videoReviewArticle.includes("可执行的七步视频复盘清单"), "Video review article must include an actionable review checklist");
+assert(videoReviewArticle.includes('href="https://blog.gtowizard.com/how-to-get-the-most-out-of-your-hand-reviews/" target="_blank" rel="noopener"'), "Video review article must cite the professional hand-review source");
+assert(videoReviewArticle.includes('href="https://blog.gtowizard.com/what-we-can-learn-from-outlier-hands/" target="_blank" rel="noopener"'), "Video review article must cite the professional outlier-hands source");
+
+const threeBetArticle = read(threeBetArticlePath);
+assert(threeBetArticle.includes("<title>德州扑克3-bet底池常见错误｜低SPR实战指南 - PokerRookie</title>"), "3-bet article must use the SEO title");
+assert(threeBetArticle.includes(`<link rel="canonical" href="${threeBetArticleUrl}">`), "3-bet article must use the canonical URL");
+assert(threeBetArticle.includes('<meta name="robots" content="index,follow">'), "3-bet article must be indexable");
+assert(threeBetArticle.includes('id="pokerrookie-seo-jsonld"'), "3-bet article must include structured data");
+assert(threeBetArticle.includes('"datePublished":"2026-08-05"'), "3-bet article must use today's publication date");
+assert(threeBetArticle.includes("完整场景"), "3-bet article must include a complete decision scene");
+assert(threeBetArticle.includes("3-bet底池复盘表"), "3-bet article must include an actionable review checklist");
+assert(threeBetArticle.includes('href="https://blog.gtowizard.com/turn-barreling-in-3-bet-pots/" target="_blank" rel="noopener"'), "3-bet article must cite the professional GTO Wizard source");
+assert(threeBetArticle.includes('href="https://upswingpoker.com/single-raised-pots-vs-3-bet-pots/" target="_blank" rel="noopener"'), "3-bet article must cite the professional Upswing source");
+
+for (const [label, article] of [
+  ["Video review", videoReviewArticle],
+  ["3-bet mistakes", threeBetArticle]
+]) {
+  const chineseCharacters = countMainChineseCharacters(article);
+  assert(chineseCharacters >= 3500, `${label} article must contain at least 3500 Chinese characters in main content`);
+  assert(chineseCharacters <= 4500, `${label} article must contain no more than 4500 Chinese characters in main content`);
+  assert((article.match(/<section class="section">/g) || []).length >= 8, `${label} article must contain at least 8 substantial sections`);
+}
+
+for (const articlePath of [
+  gtoArticlePath,
+  pioArticlePath,
+  beginnerArticlePath,
+  turnArticlePath,
+  finalTableArticlePath,
+  rangeArticlePath,
+  preflopArticlePath,
+  sizingArticlePath,
+  flopArticlePath,
+  riverArticlePath,
+  videoReviewArticlePath,
+  threeBetArticlePath
+]) {
+  assert(read(articlePath).includes('href="../../daily.html"'), `${articlePath} must link to daily sharing in the article nav`);
 }
 assert(!about.includes("code-embed w-embed pokerrookie-practical-tools-embed"), "Tools page module must not be hidden by code-embed");
 assert(!about.includes("background: #0d1117"), "Tools page must not use the old dark tools design");
