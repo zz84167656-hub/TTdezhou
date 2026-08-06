@@ -79,6 +79,10 @@ const videoReviewArticlePath = "articles/poker-video-review-method/index.html";
 const videoReviewArticleUrl = `${siteBaseUrl}/articles/poker-video-review-method/`;
 const threeBetArticlePath = "articles/three-bet-pot-mistakes/index.html";
 const threeBetArticleUrl = `${siteBaseUrl}/articles/three-bet-pot-mistakes/`;
+const hand2NoteArticlePath = "articles/hand2note-data-review/index.html";
+const hand2NoteArticleUrl = `${siteBaseUrl}/articles/hand2note-data-review/`;
+const pokerTrackerArticlePath = "articles/pokertracker4-review-workflow/index.html";
+const pokerTrackerArticleUrl = `${siteBaseUrl}/articles/pokertracker4-review-workflow/`;
 const articleCss = read("assets/article.css");
 
 function assert(condition, message) {
@@ -162,6 +166,10 @@ assert(sitemap.includes(`<loc>${videoReviewArticleUrl}</loc>`), "sitemap.xml mus
 assert(baiduUrls.includes(videoReviewArticleUrl), "baidu_urls.txt must include the video review article");
 assert(sitemap.includes(`<loc>${threeBetArticleUrl}</loc>`), "sitemap.xml must include the 3-bet article");
 assert(baiduUrls.includes(threeBetArticleUrl), "baidu_urls.txt must include the 3-bet article");
+assert(sitemap.includes(`<loc>${hand2NoteArticleUrl}</loc>`), "sitemap.xml must include the Hand2Note article");
+assert(baiduUrls.includes(hand2NoteArticleUrl), "baidu_urls.txt must include the Hand2Note article");
+assert(sitemap.includes(`<loc>${pokerTrackerArticleUrl}</loc>`), "sitemap.xml must include the PokerTracker 4 article");
+assert(baiduUrls.includes(pokerTrackerArticleUrl), "baidu_urls.txt must include the PokerTracker 4 article");
 assert(!sitemap.includes("travis-poker.html"), "sitemap.xml must not include the duplicate home mirror");
 assert(!sitemap.includes("lab.html"), "sitemap.xml must not include the hidden LAB page");
 
@@ -250,7 +258,7 @@ assert(home.includes("assets/pokerrookie-profile.jpg"), "Home must use the Poker
 assert(home.includes('id="pokerrookie-home-articles-title"'), "Home must include the strategy article section");
 assert(home.includes("从翻前范围到河牌决策"), "Home article section must include its heading");
 assert(home.includes('"@id":"https://www.pokerrookie.top/#articles"'), "Home structured data must include the article ItemList");
-assert((home.match(/class="pokerrookie-home-article-item"/g) || []).length === 12, "Home must list all 12 strategy articles exactly once");
+assert((home.match(/class="pokerrookie-home-article-item"/g) || []).length === 14, "Home must list all 14 strategy articles exactly once");
 for (const articleHref of [
   "articles/gto-plus-guide/",
   "articles/piosolver-guide/",
@@ -263,11 +271,13 @@ for (const articleHref of [
   "articles/flop-cbet-mistakes/",
   "articles/river-bluff-catching/",
   "articles/poker-video-review-method/",
-  "articles/three-bet-pot-mistakes/"
+  "articles/three-bet-pot-mistakes/",
+  "articles/hand2note-data-review/",
+  "articles/pokertracker4-review-workflow/"
 ]) {
   assert(home.includes(`href="${articleHref}"`), `Home must link to ${articleHref}`);
 }
-assert(home.indexOf('href="articles/three-bet-pot-mistakes/"') < home.indexOf('href="articles/river-bluff-catching/"'), "Home must show the newest article first");
+assert(home.indexOf('href="articles/pokertracker4-review-workflow/"') < home.indexOf('href="articles/three-bet-pot-mistakes/"'), "Home must show today's newest article first");
 assert(!home.includes('<h1 class="card-title">轻松娱乐</h1>'), "Home must replace the old entertainment card title");
 assert(!home.includes("只是随便玩玩的话"), "Home must replace the old entertainment card badge");
 assert(!home.includes("玩有趣的扑克牌小游戏"), "Home must replace the old entertainment card body");
@@ -279,18 +289,18 @@ assert(homeMirror.includes('href="download.html" class="pokerrookie-hero-title-l
 assert(homeMirror.includes('src="assets/sologan.webp"'), "travis-poker.html must use the slogan artwork");
 assert(homeMirror.includes(bilibiliUrl), "travis-poker.html must mirror the Bilibili profile link");
 assert(homeMirror.includes(`href="${bilibiliUrl}" target="_blank" rel="noopener"`), "travis-poker.html Bilibili CTA must open as a safe external link");
-assert((homeMirror.match(/class="pokerrookie-home-article-item"/g) || []).length === 12, "travis-poker.html must mirror all strategy articles");
+assert((homeMirror.match(/class="pokerrookie-home-article-item"/g) || []).length === 14, "travis-poker.html must mirror all strategy articles");
 assert(homeMirror.includes('"@id":"https://www.pokerrookie.top/#articles"'), "travis-poker.html structured data must include the article ItemList");
 
 const daily = read("daily.html");
 assert(daily.includes('class="pokerrookie-daily-sharing"'), "Daily page must include the daily sharing interface");
 assert(daily.includes('id="pokerrookie-daily-title"'), "Daily page must expose an accessible page heading");
 assert(daily.includes("每天两篇，持续积累"), "Daily page must include the daily publishing message");
-assert(daily.includes("2026年8月5日"), "Daily page must show the latest publishing date");
+assert(daily.includes("2026年8月6日"), "Daily page must show the latest publishing date");
 assert(daily.includes("2026年7月23日"), "Daily page must show the earliest publishing date");
-assert((daily.match(/class="pokerrookie-daily-group"/g) || []).length === 7, "Daily page must group articles under all 7 publishing dates");
-assert((daily.match(/class="pokerrookie-daily-article"/g) || []).length === 12, "Daily page must list all 12 strategy articles exactly once");
-assert(daily.indexOf('href="articles/three-bet-pot-mistakes/"') < daily.indexOf('href="articles/gto-plus-guide/"'), "Daily page must order articles from newest to oldest");
+assert((daily.match(/class="pokerrookie-daily-group"/g) || []).length === 8, "Daily page must group articles under all 8 publishing dates");
+assert((daily.match(/class="pokerrookie-daily-article"/g) || []).length === 14, "Daily page must list all 14 strategy articles exactly once");
+assert(daily.indexOf('href="articles/pokertracker4-review-workflow/"') < daily.indexOf('href="articles/three-bet-pot-mistakes/"'), "Daily page must order articles from newest to oldest");
 assert(daily.includes('"@id":"https://www.pokerrookie.top/daily.html#daily-articles"'), "Daily page structured data must include the article ItemList");
 assert(daily.includes('href="daily.html" aria-current="page"'), "Daily page nav must mark Daily Sharing as current");
 
@@ -606,6 +616,37 @@ for (const [label, article] of [
   assert((article.match(/<section class="section">/g) || []).length >= 8, `${label} article must contain at least 8 substantial sections`);
 }
 
+const hand2NoteArticle = read(hand2NoteArticlePath);
+assert(hand2NoteArticle.includes("<title>Hand2Note 使用教程｜从牌谱导入到数据漏洞分析 - PokerRookie</title>"), "Hand2Note article must use the SEO title");
+assert(hand2NoteArticle.includes(`<link rel="canonical" href="${hand2NoteArticleUrl}">`), "Hand2Note article must use the canonical URL");
+assert(hand2NoteArticle.includes('"datePublished":"2026-08-06"'), "Hand2Note article must use today's publication date");
+assert(hand2NoteArticle.includes("../../assets/Hand2Note.webp"), "Hand2Note article must include the local interface example image");
+assert(hand2NoteArticle.includes('class="article-figure"'), "Hand2Note article must include an explained image example");
+assert(hand2NoteArticle.includes("完整场景"), "Hand2Note article must include a complete analysis scenario");
+assert(hand2NoteArticle.includes('href="https://www.hand2note.com/Help/Features/reports" target="_blank" rel="noopener"'), "Hand2Note article must cite the official reports guide");
+
+const pokerTrackerArticle = read(pokerTrackerArticlePath);
+assert(pokerTrackerArticle.includes("<title>PokerTracker 4 复盘教程｜用筛选器建立每周训练系统 - PokerRookie</title>"), "PokerTracker 4 article must use the SEO title");
+assert(pokerTrackerArticle.includes(`<link rel="canonical" href="${pokerTrackerArticleUrl}">`), "PokerTracker 4 article must use the canonical URL");
+assert(pokerTrackerArticle.includes('"datePublished":"2026-08-06"'), "PokerTracker 4 article must use today's publication date");
+assert(pokerTrackerArticle.includes("../../assets/PokerTracker%204.webp"), "PokerTracker 4 article must include the local interface example image");
+assert(pokerTrackerArticle.includes('class="article-figure"'), "PokerTracker 4 article must include an explained image example");
+assert(pokerTrackerArticle.includes("完整场景"), "PokerTracker 4 article must include a complete analysis scenario");
+assert(pokerTrackerArticle.includes('href="https://docs.pokertracker.com/pt4/general/pokertracker-4-quick-start-guide/" target="_blank" rel="noopener"'), "PokerTracker 4 article must cite the official quick start guide");
+
+for (const [label, article] of [
+  ["Hand2Note", hand2NoteArticle],
+  ["PokerTracker 4", pokerTrackerArticle]
+]) {
+  const chineseCharacters = countMainChineseCharacters(article);
+  assert(chineseCharacters >= 3500, `${label} article must contain at least 3500 Chinese characters in main content`);
+  assert(chineseCharacters <= 4500, `${label} article must contain no more than 4500 Chinese characters in main content`);
+  assert((article.match(/<section class="section">/g) || []).length >= 10, `${label} article must contain at least 10 substantial sections`);
+}
+
+assert(articleCss.includes(".article-figure"), "Article stylesheet must style explanatory figures");
+assert(articleCss.includes(".analysis-flow"), "Article stylesheet must style the analysis flow examples");
+
 for (const articlePath of [
   gtoArticlePath,
   pioArticlePath,
@@ -618,7 +659,9 @@ for (const articlePath of [
   flopArticlePath,
   riverArticlePath,
   videoReviewArticlePath,
-  threeBetArticlePath
+  threeBetArticlePath,
+  hand2NoteArticlePath,
+  pokerTrackerArticlePath
 ]) {
   assert(read(articlePath).includes('href="../../daily.html"'), `${articlePath} must link to daily sharing in the article nav`);
 }

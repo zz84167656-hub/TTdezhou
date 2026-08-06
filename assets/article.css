@@ -36,6 +36,12 @@ h1 { margin: 22px 0 16px; font-size: clamp(36px, 6vw, 66px); line-height: 1.08; 
 .section p { margin: 0 0 14px; }
 .section ul, .section ol { margin: 0; padding-left: 22px; }
 .section li + li { margin-top: 8px; }
+.article-figure { margin: 24px 0 22px; overflow: hidden; border: 1px solid var(--article-line); border-radius: 8px; background: #eef3f8; }
+.article-figure img { width: 100%; height: auto; max-height: 620px; object-fit: contain; display: block; background: #111820; }
+.article-figure figcaption { padding: 14px 18px; border-top: 1px solid var(--article-line); background: #fff; color: var(--article-muted); font-size: 14px; line-height: 1.7; }
+.analysis-flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 22px 0; }
+.analysis-flow span { position: relative; min-height: 84px; padding: 16px 14px; border: 1px solid var(--article-line); border-radius: 6px; background: #f8fbff; color: var(--article-blue); font-size: 15px; font-weight: 800; line-height: 1.55; }
+.analysis-flow b { display: block; margin-bottom: 5px; color: var(--article-red); font-size: 12px; }
 .study-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
 .study-grid span { padding: 16px; border: 1px solid var(--article-line); border-radius: 6px; background: #f8fbff; color: var(--article-blue); font-weight: 800; }
 .link-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
@@ -54,7 +60,9 @@ h1 { margin: 22px 0 16px; font-size: clamp(36px, 6vw, 66px); line-height: 1.08; 
   .nav-links a { flex: 0 0 auto; }
   .article-wrap { width: min(100% - 28px, 980px); padding: 38px 0 56px; }
   .lead { font-size: 17px; }
-  .hero-note, .study-grid { grid-template-columns: 1fr; }
+  .hero-note, .study-grid, .analysis-flow { grid-template-columns: 1fr; }
+  .article-figure { margin: 20px 0; }
+  .article-figure figcaption { padding: 12px 14px; }
   .footer-inner { width: min(100% - 28px, 1120px); align-items: flex-start; flex-direction: column; padding: 26px 0; }
   .contact { flex-direction: column; }
 }

@@ -146,6 +146,20 @@ const indexedSeoPages = [
     title: "德州扑克3-bet底池常见错误｜低SPR实战指南 - PokerRookie",
     description: "深入分析德州扑克3-bet底池的常见错误，从低SPR、收紧范围、翻牌尺度、转牌几何增长到河牌计划，帮助玩家减少大底池中的系统性失误。",
     priority: "0.8"
+  },
+  {
+    fileName: "articles/hand2note-data-review/index.html",
+    path: "/articles/hand2note-data-review/",
+    title: "Hand2Note 使用教程｜从牌谱导入到数据漏洞分析 - PokerRookie",
+    description: "深入讲解 Hand2Note 的牌谱导入、报告筛选、样本判断、行动收益、HUD 与每周复盘流程，帮助德州扑克玩家从数据中定位真实漏洞。",
+    priority: "0.8"
+  },
+  {
+    fileName: "articles/pokertracker4-review-workflow/index.html",
+    path: "/articles/pokertracker4-review-workflow/",
+    title: "PokerTracker 4 复盘教程｜用筛选器建立每周训练系统 - PokerRookie",
+    description: "系统讲解 PokerTracker 4 的牌谱导入、报告、全局筛选器、自定义报告、HUD 和回放器，建立从发现漏洞到验证改进的德州扑克训练流程。",
+    priority: "0.8"
   }
 ];
 const duplicateSeoPages = [
@@ -892,7 +906,7 @@ const homepageArticlePages = indexedSeoPages
   .reverse();
 
 function homepageArticleCategory(page) {
-  if (/gto-plus|piosolver/.test(page.fileName)) return "实用工具";
+  if (/gto-plus|piosolver|hand2note|pokertracker4/.test(page.fileName)) return "实用工具";
   if (/video-review/.test(page.fileName)) return "视频复盘";
   if (/three-bet-pot/.test(page.fileName)) return "常见错误";
   if (/position-range|preflop|bet-sizing/.test(page.fileName)) return "新手基础";
