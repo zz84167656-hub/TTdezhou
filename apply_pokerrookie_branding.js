@@ -160,6 +160,20 @@ const indexedSeoPages = [
     title: "PokerTracker 4 复盘教程｜用筛选器建立每周训练系统 - PokerRookie",
     description: "系统讲解 PokerTracker 4 的牌谱导入、报告、全局筛选器、自定义报告、HUD 和回放器，建立从发现漏洞到验证改进的德州扑克训练流程。",
     priority: "0.8"
+  },
+  {
+    fileName: "articles/tournament-bubble-icm-strategy/index.html",
+    path: "/articles/tournament-bubble-icm-strategy/",
+    title: "德州扑克锦标赛泡沫期策略｜ICM、风险溢价与筹码施压 - PokerRookie",
+    description: "深入讲解德州扑克锦标赛泡沫期的 ICM、风险溢价、筹码角色、开池与跟注差异，并通过完整牌局建立可执行的赛事复盘流程。",
+    priority: "0.8"
+  },
+  {
+    fileName: "articles/big-blind-defense-button/index.html",
+    path: "/articles/big-blind-defense-button/",
+    title: "德州扑克大盲防守进阶｜对抗按钮位开池的完整策略 - PokerRookie",
+    description: "深入讲解德州扑克大盲对按钮位开池的赔率、权益实现、跟注与3-bet范围、翻牌防守、转牌计划，并通过完整牌局建立复盘框架。",
+    priority: "0.8"
   }
 ];
 const duplicateSeoPages = [
@@ -909,6 +923,8 @@ function homepageArticleCategory(page) {
   if (/gto-plus|piosolver|hand2note|pokertracker4/.test(page.fileName)) return "实用工具";
   if (/video-review/.test(page.fileName)) return "视频复盘";
   if (/three-bet-pot/.test(page.fileName)) return "常见错误";
+  if (/tournament-bubble/.test(page.fileName)) return "赛事复盘";
+  if (/big-blind-defense/.test(page.fileName)) return "玩家进阶";
   if (/position-range|preflop|bet-sizing/.test(page.fileName)) return "新手基础";
   if (/final-table/.test(page.fileName)) return "赛事复盘";
   if (/range-reading/.test(page.fileName)) return "玩家进阶";
