@@ -174,6 +174,20 @@ const indexedSeoPages = [
     title: "德州扑克大盲防守进阶｜对抗按钮位开池的完整策略 - PokerRookie",
     description: "深入讲解德州扑克大盲对按钮位开池的赔率、权益实现、跟注与3-bet范围、翻牌防守、转牌计划，并通过完整牌局建立复盘框架。",
     priority: "0.8"
+  },
+  {
+    fileName: "articles/small-blind-strategy/index.html",
+    path: "/articles/small-blind-strategy/",
+    title: "德州扑克小盲位策略｜翻前3-bet、盲注战与翻后计划 - PokerRookie",
+    description: "系统讲解德州扑克小盲位策略，包括面对开池的3-bet或弃牌框架、盲注战开池与跛入、下注尺度、有效筹码和翻后计划。",
+    priority: "0.8"
+  },
+  {
+    fileName: "articles/pot-odds-implied-odds/index.html",
+    path: "/articles/pot-odds-implied-odds/",
+    title: "德州扑克底池赔率与隐含赔率｜听牌跟注计算完整指南 - PokerRookie",
+    description: "深入讲解德州扑克底池赔率、胜率、补牌、隐含赔率与反向隐含赔率，拆解听牌跟注、半诈唬和河牌抓诈唬的计算方法。",
+    priority: "0.8"
   }
 ];
 const duplicateSeoPages = [
@@ -924,8 +938,8 @@ function homepageArticleCategory(page) {
   if (/video-review/.test(page.fileName)) return "视频复盘";
   if (/three-bet-pot/.test(page.fileName)) return "常见错误";
   if (/tournament-bubble/.test(page.fileName)) return "赛事复盘";
-  if (/big-blind-defense/.test(page.fileName)) return "玩家进阶";
-  if (/position-range|preflop|bet-sizing/.test(page.fileName)) return "新手基础";
+  if (/big-blind-defense|small-blind-strategy/.test(page.fileName)) return "玩家进阶";
+  if (/position-range|preflop|bet-sizing|pot-odds/.test(page.fileName)) return "新手基础";
   if (/final-table/.test(page.fileName)) return "赛事复盘";
   if (/range-reading/.test(page.fileName)) return "玩家进阶";
   return "实战教学";
