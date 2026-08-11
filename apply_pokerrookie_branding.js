@@ -188,6 +188,20 @@ const indexedSeoPages = [
     title: "德州扑克底池赔率与隐含赔率｜听牌跟注计算完整指南 - PokerRookie",
     description: "深入讲解德州扑克底池赔率、胜率、补牌、隐含赔率与反向隐含赔率，拆解听牌跟注、半诈唬和河牌抓诈唬的计算方法。",
     priority: "0.8"
+  },
+  {
+    fileName: "articles/turn-double-barrel-strategy/index.html",
+    path: "/articles/turn-double-barrel-strategy/",
+    title: "德州扑克转牌双桶策略｜好转牌、范围极化与河牌计划 - PokerRookie",
+    description: "深入讲解德州扑克转牌双桶策略，从范围优势、坚果优势、权益变化和阻断牌判断哪些转牌适合继续下注，并建立完整河牌计划。",
+    priority: "0.8"
+  },
+  {
+    fileName: "articles/river-blockers-guide/index.html",
+    path: "/articles/river-blockers-guide/",
+    title: "德州扑克河牌阻断牌指南｜价值、诈唬与抓诈唬 - PokerRookie",
+    description: "系统讲解德州扑克河牌阻断牌与解阻断牌，说明如何用组合数选择价值下注、诈唬和抓诈唬候选，并建立正确判断顺序。",
+    priority: "0.8"
   }
 ];
 const duplicateSeoPages = [
