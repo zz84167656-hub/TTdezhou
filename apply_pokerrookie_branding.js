@@ -202,6 +202,20 @@ const indexedSeoPages = [
     title: "德州扑克河牌阻断牌指南｜价值、诈唬与抓诈唬 - PokerRookie",
     description: "系统讲解德州扑克河牌阻断牌与解阻断牌，说明如何用组合数选择价值下注、诈唬和抓诈唬候选，并建立正确判断顺序。",
     priority: "0.8"
+  },
+  {
+    fileName: "articles/high-stakes-video-hand-review/index.html",
+    path: "/articles/high-stakes-video-hand-review/",
+    title: "德州扑克高额现金桌视频复盘｜盲注战三街决策拆解 - PokerRookie",
+    description: "通过一手按钮位对小盲3-bet高额现金桌牌局，逐街拆解翻前范围、翻牌小注、转牌阻断下注与河牌超池价值。",
+    priority: "0.8"
+  },
+  {
+    fileName: "articles/multiway-pot-mistakes/index.html",
+    path: "/articles/multiway-pot-mistakes/",
+    title: "德州扑克多人底池常见错误｜范围、尺度与坚果潜力 - PokerRookie",
+    description: "深入分析德州扑克多人底池常见错误，包括翻前跟注过宽、套用单挑持续下注、薄价值过度、错误防守频率和忽视坚果潜力。",
+    priority: "0.8"
   }
 ];
 const duplicateSeoPages = [
@@ -949,8 +963,8 @@ const homepageArticlePages = indexedSeoPages
 
 function homepageArticleCategory(page) {
   if (/gto-plus|piosolver|hand2note|pokertracker4/.test(page.fileName)) return "实用工具";
-  if (/video-review/.test(page.fileName)) return "视频复盘";
-  if (/three-bet-pot/.test(page.fileName)) return "常见错误";
+  if (/video-review|video-hand-review/.test(page.fileName)) return "视频复盘";
+  if (/three-bet-pot|multiway-pot-mistakes/.test(page.fileName)) return "常见错误";
   if (/tournament-bubble/.test(page.fileName)) return "赛事复盘";
   if (/big-blind-defense|small-blind-strategy/.test(page.fileName)) return "玩家进阶";
   if (/position-range|preflop|bet-sizing|pot-odds/.test(page.fileName)) return "新手基础";
