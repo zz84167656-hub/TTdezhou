@@ -216,6 +216,20 @@ const indexedSeoPages = [
     title: "德州扑克多人底池常见错误｜范围、尺度与坚果潜力 - PokerRookie",
     description: "深入分析德州扑克多人底池常见错误，包括翻前跟注过宽、套用单挑持续下注、薄价值过度、错误防守频率和忽视坚果潜力。",
     priority: "0.8"
+  },
+  {
+    fileName: "articles/pokersnowie-training-guide/index.html",
+    path: "/articles/pokersnowie-training-guide/",
+    title: "PokerSnowie 使用教程｜AI训练、场景分析与错误率复盘 - PokerRookie",
+    description: "系统讲解 PokerSnowie 的牌谱导入、错误率、场景分析、对战训练与进步追踪，帮助玩家把 AI 建议转化为可执行的德州扑克训练计划。",
+    priority: "0.8"
+  },
+  {
+    fileName: "articles/gto-plus-piosolver-comparison/index.html",
+    path: "/articles/gto-plus-piosolver-comparison/",
+    title: "GTO+与PioSolver怎么选｜求解器差异与联合复盘流程 - PokerRookie",
+    description: "对比 GTO+ 与 PioSolver 的树构建、分析界面、数据库、报告、硬件和存储特点，并用同一牌局演示可重复的联合复盘流程。",
+    priority: "0.8"
   }
 ];
 const duplicateSeoPages = [
@@ -962,7 +976,7 @@ const homepageArticlePages = indexedSeoPages
   .reverse();
 
 function homepageArticleCategory(page) {
-  if (/gto-plus|piosolver|hand2note|pokertracker4/.test(page.fileName)) return "实用工具";
+  if (/gto-plus|piosolver|pokersnowie|hand2note|pokertracker4/.test(page.fileName)) return "实用工具";
   if (/video-review|video-hand-review/.test(page.fileName)) return "视频复盘";
   if (/three-bet-pot|multiway-pot-mistakes/.test(page.fileName)) return "常见错误";
   if (/tournament-bubble/.test(page.fileName)) return "赛事复盘";
