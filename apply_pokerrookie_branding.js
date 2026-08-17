@@ -33,6 +33,7 @@ const indexedSeoPages = [
     path: "/",
     title: "PokerRookie｜德州扑克实战复盘与视频教学",
     description: "PokerRookie 德州扑克实战复盘、视频教学、GTO工具整理与游戏下载入口，帮助玩家系统提升德州扑克、奥马哈与混合游戏水平。",
+    lastmod: "2026-08-17",
     priority: "1.0"
   },
   {
@@ -40,6 +41,7 @@ const indexedSeoPages = [
     path: "/download.html",
     title: "PokerRookie 游戏下载｜long999 邀请码与战队福利",
     description: "通过 PokerRookie 专属链接下载游戏，使用 long999 邀请码加入战队，查看新人礼包、战队赛与现金奖励等福利说明。",
+    lastmod: "2026-08-13",
     priority: "0.9"
   },
   {
@@ -47,6 +49,7 @@ const indexedSeoPages = [
     path: "/free.html",
     title: "视频教学｜PokerRookie 德州扑克实战复盘合集",
     description: "精选 PokerRookie 的 B 站德州扑克视频教学、赛事复盘、现金桌与高额桌实战解析，按系列整理方便观看。",
+    lastmod: "2026-08-13",
     priority: "0.9"
   },
   {
@@ -54,6 +57,7 @@ const indexedSeoPages = [
     path: "/about.html",
     title: "实用工具｜PokerRookie 德州扑克 GTO 与数据分析工具",
     description: "整理 GTO+、PioSolver、PokerSnowie、Hand2Note、PokerTracker 4 等德州扑克训练、复盘与数据分析工具。",
+    lastmod: "2026-08-13",
     priority: "0.8"
   },
   {
@@ -61,6 +65,7 @@ const indexedSeoPages = [
     path: "/daily.html",
     title: "每日分享｜PokerRookie 德州扑克学习文章",
     description: "按发布日期整理 PokerRookie 的德州扑克学习文章，每日分享翻前范围、下注尺度、范围阅读、赛事复盘与逐街实战判断。",
+    lastmod: "2026-08-17",
     priority: "0.9"
   },
   {
@@ -221,14 +226,14 @@ const indexedSeoPages = [
     fileName: "articles/pokersnowie-training-guide/index.html",
     path: "/articles/pokersnowie-training-guide/",
     title: "PokerSnowie 使用教程｜AI训练、场景分析与错误率复盘 - PokerRookie",
-    description: "系统讲解 PokerSnowie 的牌谱导入、错误率、场景分析、对战训练与进步追踪，帮助玩家把 AI 建议转化为可执行的德州扑克训练计划。",
+    description: "PokerSnowie 最有用的不是红绿答案，而是把一手牌复制成多个对照场景。通过 Q9s 盲注防守，演示如何从错误提示走向可执行训练。",
     priority: "0.8"
   },
   {
     fileName: "articles/gto-plus-piosolver-comparison/index.html",
     path: "/articles/gto-plus-piosolver-comparison/",
     title: "GTO+与PioSolver怎么选｜求解器差异与联合复盘流程 - PokerRookie",
-    description: "对比 GTO+ 与 PioSolver 的树构建、分析界面、数据库、报告、硬件和存储特点，并用同一牌局演示可重复的联合复盘流程。",
+    description: "GTO+ 和 PioSolver 没有抽象的胜负。先给购买建议，再用同一手 Q83 彩虹翻牌比较两种工作流，说明谁适合轻量复盘，谁需要批量研究。",
     priority: "0.8"
   }
 ];
@@ -1016,7 +1021,7 @@ const dailyArticleGroups = Object.entries(homepageArticlePages.reduce((groups, p
   return groups;
 }, {})).sort(([leftDate], [rightDate]) => rightDate.localeCompare(leftDate));
 
-const dailySharingSection = `<section class="pokerrookie-daily-sharing" aria-labelledby="pokerrookie-daily-title"><div class="pokerrookie-daily-inner"><header class="pokerrookie-daily-hero"><div><span class="pokerrookie-daily-label">每日分享</span><h1 id="pokerrookie-daily-title" class="pokerrookie-daily-title">每天两篇，持续积累</h1></div><p class="pokerrookie-daily-intro">把复杂的牌局拆成可以复习的判断框架。按日期查看 PokerRookie 的德州扑克策略文章，从基础概念逐步进入范围、尺度与逐街决策。</p></header><div class="pokerrookie-daily-groups">${dailyArticleGroups.map(([date, articles]) => `<section class="pokerrookie-daily-group"><div class="pokerrookie-daily-date"><strong>${formatChineseDate(date)}</strong><span>${formatChineseWeekday(date)} · ${articles.length} 篇</span></div><div class="pokerrookie-daily-list">${articles.map((article) => `<a class="pokerrookie-daily-article" href="${article.path.replace(/^\//, "")}"><span class="pokerrookie-daily-category">${homepageArticleCategory(article)}</span><h2 class="pokerrookie-daily-article-title">${escapeHtml(article.title.replace(/ - PokerRookie$/, ""))}</h2><p class="pokerrookie-daily-article-desc">${escapeHtml(article.description)}</p><span class="pokerrookie-daily-article-link">阅读全文<b aria-hidden="true">&rarr;</b></span></a>`).join("")}</div></section>`).join("")}</div></div></section>`;
+const dailySharingSection = `<section class="pokerrookie-daily-sharing" aria-labelledby="pokerrookie-daily-title"><div class="pokerrookie-daily-inner"><header class="pokerrookie-daily-hero"><div><span class="pokerrookie-daily-label">每日分享</span><h1 id="pokerrookie-daily-title" class="pokerrookie-daily-title">少一点套路，多一点判断</h1></div><p class="pokerrookie-daily-intro">不追求机械日更，只发布有具体牌例、明确观点或真实工具任务的内容。按日期查看 PokerRookie 的德州扑克策略文章。</p></header><div class="pokerrookie-daily-groups">${dailyArticleGroups.map(([date, articles]) => `<section class="pokerrookie-daily-group"><div class="pokerrookie-daily-date"><strong>${formatChineseDate(date)}</strong><span>${formatChineseWeekday(date)} · ${articles.length} 篇</span></div><div class="pokerrookie-daily-list">${articles.map((article) => `<a class="pokerrookie-daily-article" href="${article.path.replace(/^\//, "")}"><span class="pokerrookie-daily-category">${homepageArticleCategory(article)}</span><h2 class="pokerrookie-daily-article-title">${escapeHtml(article.title.replace(/ - PokerRookie$/, ""))}</h2><p class="pokerrookie-daily-article-desc">${escapeHtml(article.description)}</p><span class="pokerrookie-daily-article-link">阅读全文<b aria-hidden="true">&rarr;</b></span></a>`).join("")}</div></section>`).join("")}</div></div></section>`;
 const heroTitleLink = `<a href="download.html" class="pokerrookie-hero-title-link w-inline-block" aria-label="下载游戏"><img class="pokerrookie-hero-slogan" src="assets/sologan.webp" alt="和PokerRookie一起游戏" loading="eager"/></a>`;
 const bilibiliLink = `<a href="https://space.bilibili.com/443284341?spm_id_from=333.337.0.0" target="_blank" rel="noopener" class="pokerrookie-bili-link w-inline-block"><span>访问 PokerRookie 的 Bilibili 主页</span></a>`;
 
@@ -1919,10 +1924,22 @@ function ensureSeo(html, fileName) {
   return clean.replace("</head>", `${tags}</head>`);
 }
 
+function sitemapLastModified(page, fallbackDate) {
+  if (page.lastmod) return page.lastmod;
+
+  const filePath = path.join(root, page.fileName);
+  if (!fs.existsSync(filePath)) return fallbackDate;
+
+  const html = fs.readFileSync(filePath, "utf8");
+  return html.match(/"dateModified":"(\d{4}-\d{2}-\d{2})"/)?.[1]
+    || html.match(/"datePublished":"(\d{4}-\d{2}-\d{2})"/)?.[1]
+    || fallbackDate;
+}
+
 function writeSeoFiles() {
   const now = new Date().toISOString().slice(0, 10);
   const urls = indexedSeoPages.map((page) => pageUrl(page.path));
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexedSeoPages.map((page) => `  <url>\n    <loc>${pageUrl(page.path)}</loc>\n    <lastmod>${now}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${page.priority}</priority>\n  </url>`).join("\n")}\n</urlset>\n`;
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexedSeoPages.map((page) => `  <url>\n    <loc>${pageUrl(page.path)}</loc>\n    <lastmod>${sitemapLastModified(page, now)}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${page.priority}</priority>\n  </url>`).join("\n")}\n</urlset>\n`;
   const robots = `User-agent: *\nAllow: /\n\nSitemap: ${siteBaseUrl}/sitemap.xml\n`;
   const baiduUrls = `${urls.join("\n")}\n`;
 
