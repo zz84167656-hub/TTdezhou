@@ -211,8 +211,8 @@ const indexedSeoPages = [
   {
     fileName: "articles/high-stakes-video-hand-review/index.html",
     path: "/articles/high-stakes-video-hand-review/",
-    title: "德州扑克高额现金桌视频复盘｜盲注战三街决策拆解 - PokerRookie",
-    description: "通过一手按钮位对小盲3-bet高额现金桌牌局，逐街拆解翻前范围、翻牌小注、转牌阻断下注与河牌超池价值。",
+    title: "高额现金桌视频复盘｜ATs面对河牌超池该跟吗 - PokerRookie",
+    description: "小盲 JTs 在 Q 河牌完成坚果顺子，按钮 ATs 面对 1.5 倍底池全压。真正的问题不是阻断牌好不好，而是对手能否找到足够诈唬。",
     priority: "0.8"
   },
   {

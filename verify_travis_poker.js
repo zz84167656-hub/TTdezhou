@@ -801,13 +801,19 @@ for (const [label, article] of [
 }
 
 const highStakesVideoArticle = read(highStakesVideoArticlePath);
-assert(highStakesVideoArticle.includes("<title>德州扑克高额现金桌视频复盘｜盲注战三街决策拆解 - PokerRookie</title>"), "High-stakes video article must use the SEO title");
+assert(highStakesVideoArticle.includes("<title>高额现金桌视频复盘｜ATs面对河牌超池该跟吗 - PokerRookie</title>"), "High-stakes video article must use the SEO title");
 assert(highStakesVideoArticle.includes(`<link rel="canonical" href="${highStakesVideoArticleUrl}">`), "High-stakes video article must use the canonical URL");
 assert(highStakesVideoArticle.includes('"datePublished":"2026-08-12"'), "High-stakes video article must use today's publication date");
+assert(highStakesVideoArticle.includes('"dateModified":"2026-08-18"'), "High-stakes video article must expose its editorial rewrite date");
 assert(highStakesVideoArticle.includes("../../assets/Hustler%20Casino%20Live.webp"), "High-stakes video article must include a local video image example");
 assert(highStakesVideoArticle.includes('class="article-figure"'), "High-stakes video article must include an explained image example");
-assert(highStakesVideoArticle.includes("完整复盘"), "High-stakes video article must include a complete hand review");
-assert(highStakesVideoArticle.includes("高额现金桌视频复盘清单"), "High-stakes video article must include an actionable review checklist");
+assert(highStakesVideoArticle.includes('class="article-editorial article-hand-story"'), "High-stakes video article must use the hand-story format");
+assert(highStakesVideoArticle.includes('class="hand-ledger"'), "High-stakes video article must summarize the concrete action line");
+assert(highStakesVideoArticle.includes('class="river-math"'), "High-stakes video article must explain the river threshold in context");
+assert(highStakesVideoArticle.includes('class="article-sources"'), "High-stakes video article must expose its sources without a boilerplate section");
+for (const forbiddenTemplate of ["复盘使用说明", "完整复盘", "高额现金桌视频复盘清单", "专业资料与延伸阅读"]) {
+  assert(!highStakesVideoArticle.includes(forbiddenTemplate), `High-stakes video article must not reuse the old template phrase: ${forbiddenTemplate}`);
+}
 assert(highStakesVideoArticle.includes('href="https://upswingpoker.com/david-yan-vs-duthweiler/" target="_blank" rel="noopener"'), "High-stakes video article must cite the public hand analysis");
 assert(highStakesVideoArticle.includes('href="https://blog.gtowizard.com/how-to-get-the-most-out-of-your-hand-reviews/" target="_blank" rel="noopener"'), "High-stakes video article must cite the professional review method");
 
@@ -822,15 +828,15 @@ assert(multiwayArticle.includes("多人底池复盘清单"), "Multiway article m
 assert(multiwayArticle.includes('href="https://blog.gtowizard.com/10-tips-multiway-pots-in-poker/" target="_blank" rel="noopener"'), "Multiway article must cite the professional GTO Wizard source");
 assert(multiwayArticle.includes('href="https://upswingpoker.com/multiway-pot-preflop-squeezing-leaks/" target="_blank" rel="noopener"'), "Multiway article must cite the professional Upswing source");
 
-for (const [label, article] of [
-  ["High-stakes video review", highStakesVideoArticle],
-  ["Multiway mistakes", multiwayArticle]
-]) {
-  const chineseCharacters = countMainChineseCharacters(article);
-  assert(chineseCharacters >= 3500, `${label} article must contain at least 3500 Chinese characters in main content`);
-  assert(chineseCharacters <= 4500, `${label} article must contain no more than 4500 Chinese characters in main content`);
-  assert((article.match(/<section class="section">/g) || []).length >= 10, `${label} article must contain at least 10 substantial sections`);
-}
+const highStakesChineseCharacters = countMainChineseCharacters(highStakesVideoArticle);
+const highStakesSectionCount = (highStakesVideoArticle.match(/<section\b/g) || []).length;
+assert(highStakesChineseCharacters >= 1500, "High-stakes video article must develop the hand with enough original analysis");
+assert(highStakesSectionCount >= 5 && highStakesSectionCount <= 8, "High-stakes video article must use a narrative structure instead of a fixed long-form template");
+
+const multiwayChineseCharacters = countMainChineseCharacters(multiwayArticle);
+assert(multiwayChineseCharacters >= 3500, "Multiway mistakes article must contain at least 3500 Chinese characters in main content");
+assert(multiwayChineseCharacters <= 4500, "Multiway mistakes article must contain no more than 4500 Chinese characters in main content");
+assert((multiwayArticle.match(/<section class="section">/g) || []).length >= 10, "Multiway mistakes article must contain at least 10 substantial sections");
 
 assert(highStakesVideoArticle.includes('href="../poker-video-review-method/"'), "Today's video article must link to the established review method");
 assert(highStakesVideoArticle.includes('href="../three-bet-pot-mistakes/"'), "Today's video article must link to the established 3-bet guide");
@@ -893,6 +899,8 @@ assert(articleCss.includes(".analysis-flow"), "Article stylesheet must style the
 assert(articleCss.includes(".article-editorial .section"), "Article stylesheet must give editorial formats a non-card reading rhythm");
 assert(articleCss.includes(".verdict-grid"), "Article stylesheet must support the comparison verdict format");
 assert(articleCss.includes(".article-sources"), "Article stylesheet must support lightweight source notes");
+assert(articleCss.includes(".hand-ledger"), "Article stylesheet must support the narrative hand summary");
+assert(articleCss.includes(".river-math"), "Article stylesheet must support the river decision callout");
 
 for (const articlePath of [
   gtoArticlePath,
