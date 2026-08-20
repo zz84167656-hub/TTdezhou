@@ -678,13 +678,28 @@ for (const [label, article] of [
 }
 
 const hand2NoteArticle = read(hand2NoteArticlePath);
-assert(hand2NoteArticle.includes("<title>Hand2Note 使用教程｜从牌谱导入到数据漏洞分析 - PokerRookie</title>"), "Hand2Note article must use the SEO title");
+assert(hand2NoteArticle.includes("<title>Hand2Note 数据复盘｜VPIP过高先别急着收紧范围 - PokerRookie</title>"), "Hand2Note article must use the SEO title");
 assert(hand2NoteArticle.includes(`<link rel="canonical" href="${hand2NoteArticleUrl}">`), "Hand2Note article must use the canonical URL");
-assert(hand2NoteArticle.includes('"datePublished":"2026-08-06"'), "Hand2Note article must use today's publication date");
+assert(hand2NoteArticle.includes('"datePublished":"2026-08-06"'), "Hand2Note article must retain its original publication date");
+assert(hand2NoteArticle.includes('"dateModified":"2026-08-20"'), "Hand2Note article must use today's modification date");
 assert(hand2NoteArticle.includes("../../assets/Hand2Note.webp"), "Hand2Note article must include the local interface example image");
 assert(hand2NoteArticle.includes('class="article-figure"'), "Hand2Note article must include an explained image example");
-assert(hand2NoteArticle.includes("完整场景"), "Hand2Note article must include a complete analysis scenario");
+assert(hand2NoteArticle.includes('class="article-editorial article-data-diagnostic"'), "Hand2Note article must use the data-diagnostic layout");
+assert(hand2NoteArticle.includes('class="diagnostic-brief"'), "Hand2Note article must include the diagnosis brief");
+assert(hand2NoteArticle.includes('class="diagnostic-path"'), "Hand2Note article must include the drill-down path");
+assert(hand2NoteArticle.includes('class="diagnostic-outcomes"'), "Hand2Note article must compare possible outcomes");
+assert(hand2NoteArticle.includes('class="article-sources"'), "Hand2Note article must include a source note");
 assert(hand2NoteArticle.includes('href="https://www.hand2note.com/Help/Features/reports" target="_blank" rel="noopener"'), "Hand2Note article must cite the official reports guide");
+assert(hand2NoteArticle.includes('href="https://www.hand2note.com/Help/Features/report-navigation" target="_blank" rel="noopener"'), "Hand2Note article must cite the official report navigation guide");
+assert(hand2NoteArticle.includes('href="https://hand2note.com/Help/Features/aliases" target="_blank" rel="noopener"'), "Hand2Note article must cite the official aliases guide");
+for (const phrase of ["完整场景", "复盘清单", "专业参考与延伸阅读"]) {
+  assert(!hand2NoteArticle.includes(phrase), `Hand2Note article must avoid the old template phrase: ${phrase}`);
+}
+const hand2NoteChineseCharacters = countMainChineseCharacters(hand2NoteArticle);
+assert(hand2NoteChineseCharacters >= 1500, "Hand2Note article must contain at least 1500 Chinese characters in main content");
+assert(hand2NoteChineseCharacters <= 3000, "Hand2Note article must stay focused instead of expanding into a feature inventory");
+const hand2NoteSectionCount = (hand2NoteArticle.match(/<section class="section/g) || []).length;
+assert(hand2NoteSectionCount >= 6 && hand2NoteSectionCount <= 9, "Hand2Note article must use 6 to 9 purposeful sections");
 
 const pokerTrackerArticle = read(pokerTrackerArticlePath);
 assert(pokerTrackerArticle.includes("<title>PokerTracker 4 复盘教程｜用筛选器建立每周训练系统 - PokerRookie</title>"), "PokerTracker 4 article must use the SEO title");
@@ -695,15 +710,14 @@ assert(pokerTrackerArticle.includes('class="article-figure"'), "PokerTracker 4 a
 assert(pokerTrackerArticle.includes("完整场景"), "PokerTracker 4 article must include a complete analysis scenario");
 assert(pokerTrackerArticle.includes('href="https://docs.pokertracker.com/pt4/general/pokertracker-4-quick-start-guide/" target="_blank" rel="noopener"'), "PokerTracker 4 article must cite the official quick start guide");
 
-for (const [label, article] of [
-  ["Hand2Note", hand2NoteArticle],
-  ["PokerTracker 4", pokerTrackerArticle]
-]) {
-  const chineseCharacters = countMainChineseCharacters(article);
-  assert(chineseCharacters >= 3500, `${label} article must contain at least 3500 Chinese characters in main content`);
-  assert(chineseCharacters <= 4500, `${label} article must contain no more than 4500 Chinese characters in main content`);
-  assert((article.match(/<section class="section">/g) || []).length >= 10, `${label} article must contain at least 10 substantial sections`);
-}
+const pokerTrackerChineseCharacters = countMainChineseCharacters(pokerTrackerArticle);
+assert(pokerTrackerChineseCharacters >= 3500, "PokerTracker 4 article must contain at least 3500 Chinese characters in main content");
+assert(pokerTrackerChineseCharacters <= 4500, "PokerTracker 4 article must contain no more than 4500 Chinese characters in main content");
+assert((pokerTrackerArticle.match(/<section class="section">/g) || []).length >= 10, "PokerTracker 4 article must contain at least 10 substantial sections");
+
+assert(articleCss.includes(".diagnostic-brief"), "Shared article CSS must style the diagnosis brief");
+assert(articleCss.includes(".diagnostic-path"), "Shared article CSS must style the diagnosis path");
+assert(articleCss.includes(".diagnostic-outcomes"), "Shared article CSS must style diagnosis outcomes");
 
 const bubbleArticle = read(bubbleArticlePath);
 assert(bubbleArticle.includes("<title>德州扑克锦标赛泡沫期策略｜ICM、风险溢价与筹码施压 - PokerRookie</title>"), "Tournament bubble article must use the SEO title");

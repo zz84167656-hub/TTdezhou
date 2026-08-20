@@ -155,8 +155,8 @@ const indexedSeoPages = [
   {
     fileName: "articles/hand2note-data-review/index.html",
     path: "/articles/hand2note-data-review/",
-    title: "Hand2Note 使用教程｜从牌谱导入到数据漏洞分析 - PokerRookie",
-    description: "深入讲解 Hand2Note 的牌谱导入、报告筛选、样本判断、行动收益、HUD 与每周复盘流程，帮助德州扑克玩家从数据中定位真实漏洞。",
+    title: "Hand2Note 数据复盘｜VPIP过高先别急着收紧范围 - PokerRookie",
+    description: "总体 VPIP 偏高不等于整套范围有错。先验证账号和牌谱，再沿位置、行动与组合下钻，判断问题究竟在翻前选择还是翻后执行。",
     priority: "0.8"
   },
   {
