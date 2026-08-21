@@ -71,8 +71,8 @@ const indexedSeoPages = [
   {
     fileName: "articles/gto-plus-guide/index.html",
     path: "/articles/gto-plus-guide/",
-    title: "GTO+ 使用教程｜德州扑克复盘工具入门 - PokerRookie",
-    description: "了解 GTO+ 在德州扑克训练中的用途，包括范围构建、下注尺度、EV 对比和复盘流程，适合想系统提升决策质量的玩家。",
+    title: "GTO+怎么用｜用范围、尺度与EV完成一次牌局复盘 - PokerRookie",
+    description: "GTO+ 怎么用？以一手牌复盘为主线，说明如何输入双方范围、设置下注尺度、比较 EV，并把求解结果转成可执行的实战结论。",
     priority: "0.7"
   },
   {

@@ -464,12 +464,14 @@ assert(!about.includes("pr-article-cover"), "Tools page must remove the top arti
 assert(!about.includes("assets/poker-tools-cover.svg"), "Tools page must not reference the removed tools cover image");
 
 const gtoArticle = read(gtoArticlePath);
-assert(gtoArticle.includes("<title>GTO+ 使用教程｜德州扑克复盘工具入门 - PokerRookie</title>"), "GTO+ article must use the SEO title");
+assert(gtoArticle.includes("<title>GTO+怎么用｜用范围、尺度与EV完成一次牌局复盘 - PokerRookie</title>"), "GTO+ article must use the search-intent title");
 assert(gtoArticle.includes(`<link rel="canonical" href="${gtoArticleUrl}">`), "GTO+ article must use the canonical article URL");
 assert(gtoArticle.includes('<meta name="robots" content="index,follow">'), "GTO+ article must be indexable");
 assert(gtoArticle.includes('<meta name="applicable-device" content="pc,mobile">'), "GTO+ article must declare Baidu-friendly device support");
 assert(gtoArticle.includes('id="pokerrookie-seo-jsonld"'), "GTO+ article must include structured data");
-assert(gtoArticle.includes("GTO+ 使用教程：用复盘工具看懂每一手牌"), "GTO+ article must include the article headline");
+assert(gtoArticle.includes("GTO+ 怎么用：用范围、尺度与 EV 完成一次牌局复盘"), "GTO+ article must include the article headline");
+assert(gtoArticle.includes('"datePublished":"2026-07-23"'), "GTO+ article must retain its original publication date");
+assert(gtoArticle.includes('"dateModified":"2026-08-21"'), "GTO+ article must use today's modification date");
 assert(gtoArticle.includes("../../assets/GTO%2B.webp"), "GTO+ article must use the local GTO+ image");
 assert(gtoArticle.includes('href="../../free.html"'), "GTO+ article must link to video teaching");
 assert(gtoArticle.includes('href="../../about.html"'), "GTO+ article must link to practical tools");
@@ -477,6 +479,9 @@ assert(gtoArticle.includes('href="../../download.html"'), "GTO+ article must lin
 assert(gtoArticle.includes('href="../piosolver-guide/"'), "GTO+ article must link to the PioSolver guide");
 assert(gtoArticle.includes('href="../poker-position-range-pot-odds/"'), "GTO+ article must link to the beginner guide");
 assert(gtoArticle.includes('href="../turn-card-leaks/"'), "GTO+ article must link to the turn strategy guide");
+assert(gtoArticle.includes('href="../gto-plus-piosolver-comparison/"'), "GTO+ article must link contextually to the solver comparison");
+assert(gtoArticle.includes('href="../hand2note-data-review/"'), "GTO+ article must link contextually to the Hand2Note diagnosis");
+assert(gtoArticle.includes('class="inline-link"'), "GTO+ article must visually distinguish contextual links");
 assert(gtoArticle.includes('href="https://www.gtoplus.com/" target="_blank" rel="noopener"'), "GTO+ article must link safely to the GTO+ website");
 
 const pioArticle = read(pioArticlePath);

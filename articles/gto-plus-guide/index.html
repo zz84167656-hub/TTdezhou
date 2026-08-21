@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GTO+ 使用教程｜德州扑克复盘工具入门 - PokerRookie</title>
-  <meta name="description" content="了解 GTO+ 在德州扑克训练中的用途，包括范围构建、下注尺度、EV 对比和复盘流程，适合想系统提升决策质量的玩家。">
+  <title>GTO+怎么用｜用范围、尺度与EV完成一次牌局复盘 - PokerRookie</title>
+  <meta name="description" content="GTO+ 怎么用？以一手牌复盘为主线，说明如何输入双方范围、设置下注尺度、比较 EV，并把求解结果转成可执行的实战结论。">
   <meta name="robots" content="index,follow">
   <meta name="applicable-device" content="pc,mobile">
   <meta name="MobileOptimized" content="width">
@@ -15,12 +15,12 @@
   <meta property="og:site_name" content="PokerRookie">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:url" content="https://www.pokerrookie.top/articles/gto-plus-guide/">
-  <meta property="og:title" content="GTO+ 使用教程｜德州扑克复盘工具入门 - PokerRookie">
-  <meta property="og:description" content="了解 GTO+ 在德州扑克训练中的用途，包括范围构建、下注尺度、EV 对比和复盘流程，适合想系统提升决策质量的玩家。">
+  <meta property="og:title" content="GTO+怎么用｜用范围、尺度与EV完成一次牌局复盘 - PokerRookie">
+  <meta property="og:description" content="以一手牌复盘为主线，说明如何输入双方范围、设置下注尺度、比较 EV，并把求解结果转成实战结论。">
   <meta property="og:image" content="https://www.pokerrookie.top/assets/pokerrookie-logo.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GTO+ 使用教程｜德州扑克复盘工具入门 - PokerRookie">
-  <meta name="twitter:description" content="了解 GTO+ 在德州扑克训练中的用途，包括范围构建、下注尺度、EV 对比和复盘流程，适合想系统提升决策质量的玩家。">
+  <meta name="twitter:title" content="GTO+怎么用｜用范围、尺度与EV完成一次牌局复盘 - PokerRookie">
+  <meta name="twitter:description" content="从范围、下注尺度和 EV 入手，完成一次可落地的 GTO+ 牌局复盘。">
   <meta name="twitter:image" content="https://www.pokerrookie.top/assets/pokerrookie-logo.png">
   <style>
     :root {
@@ -168,6 +168,12 @@
     .section p {
       margin: 0 0 14px;
     }
+    .section .inline-link {
+      color: var(--pr-blue);
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
     .section ul,
     .section ol {
       margin: 0;
@@ -249,8 +255,18 @@
       }
       .nav-links {
         width: 100%;
-        gap: 18px;
+        gap: 14px;
         overflow-x: auto;
+        padding-bottom: 4px;
+        font-size: 13px;
+        white-space: nowrap;
+        scrollbar-width: none;
+      }
+      .nav-links::-webkit-scrollbar {
+        display: none;
+      }
+      .nav-links a {
+        flex: 0 0 auto;
       }
       .article-wrap {
         width: min(100% - 28px, 980px);
@@ -273,7 +289,7 @@
       }
     }
   </style>
-  <script type="application/ld+json" id="pokerrookie-seo-jsonld">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.pokerrookie.top/#organization","name":"PokerRookie","url":"https://www.pokerrookie.top","logo":"https://www.pokerrookie.top/assets/pokerrookie-logo.png","sameAs":["https://space.bilibili.com/443284341"],"contactPoint":{"@type":"ContactPoint","email":"23294069@qq.com","contactType":"customer support","availableLanguage":["zh-CN"]}},{"@type":"WebSite","@id":"https://www.pokerrookie.top/#website","name":"PokerRookie","url":"https://www.pokerrookie.top","inLanguage":"zh-CN","publisher":{"@id":"https://www.pokerrookie.top/#organization"}},{"@type":"Article","@id":"https://www.pokerrookie.top/articles/gto-plus-guide/#article","headline":"GTO+ 使用教程｜德州扑克复盘工具入门","description":"了解 GTO+ 在德州扑克训练中的用途，包括范围构建、下注尺度、EV 对比和复盘流程，适合想系统提升决策质量的玩家。","image":"https://www.pokerrookie.top/assets/GTO%2B.webp","author":{"@type":"Person","name":"PokerRookie","url":"https://space.bilibili.com/443284341"},"publisher":{"@id":"https://www.pokerrookie.top/#organization"},"mainEntityOfPage":"https://www.pokerrookie.top/articles/gto-plus-guide/","inLanguage":"zh-CN","datePublished":"2026-07-23","dateModified":"2026-07-23"}]}</script>
+  <script type="application/ld+json" id="pokerrookie-seo-jsonld">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.pokerrookie.top/#organization","name":"PokerRookie","url":"https://www.pokerrookie.top","logo":"https://www.pokerrookie.top/assets/pokerrookie-logo.png","sameAs":["https://space.bilibili.com/443284341"],"contactPoint":{"@type":"ContactPoint","email":"23294069@qq.com","contactType":"customer support","availableLanguage":["zh-CN"]}},{"@type":"WebSite","@id":"https://www.pokerrookie.top/#website","name":"PokerRookie","url":"https://www.pokerrookie.top","inLanguage":"zh-CN","publisher":{"@id":"https://www.pokerrookie.top/#organization"}},{"@type":"Article","@id":"https://www.pokerrookie.top/articles/gto-plus-guide/#article","headline":"GTO+怎么用：用范围、尺度与EV完成一次牌局复盘","description":"以一手牌复盘为主线，说明如何输入双方范围、设置下注尺度、比较 EV，并把求解结果转成可执行的实战结论。","image":"https://www.pokerrookie.top/assets/GTO%2B.webp","author":{"@type":"Person","name":"PokerRookie","url":"https://space.bilibili.com/443284341"},"publisher":{"@id":"https://www.pokerrookie.top/#organization"},"mainEntityOfPage":"https://www.pokerrookie.top/articles/gto-plus-guide/","inLanguage":"zh-CN","datePublished":"2026-07-23","dateModified":"2026-08-21"}]}</script>
 </head>
 <body>
   <header class="site-header">
@@ -292,11 +308,11 @@
 
   <main class="article-wrap">
     <span class="eyebrow">实用工具教程</span>
-    <h1>GTO+ 使用教程：用复盘工具看懂每一手牌</h1>
+    <h1>GTO+ 怎么用：用范围、尺度与 EV 完成一次牌局复盘</h1>
     <p class="lead">GTO+ 不是让你死记答案的软件，而是帮助你把一手牌拆开，检查范围、下注尺度、EV 差异和对手反制空间。对想系统提升的德州扑克玩家来说，它最重要的价值是让复盘从“感觉对不对”变成“证据够不够”。</p>
     <div class="meta">
       <span>作者：PokerRookie</span>
-      <span>更新：2026-07-23</span>
+      <span>修订：2026-08-21</span>
       <span>主题：德州扑克工具 / GTO 训练 / 复盘流程</span>
     </div>
 
@@ -343,12 +359,14 @@
 
       <section class="section">
         <h2>四、下一步怎么学</h2>
-        <p>如果你还在入门阶段，建议先结合 PokerRookie 的视频复盘理解实战语境，再回到工具页逐个熟悉 GTO+、PioSolver、PokerSnowie、Hand2Note 和 PokerTracker 4 的用途。工具是辅助，真正的提升来自持续复盘和稳定执行。</p>
+        <p>如果你还在入门阶段，建议先结合 PokerRookie 的视频复盘理解实战语境，再回到工具页逐个熟悉不同工具的用途。还不确定两款求解器该怎么选，可以先看<a class="inline-link" href="../gto-plus-piosolver-comparison/">GTO+ 与 PioSolver 对比</a>；如果问题来自自己的长期频率，而不是单手牌的策略树，则应先用<a class="inline-link" href="../hand2note-data-review/">Hand2Note 数据诊断</a>定位节点，再把明确场景带回求解器。工具是辅助，真正的提升来自持续复盘和稳定执行。</p>
         <div class="link-row">
           <a class="pill-link primary" href="../../free.html">去看视频教学</a>
           <a class="pill-link" href="../../about.html">查看实用工具</a>
           <a class="pill-link" href="../poker-position-range-pot-odds/">阅读新手入门</a>
           <a class="pill-link" href="../piosolver-guide/">阅读 PioSolver 入门指南</a>
+          <a class="pill-link" href="../gto-plus-piosolver-comparison/">比较 GTO+ 与 PioSolver</a>
+          <a class="pill-link" href="../hand2note-data-review/">从数据里定位复盘节点</a>
           <a class="pill-link" href="../turn-card-leaks/">阅读转牌常见错误</a>
           <a class="pill-link" href="../../download.html">下载游戏</a>
           <a class="pill-link" href="https://www.gtoplus.com/" target="_blank" rel="noopener">访问 GTO+ 官网</a>
