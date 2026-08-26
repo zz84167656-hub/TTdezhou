@@ -92,6 +92,21 @@ h1 { margin: 22px 0 16px; font-size: clamp(36px, 6vw, 66px); line-height: 1.08; 
 .diagnostic-outcomes article { display: grid; grid-template-columns: 170px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--article-line); }
 .diagnostic-outcomes strong { color: var(--article-ink); font-size: 18px; }
 .diagnostic-outcomes p { margin: 0; }
+.qa-rule-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; max-width: 850px; margin: 28px 0; overflow: hidden; border: 1px solid var(--article-line); border-radius: 8px; background: var(--article-line); }
+.qa-rule-grid span { padding: 22px; background: #fff; color: #24384f; font-size: 15px; line-height: 1.75; }
+.qa-rule-grid b { display: block; margin-bottom: 7px; color: var(--article-red); font-size: 14px; }
+.qa-number { display: block; margin-bottom: 10px; color: var(--article-red); font-size: 14px; font-weight: 850; }
+.qa-hand-case { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 880px; margin: 26px 0; border-top: 1px solid var(--article-line); }
+.qa-hand-case > div { padding: 22px 0; border-bottom: 1px solid var(--article-line); }
+.qa-hand-case > div:nth-child(even) { padding-right: 22px; }
+.qa-hand-case > div:nth-child(odd):not(.qa-board) { padding-left: 22px; border-left: 1px solid var(--article-line); }
+.qa-hand-case .qa-board { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
+.qa-hand-case b { display: block; color: var(--article-blue); font-size: 14px; }
+.qa-hand-case span { color: var(--article-ink); font-size: clamp(20px, 4vw, 28px); font-weight: 850; }
+.qa-hand-case p { margin: 10px 0 0; font-size: 15px; line-height: 1.75; }
+.qa-checklist { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; max-width: 880px; margin: 24px 0; }
+.qa-checklist span { padding: 20px; border-top: 3px solid var(--article-red); background: #fff; color: #24384f; font-size: 15px; line-height: 1.65; }
+.qa-checklist b { display: block; margin-bottom: 7px; color: var(--article-blue); font-size: 18px; }
 .footer-inner { min-height: 136px; }
 .footer-inner img { width: 170px; height: auto; display: block; }
 .contact { display: flex; flex-wrap: wrap; gap: 14px 26px; color: #1b2a3f; font-size: 15px; }
@@ -118,8 +133,11 @@ h1 { margin: 22px 0 16px; font-size: clamp(36px, 6vw, 66px); line-height: 1.08; 
   .article-hand-story .street-section { padding-left: 28px; }
   .article-hand-story .street-section::before { left: 5px; }
   .article-hand-story .street-section::after { left: 0; }
-  .diagnostic-brief, .diagnostic-path { grid-template-columns: 1fr; }
+  .diagnostic-brief, .diagnostic-path, .qa-rule-grid, .qa-checklist { grid-template-columns: 1fr; }
   .diagnostic-outcomes article { grid-template-columns: 1fr; gap: 8px; }
+  .qa-hand-case { grid-template-columns: 1fr; }
+  .qa-hand-case .qa-board { grid-column: auto; align-items: flex-start; flex-direction: column; gap: 8px; }
+  .qa-hand-case > div:nth-child(even), .qa-hand-case > div:nth-child(odd):not(.qa-board) { padding-right: 0; padding-left: 0; border-left: 0; }
   .footer-inner { width: min(100% - 28px, 1120px); align-items: flex-start; flex-direction: column; padding: 26px 0; }
   .contact { flex-direction: column; }
 }

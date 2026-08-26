@@ -146,10 +146,15 @@ function markdownTable(rows) {
   return lines.join("\n");
 }
 
-function pushSucceeded(pushResult) {
-  if (pushResult.skipped || !pushResult.ok) return false;
-  if (!pushResult.parsed) return true;
-  return !pushResult.parsed.error && !pushResult.parsed.message;
+function pushSucceeded(pushResult, expectedCount) {
+  if (pushResult.skipped || !pushResult.ok || !pushResult.parsed) return false;
+
+  const { error, message, success, not_same_site: notSameSite, not_valid: notValid } = pushResult.parsed;
+  return !error
+    && !message
+    && success === expectedCount
+    && (!Array.isArray(notSameSite) || notSameSite.length === 0)
+    && (!Array.isArray(notValid) || notValid.length === 0);
 }
 
 async function main() {
@@ -176,7 +181,8 @@ async function main() {
   const robotsHasSitemap = robots.text.includes(`${config.site}/sitemap.xml`);
   const pushResult = await pushToBaidu(config, submitUrls);
 
-  if (queuedUrls.length && pushSucceeded(pushResult) && fs.existsSync(queuePath)) {
+  const queueSubmitted = queuedUrls.length && pushSucceeded(pushResult, submitUrls.length);
+  if (queueSubmitted && fs.existsSync(queuePath)) {
     fs.unlinkSync(queuePath);
   }
 
@@ -200,7 +206,8 @@ async function main() {
     "- 提交 URL：",
     ...submitUrls.map((url) => `  - ${url}`),
     `- 结果：${pushResult.skipped ? pushResult.message : pushResult.raw}`,
-    queuedUrls.length && pushSucceeded(pushResult) ? "- 队列状态：已提交成功，并清空 seo_submit_queue.txt" : "",
+    queueSubmitted ? "- 队列状态：已提交成功，并清空 seo_submit_queue.txt" : "",
+    queuedUrls.length && !queueSubmitted ? "- 队列状态：接口未确认全部 URL 成功，已保留 seo_submit_queue.txt" : "",
     "",
     "## 今日内容任务",
     "- 发布频率：质量优先，默认每周 3–4 篇；当天没有独立价值时允许不发布",
