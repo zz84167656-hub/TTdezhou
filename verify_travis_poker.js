@@ -105,6 +105,8 @@ const solverComparisonArticlePath = "articles/gto-plus-piosolver-comparison/inde
 const solverComparisonArticleUrl = `${siteBaseUrl}/articles/gto-plus-piosolver-comparison/`;
 const omahaComparisonArticlePath = "articles/omaha-vs-texas-holdem/index.html";
 const omahaComparisonArticleUrl = `${siteBaseUrl}/articles/omaha-vs-texas-holdem/`;
+const cashTournamentArticlePath = "articles/cash-game-vs-tournament/index.html";
+const cashTournamentArticleUrl = `${siteBaseUrl}/articles/cash-game-vs-tournament/`;
 const editorialGuide = read("SEO_EDITORIAL_GUIDE.md");
 const articleCss = read("assets/article.css");
 
@@ -216,6 +218,11 @@ assert(baiduUrls.includes(solverComparisonArticleUrl), "baidu_urls.txt must incl
 assert(sitemap.includes(`<loc>${omahaComparisonArticleUrl}</loc>`), "sitemap.xml must include the Omaha comparison article");
 assert(baiduUrls.includes(omahaComparisonArticleUrl), "baidu_urls.txt must include the Omaha comparison article");
 assert(sitemap.includes(`<loc>${omahaComparisonArticleUrl}</loc>\n    <lastmod>2026-08-26</lastmod>`), "sitemap.xml must expose the Omaha article publication date");
+assert(sitemap.includes(`<loc>${cashTournamentArticleUrl}</loc>`), "sitemap.xml must include the cash versus tournament article");
+assert(baiduUrls.includes(cashTournamentArticleUrl), "baidu_urls.txt must include the cash versus tournament article");
+assert(sitemap.includes(`<loc>${cashTournamentArticleUrl}</loc>\n    <lastmod>2026-08-27</lastmod>`), "sitemap.xml must expose the cash versus tournament article publication date");
+assert(sitemap.includes(`<loc>${highStakesVideoArticleUrl}</loc>\n    <lastmod>2026-08-27</lastmod>`), "sitemap.xml must expose the cash hand review backlink update date");
+assert(sitemap.includes(`<loc>${bubbleArticleUrl}</loc>\n    <lastmod>2026-08-27</lastmod>`), "sitemap.xml must expose the tournament ICM backlink update date");
 assert(sitemap.includes(`<loc>${pokerSnowieArticleUrl}</loc>\n    <lastmod>2026-08-17</lastmod>`), "sitemap.xml must expose the PokerSnowie rewrite date");
 assert(sitemap.includes(`<loc>${solverComparisonArticleUrl}</loc>\n    <lastmod>2026-08-17</lastmod>`), "sitemap.xml must expose the solver comparison rewrite date");
 assert(sitemap.includes(`<loc>${sizingArticleUrl}</loc>\n    <lastmod>2026-08-03</lastmod>`), "sitemap.xml must preserve unchanged article dates instead of refreshing every URL");
@@ -307,7 +314,7 @@ assert(home.includes("assets/pokerrookie-profile.jpg"), "Home must use the Poker
 assert(home.includes('id="pokerrookie-home-articles-title"'), "Home must include the strategy article section");
 assert(home.includes("从翻前范围到河牌决策"), "Home article section must include its heading");
 assert(home.includes('"@id":"https://www.pokerrookie.top/#articles"'), "Home structured data must include the article ItemList");
-assert((home.match(/class="pokerrookie-home-article-item"/g) || []).length === 25, "Home must list all 25 strategy articles exactly once");
+assert((home.match(/class="pokerrookie-home-article-item"/g) || []).length === 26, "Home must list all 26 strategy articles exactly once");
 for (const articleHref of [
   "articles/gto-plus-guide/",
   "articles/piosolver-guide/",
@@ -333,11 +340,13 @@ for (const articleHref of [
   "articles/multiway-pot-mistakes/",
   "articles/pokersnowie-training-guide/",
   "articles/gto-plus-piosolver-comparison/",
-  "articles/omaha-vs-texas-holdem/"
+  "articles/omaha-vs-texas-holdem/",
+  "articles/cash-game-vs-tournament/"
 ]) {
   assert(home.includes(`href="${articleHref}"`), `Home must link to ${articleHref}`);
 }
-assert(home.indexOf('href="articles/omaha-vs-texas-holdem/"') < home.indexOf('href="articles/gto-plus-piosolver-comparison/"'), "Home must show the new Omaha beginner article first");
+assert(home.indexOf('href="articles/cash-game-vs-tournament/"') < home.indexOf('href="articles/omaha-vs-texas-holdem/"'), "Home must show the new cash versus tournament article first");
+assert(home.indexOf('href="articles/omaha-vs-texas-holdem/"') < home.indexOf('href="articles/gto-plus-piosolver-comparison/"'), "Home must show the new Omaha beginner article before older guides");
 assert(home.indexOf('href="articles/gto-plus-piosolver-comparison/"') < home.indexOf('href="articles/pokersnowie-training-guide/"'), "Home must show today's solver comparison first");
 assert(home.indexOf('href="articles/pokersnowie-training-guide/"') < home.indexOf('href="articles/multiway-pot-mistakes/"'), "Home must show today's tool articles before older articles");
 assert(home.indexOf('href="articles/multiway-pot-mistakes/"') < home.indexOf('href="articles/high-stakes-video-hand-review/"'), "Home must show today's newest articles first");
@@ -355,7 +364,7 @@ assert(homeMirror.includes('href="download.html" class="pokerrookie-hero-title-l
 assert(homeMirror.includes('src="assets/sologan.webp"'), "travis-poker.html must use the slogan artwork");
 assert(homeMirror.includes(bilibiliUrl), "travis-poker.html must mirror the Bilibili profile link");
 assert(homeMirror.includes(`href="${bilibiliUrl}" target="_blank" rel="noopener"`), "travis-poker.html Bilibili CTA must open as a safe external link");
-assert((homeMirror.match(/class="pokerrookie-home-article-item"/g) || []).length === 25, "travis-poker.html must mirror all strategy articles");
+assert((homeMirror.match(/class="pokerrookie-home-article-item"/g) || []).length === 26, "travis-poker.html must mirror all strategy articles");
 assert(homeMirror.includes('"@id":"https://www.pokerrookie.top/#articles"'), "travis-poker.html structured data must include the article ItemList");
 
 const daily = read("daily.html");
@@ -363,11 +372,12 @@ assert(daily.includes('class="pokerrookie-daily-sharing"'), "Daily page must inc
 assert(daily.includes('id="pokerrookie-daily-title"'), "Daily page must expose an accessible page heading");
 assert(daily.includes("少一点套路，多一点判断"), "Daily page must communicate the quality-first editorial approach");
 assert(!daily.includes("每天两篇，持续积累"), "Daily page must not promise a fixed two-article quota");
-assert(daily.includes("2026年8月26日"), "Daily page must show the latest publishing date");
+assert(daily.includes("2026年8月27日"), "Daily page must show the latest publishing date");
 assert(daily.includes("2026年7月23日"), "Daily page must show the earliest publishing date");
-assert((daily.match(/class="pokerrookie-daily-group"/g) || []).length === 14, "Daily page must group articles under all 14 publishing dates");
-assert((daily.match(/class="pokerrookie-daily-article"/g) || []).length === 25, "Daily page must list all 25 strategy articles exactly once");
-assert(daily.indexOf('href="articles/omaha-vs-texas-holdem/"') < daily.indexOf('href="articles/gto-plus-piosolver-comparison/"'), "Daily page must show the new Omaha beginner article first");
+assert((daily.match(/class="pokerrookie-daily-group"/g) || []).length === 15, "Daily page must group articles under all 15 publishing dates");
+assert((daily.match(/class="pokerrookie-daily-article"/g) || []).length === 26, "Daily page must list all 26 strategy articles exactly once");
+assert(daily.indexOf('href="articles/cash-game-vs-tournament/"') < daily.indexOf('href="articles/omaha-vs-texas-holdem/"'), "Daily page must show the new cash versus tournament article first");
+assert(daily.indexOf('href="articles/omaha-vs-texas-holdem/"') < daily.indexOf('href="articles/gto-plus-piosolver-comparison/"'), "Daily page must show the Omaha beginner article before older guides");
 assert(daily.indexOf('href="articles/gto-plus-piosolver-comparison/"') < daily.indexOf('href="articles/multiway-pot-mistakes/"'), "Daily page must show today's tool articles first");
 assert(daily.indexOf('href="articles/multiway-pot-mistakes/"') < daily.indexOf('href="articles/river-blockers-guide/"'), "Daily page must order articles from newest to oldest");
 assert(daily.includes('"@id":"https://www.pokerrookie.top/daily.html#daily-articles"'), "Daily page structured data must include the article ItemList");
@@ -736,6 +746,8 @@ const bubbleArticle = read(bubbleArticlePath);
 assert(bubbleArticle.includes("<title>德州扑克锦标赛泡沫期策略｜ICM、风险溢价与筹码施压 - PokerRookie</title>"), "Tournament bubble article must use the SEO title");
 assert(bubbleArticle.includes(`<link rel="canonical" href="${bubbleArticleUrl}">`), "Tournament bubble article must use the canonical URL");
 assert(bubbleArticle.includes('"datePublished":"2026-08-07"'), "Tournament bubble article must use today's publication date");
+assert(bubbleArticle.includes('"dateModified":"2026-08-27"'), "Tournament bubble article must expose its backlink update date");
+assert(bubbleArticle.includes("更新：2026-08-27"), "Tournament bubble article must show its backlink update date");
 assert(bubbleArticle.includes("../../assets/chuanqipuke.webp"), "Tournament bubble article must include a local tournament image example");
 assert(bubbleArticle.includes('class="article-figure"'), "Tournament bubble article must include an explained image example");
 assert(bubbleArticle.includes("完整场景"), "Tournament bubble article must include a complete ICM scenario");
@@ -831,7 +843,8 @@ const highStakesVideoArticle = read(highStakesVideoArticlePath);
 assert(highStakesVideoArticle.includes("<title>高额现金桌视频复盘｜ATs面对河牌超池该跟吗 - PokerRookie</title>"), "High-stakes video article must use the SEO title");
 assert(highStakesVideoArticle.includes(`<link rel="canonical" href="${highStakesVideoArticleUrl}">`), "High-stakes video article must use the canonical URL");
 assert(highStakesVideoArticle.includes('"datePublished":"2026-08-12"'), "High-stakes video article must use today's publication date");
-assert(highStakesVideoArticle.includes('"dateModified":"2026-08-18"'), "High-stakes video article must expose its editorial rewrite date");
+assert(highStakesVideoArticle.includes('"dateModified":"2026-08-27"'), "High-stakes video article must expose its backlink update date");
+assert(highStakesVideoArticle.includes("修订：2026-08-27"), "High-stakes video article must show its backlink update date");
 assert(highStakesVideoArticle.includes("../../assets/Hustler%20Casino%20Live.webp"), "High-stakes video article must include a local video image example");
 assert(highStakesVideoArticle.includes('class="article-figure"'), "High-stakes video article must include an explained image example");
 assert(highStakesVideoArticle.includes('class="article-editorial article-hand-story"'), "High-stakes video article must use the hand-story format");
@@ -938,6 +951,35 @@ const omahaChineseCharacters = countMainChineseCharacters(omahaComparisonArticle
 assert(omahaChineseCharacters >= 1800, "Omaha comparison article must develop the six questions with enough original analysis");
 assert(omahaChineseCharacters <= 3500, "Omaha comparison article must remain a focused beginner Q&A instead of padding to an old quota");
 
+const cashTournamentArticle = read(cashTournamentArticlePath);
+assert(cashTournamentArticle.includes("<title>德州扑克现金桌和锦标赛有什么区别｜新手该怎么选 - PokerRookie</title>"), "Cash versus tournament article must use the search-intent title");
+assert(cashTournamentArticle.includes(`<link rel="canonical" href="${cashTournamentArticleUrl}">`), "Cash versus tournament article must use the canonical URL");
+assert(cashTournamentArticle.includes('"datePublished":"2026-08-27"'), "Cash versus tournament article must use today's publication date");
+assert(cashTournamentArticle.includes('"@type":"Article"'), "Cash versus tournament article must expose Article structured data");
+assert(!cashTournamentArticle.includes('"@type":"FAQPage"'), "Cash versus tournament article must not repeat yesterday's FAQ format");
+assert(cashTournamentArticle.includes('class="article-editorial article-game-choice"'), "Cash versus tournament article must use its own comparison format");
+assert((cashTournamentArticle.match(/class="section(?:\s|")/g) || []).length === 6, "Cash versus tournament article must use six topic-led sections");
+assert(cashTournamentArticle.includes("8♣8♦"), "Cash versus tournament article must include the shared 20BB pocket eights example");
+assert(cashTournamentArticle.includes("18 ÷ 40.5 = 44.4%"), "Cash versus tournament article must show the bounded pot-odds calculation");
+assert(cashTournamentArticle.includes('src="../../assets/Hustler%20Casino%20Live.webp"'), "Cash versus tournament article must include a real cash-game visual");
+assert(cashTournamentArticle.includes('src="../../assets/wsop.webp"'), "Cash versus tournament article must include a real tournament visual");
+assert(cashTournamentArticle.includes('href="https://www.pokerstars.com/poker/tournaments/rules/" target="_blank" rel="noopener"'), "Cash versus tournament article must cite the public tournament rules");
+assert(cashTournamentArticle.includes('href="https://blog.gtowizard.com/poker-strategies-tournaments-vs-cash-games/" target="_blank" rel="noopener"'), "Cash versus tournament article must cite the public strategy comparison");
+assert(cashTournamentArticle.includes('href="../poker-position-range-pot-odds/"'), "Cash versus tournament article must link to the beginner fundamentals guide");
+assert(cashTournamentArticle.includes('href="../tournament-bubble-icm-strategy/"'), "Cash versus tournament article must link to the tournament ICM guide");
+assert(cashTournamentArticle.includes('href="../high-stakes-video-hand-review/"'), "Cash versus tournament article must link to the cash-game hand review");
+assert(!cashTournamentArticle.includes('class="qa-number"'), "Cash versus tournament article must not reuse numbered beginner questions");
+assert(!cashTournamentArticle.includes('class="qa-section"'), "Cash versus tournament article must not reuse the Omaha Q&A sections");
+assert(!cashTournamentArticle.includes('class="verdict-grid"'), "Cash versus tournament article must not reuse the solver buying verdict grid");
+for (const forbiddenTemplate of ["本文将系统讲解", "建立完整框架", "形成闭环", "专业资料与延伸阅读"]) {
+  assert(!cashTournamentArticle.includes(forbiddenTemplate), `Cash versus tournament article must not use the forbidden template phrase: ${forbiddenTemplate}`);
+}
+const cashTournamentChineseCharacters = countMainChineseCharacters(cashTournamentArticle);
+assert(cashTournamentChineseCharacters >= 1800, "Cash versus tournament article must develop the comparison with enough original analysis");
+assert(cashTournamentChineseCharacters <= 3200, "Cash versus tournament article must remain focused instead of padding the comparison");
+assert(highStakesVideoArticle.includes('href="../cash-game-vs-tournament/"'), "Cash hand review must link back to the new game comparison");
+assert(bubbleArticle.includes('href="../cash-game-vs-tournament/"'), "Tournament ICM guide must link back to the new game comparison");
+
 assert(editorialGuide.includes("默认每周发布 3 至 4 篇"), "Editorial guide must prioritize quality over a fixed daily quota");
 assert(editorialGuide.includes("连续两篇文章不得使用同一种结构"), "Editorial guide must require structural rotation");
 assert(editorialGuide.includes("不编造作者亲历"), "Editorial guide must prohibit fabricated first-hand signals");
@@ -976,7 +1018,8 @@ for (const articlePath of [
   multiwayArticlePath,
   pokerSnowieArticlePath,
   solverComparisonArticlePath,
-  omahaComparisonArticlePath
+  omahaComparisonArticlePath,
+  cashTournamentArticlePath
 ]) {
   assert(read(articlePath).includes('href="../../daily.html"'), `${articlePath} must link to daily sharing in the article nav`);
 }

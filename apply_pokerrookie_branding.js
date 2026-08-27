@@ -33,7 +33,7 @@ const indexedSeoPages = [
     path: "/",
     title: "PokerRookie｜德州扑克实战复盘与视频教学",
     description: "PokerRookie 德州扑克实战复盘、视频教学、GTO工具整理与游戏下载入口，帮助玩家系统提升德州扑克、奥马哈与混合游戏水平。",
-    lastmod: "2026-08-26",
+    lastmod: "2026-08-27",
     priority: "1.0"
   },
   {
@@ -65,7 +65,7 @@ const indexedSeoPages = [
     path: "/daily.html",
     title: "每日分享｜PokerRookie 德州扑克学习文章",
     description: "按发布日期整理 PokerRookie 的德州扑克学习文章，每日分享翻前范围、下注尺度、范围阅读、赛事复盘与逐街实战判断。",
-    lastmod: "2026-08-26",
+    lastmod: "2026-08-27",
     priority: "0.9"
   },
   {
@@ -241,6 +241,13 @@ const indexedSeoPages = [
     path: "/articles/omaha-vs-texas-holdem/",
     title: "奥马哈和德州扑克有什么区别｜新手最容易弄错的6个问题 - PokerRookie",
     description: "奥马哈和德州扑克有什么区别？用6个新手问题和一组具体牌例，讲清底牌数量、2+3成牌规则、PLO底池限注、AA强度与入门选择。",
+    priority: "0.8"
+  },
+  {
+    fileName: "articles/cash-game-vs-tournament/index.html",
+    path: "/articles/cash-game-vs-tournament/",
+    title: "德州扑克现金桌和锦标赛有什么区别｜新手该怎么选 - PokerRookie",
+    description: "德州扑克现金桌和锦标赛有什么区别？用同一手20BB全压决策，对比筹码价值、升盲、ICM、买入退出、时间与波动，给出新手选择建议。",
     priority: "0.8"
   }
 ];
@@ -993,7 +1000,7 @@ function homepageArticleCategory(page) {
   if (/three-bet-pot|multiway-pot-mistakes/.test(page.fileName)) return "常见错误";
   if (/tournament-bubble/.test(page.fileName)) return "赛事复盘";
   if (/big-blind-defense|small-blind-strategy/.test(page.fileName)) return "玩家进阶";
-  if (/position-range|preflop|bet-sizing|pot-odds|omaha-vs-texas/.test(page.fileName)) return "新手基础";
+  if (/position-range|preflop|bet-sizing|pot-odds|omaha-vs-texas|cash-game-vs-tournament/.test(page.fileName)) return "新手基础";
   if (/final-table/.test(page.fileName)) return "赛事复盘";
   if (/range-reading/.test(page.fileName)) return "玩家进阶";
   return "实战教学";
