@@ -14,7 +14,8 @@ const mime = {
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
-  ".svg": "image/svg+xml"
+  ".svg": "image/svg+xml",
+  ".webp": "image/webp"
 };
 
 const server = http.createServer((req, res) => {
@@ -31,6 +32,9 @@ const server = http.createServer((req, res) => {
 
     if (url.pathname === "/") {
       filePath = path.join(root, "index.html");
+    } else if (url.pathname.endsWith("/")) {
+      const routeName = url.pathname.replace(/^\/+|\/+$/g, "");
+      filePath = path.join(root, routeName, "index.html");
     } else if (!path.extname(filePath)) {
       const routeName = url.pathname.replace(/^\/+/, "");
       filePath = path.join(root, `${routeName}.html`);

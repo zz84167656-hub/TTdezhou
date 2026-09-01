@@ -23,9 +23,10 @@
 
 ```txt
 https://www.pokerrookie.top/
-https://www.pokerrookie.top/download.html
-https://www.pokerrookie.top/free.html
-https://www.pokerrookie.top/about.html
+https://www.pokerrookie.top/download
+https://www.pokerrookie.top/free
+https://www.pokerrookie.top/daily
+https://www.pokerrookie.top/about
 ```
 
 如果当天新增页面，把新 URL 放到本地文件 `seo_submit_queue.txt`，一行一个。脚本会优先提交这个文件里的链接。

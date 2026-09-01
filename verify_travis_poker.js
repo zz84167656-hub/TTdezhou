@@ -50,10 +50,10 @@ const pages = {
 };
 const seoPaths = {
   "index.html": "/",
-  "download.html": "/download.html",
-  "free.html": "/free.html",
-  "daily.html": "/daily.html",
-  "about.html": "/about.html"
+  "download.html": "/download",
+  "free.html": "/free",
+  "daily.html": "/daily",
+  "about.html": "/about"
 };
 const gtoArticlePath = "articles/gto-plus-guide/index.html";
 const gtoArticleUrl = `${siteBaseUrl}/articles/gto-plus-guide/`;
@@ -107,6 +107,37 @@ const omahaComparisonArticlePath = "articles/omaha-vs-texas-holdem/index.html";
 const omahaComparisonArticleUrl = `${siteBaseUrl}/articles/omaha-vs-texas-holdem/`;
 const cashTournamentArticlePath = "articles/cash-game-vs-tournament/index.html";
 const cashTournamentArticleUrl = `${siteBaseUrl}/articles/cash-game-vs-tournament/`;
+const isolationRaiseArticlePath = "articles/isolation-raise-vs-limpers/index.html";
+const isolationRaiseArticleUrl = `${siteBaseUrl}/articles/isolation-raise-vs-limpers/`;
+const articlePaths = [
+  gtoArticlePath,
+  pioArticlePath,
+  beginnerArticlePath,
+  turnArticlePath,
+  finalTableArticlePath,
+  rangeArticlePath,
+  preflopArticlePath,
+  sizingArticlePath,
+  flopArticlePath,
+  riverArticlePath,
+  videoReviewArticlePath,
+  threeBetArticlePath,
+  hand2NoteArticlePath,
+  pokerTrackerArticlePath,
+  bubbleArticlePath,
+  bigBlindArticlePath,
+  smallBlindArticlePath,
+  potOddsArticlePath,
+  turnDoubleBarrelArticlePath,
+  riverBlockersArticlePath,
+  highStakesVideoArticlePath,
+  multiwayArticlePath,
+  pokerSnowieArticlePath,
+  solverComparisonArticlePath,
+  omahaComparisonArticlePath,
+  cashTournamentArticlePath,
+  isolationRaiseArticlePath
+];
 const editorialGuide = read("SEO_EDITORIAL_GUIDE.md");
 const articleCss = read("assets/article.css");
 
@@ -159,13 +190,26 @@ for (const fileName of freeVideoImageFiles) {
 const robots = read("robots.txt");
 const sitemap = read("sitemap.xml");
 const baiduUrls = read("baidu_urls.txt");
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+const baiduUrlList = baiduUrls.split(/\r?\n/).map((url) => url.trim()).filter(Boolean);
 assert(robots.includes("User-agent: *"), "robots.txt must allow crawlers");
 assert(robots.includes(`Sitemap: ${siteBaseUrl}/sitemap.xml`), "robots.txt must point to the public sitemap");
 assert(sitemap.includes('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'), "sitemap.xml must use the sitemap protocol");
+assert(sitemapUrls.length === 32, "sitemap.xml must contain exactly 32 public URLs");
+assert(new Set(sitemapUrls).size === sitemapUrls.length, "sitemap.xml must not contain duplicate URLs");
+assert(baiduUrlList.length === 32, "baidu_urls.txt must contain exactly 32 public URLs");
+assert(new Set(baiduUrlList).size === baiduUrlList.length, "baidu_urls.txt must not contain duplicate URLs");
+assert(JSON.stringify(baiduUrlList) === JSON.stringify(sitemapUrls), "baidu_urls.txt must preserve the sitemap URL order");
 for (const [fileName, pagePath] of Object.entries(seoPaths)) {
   const url = pagePath === "/" ? `${siteBaseUrl}/` : `${siteBaseUrl}${pagePath}`;
   assert(sitemap.includes(`<loc>${url}</loc>`), `sitemap.xml must include ${fileName}`);
   assert(baiduUrls.includes(url), `baidu_urls.txt must include ${fileName}`);
+  assert(sitemap.includes(`<loc>${url}</loc>\n    <lastmod>2026-09-01</lastmod>`), `sitemap.xml must expose the 2026-09-01 update date for ${fileName}`);
+}
+for (const legacyPath of ["/download.html", "/free.html", "/daily.html", "/about.html"]) {
+  const legacyUrl = `${siteBaseUrl}${legacyPath}`;
+  assert(!sitemapUrls.includes(legacyUrl), `sitemap.xml must exclude the legacy URL ${legacyUrl}`);
+  assert(!baiduUrlList.includes(legacyUrl), `baidu_urls.txt must exclude the legacy URL ${legacyUrl}`);
 }
 assert(sitemap.includes(`<loc>${gtoArticleUrl}</loc>`), "sitemap.xml must include the GTO+ guide article");
 assert(baiduUrls.includes(gtoArticleUrl), "baidu_urls.txt must include the GTO+ guide article");
@@ -221,6 +265,11 @@ assert(sitemap.includes(`<loc>${omahaComparisonArticleUrl}</loc>\n    <lastmod>2
 assert(sitemap.includes(`<loc>${cashTournamentArticleUrl}</loc>`), "sitemap.xml must include the cash versus tournament article");
 assert(baiduUrls.includes(cashTournamentArticleUrl), "baidu_urls.txt must include the cash versus tournament article");
 assert(sitemap.includes(`<loc>${cashTournamentArticleUrl}</loc>\n    <lastmod>2026-08-27</lastmod>`), "sitemap.xml must expose the cash versus tournament article publication date");
+assert(sitemap.includes(`<loc>${isolationRaiseArticleUrl}</loc>`), "sitemap.xml must include the isolation raise article");
+assert(baiduUrls.includes(isolationRaiseArticleUrl), "baidu_urls.txt must include the isolation raise article");
+assert(sitemap.includes(`<loc>${isolationRaiseArticleUrl}</loc>\n    <lastmod>2026-09-01</lastmod>`), "sitemap.xml must expose the isolation raise article publication date");
+assert(sitemap.includes(`<loc>${preflopArticleUrl}</loc>\n    <lastmod>2026-09-01</lastmod>`), "sitemap.xml must expose the preflop ranges backlink update date");
+assert(sitemap.includes(`<loc>${smallBlindArticleUrl}</loc>\n    <lastmod>2026-09-01</lastmod>`), "sitemap.xml must expose the small blind backlink update date");
 assert(sitemap.includes(`<loc>${highStakesVideoArticleUrl}</loc>\n    <lastmod>2026-08-27</lastmod>`), "sitemap.xml must expose the cash hand review backlink update date");
 assert(sitemap.includes(`<loc>${bubbleArticleUrl}</loc>\n    <lastmod>2026-08-27</lastmod>`), "sitemap.xml must expose the tournament ICM backlink update date");
 assert(sitemap.includes(`<loc>${pokerSnowieArticleUrl}</loc>\n    <lastmod>2026-08-17</lastmod>`), "sitemap.xml must expose the PokerSnowie rewrite date");
@@ -247,6 +296,10 @@ for (const [fileName, title] of Object.entries(pages)) {
   assert(html.includes(`<meta property="og:image" content="${siteBaseUrl}/assets/pokerrookie-logo.png"/>`), `${fileName} must use the public PokerRookie sharing image`);
   assert(html.includes(`<meta name="twitter:image" content="${siteBaseUrl}/assets/pokerrookie-logo.png"/>`), `${fileName} must use the public Twitter sharing image`);
   assert(html.includes('id="pokerrookie-seo-jsonld"'), `${fileName} must include PokerRookie structured data`);
+  if (seoPaths[fileName]) {
+    assert(html.includes(`"@id":"${canonicalUrl}#webpage"`), `${fileName} structured data must use the extensionless canonical page ID`);
+    assert(html.includes(`"url":"${canonicalUrl}"`), `${fileName} structured data must use the extensionless canonical URL`);
+  }
   assert(!html.includes("Create refined, responsive"), `${fileName} must remove the old template structured data`);
   assert(!html.includes("Travis"), `${fileName} must not show the old Travis brand text`);
   assert(html.includes("assets/pokerrookie-logo.png"), `${fileName} must use the PokerRookie logo`);
@@ -261,11 +314,12 @@ for (const [fileName, title] of Object.entries(pages)) {
   assert(!html.includes(">Poker LAB</a>"), `${fileName} must not include the Poker LAB nav link`);
   assert(!html.includes(">关于我</a>"), `${fileName} must not show the old About nav label`);
   assert(!html.includes(">免费资源</a>"), `${fileName} must not show the old free resources nav label`);
-  assert(html.includes('href="about.html"'), `${fileName} must keep the local tools page link`);
+  assert(html.includes('href="download"'), `${fileName} must keep the extensionless download page link`);
+  assert(html.includes('href="about"'), `${fileName} must keep the extensionless tools page link`);
   assert(html.includes(">实用工具</a>"), `${fileName} must show the tools nav label`);
-  assert(html.includes('href="free.html"'), `${fileName} must keep the local video teaching page link`);
+  assert(html.includes('href="free"'), `${fileName} must keep the extensionless video teaching page link`);
   assert(html.includes(">视频教学</a>"), `${fileName} must show the video teaching nav label`);
-  assert(html.includes('href="daily.html"'), `${fileName} must keep the local daily sharing page link`);
+  assert(html.includes('href="daily"'), `${fileName} must keep the extensionless daily sharing page link`);
   assert(html.includes(">每日分享</a>"), `${fileName} must show the daily sharing nav label`);
   assert(!html.includes("69d6fb774fb3fe709a3c22ef_1"), `${fileName} must not use the old TravisPoker nav logo`);
   assert(!html.includes("69973e9728086fd6a49a2e06_travispoker-28"), `${fileName} must not use the old TravisPoker footer logo`);
@@ -295,10 +349,10 @@ for (const [fileName, title] of Object.entries(pages)) {
 }
 
 const home = read("index.html");
-assert(home.includes('href="download.html"'), "Home CTA/nav must link to local download page");
-assert(home.includes('href="free.html"'), "Home nav must link to local free page");
-assert(home.includes('href="about.html"'), "Home nav must link to local tools page");
-assert(home.includes('href="download.html" class="pokerrookie-hero-title-link w-inline-block"'), "Home hero slogan must link to the download page");
+assert(home.includes('href="download"'), "Home CTA/nav must link to the extensionless download page");
+assert(home.includes('href="free"'), "Home nav must link to the extensionless video teaching page");
+assert(home.includes('href="about"'), "Home nav must link to the extensionless tools page");
+assert(home.includes('href="download" class="pokerrookie-hero-title-link w-inline-block"'), "Home hero slogan must link to the extensionless download page");
 assert(home.includes('src="assets/sologan.webp"'), "Home hero must use the slogan artwork");
 assert(home.includes('class="pokerrookie-hero-slogan"'), "Home hero slogan image must include the slogan styling");
 assert(home.includes('alt="和PokerRookie一起游戏"'), "Home hero slogan image must include the updated alt text");
@@ -314,8 +368,9 @@ assert(home.includes("assets/pokerrookie-profile.jpg"), "Home must use the Poker
 assert(home.includes('id="pokerrookie-home-articles-title"'), "Home must include the strategy article section");
 assert(home.includes("从翻前范围到河牌决策"), "Home article section must include its heading");
 assert(home.includes('"@id":"https://www.pokerrookie.top/#articles"'), "Home structured data must include the article ItemList");
-assert((home.match(/class="pokerrookie-home-article-item"/g) || []).length === 26, "Home must list all 26 strategy articles exactly once");
+assert((home.match(/class="pokerrookie-home-article-item"/g) || []).length === 27, "Home must list all 27 strategy articles exactly once");
 for (const articleHref of [
+  "articles/isolation-raise-vs-limpers/",
   "articles/gto-plus-guide/",
   "articles/piosolver-guide/",
   "articles/poker-position-range-pot-odds/",
@@ -345,6 +400,7 @@ for (const articleHref of [
 ]) {
   assert(home.includes(`href="${articleHref}"`), `Home must link to ${articleHref}`);
 }
+assert(home.indexOf('href="articles/isolation-raise-vs-limpers/"') < home.indexOf('href="articles/cash-game-vs-tournament/"'), "Home must show the new isolation raise article first");
 assert(home.indexOf('href="articles/cash-game-vs-tournament/"') < home.indexOf('href="articles/omaha-vs-texas-holdem/"'), "Home must show the new cash versus tournament article first");
 assert(home.indexOf('href="articles/omaha-vs-texas-holdem/"') < home.indexOf('href="articles/gto-plus-piosolver-comparison/"'), "Home must show the new Omaha beginner article before older guides");
 assert(home.indexOf('href="articles/gto-plus-piosolver-comparison/"') < home.indexOf('href="articles/pokersnowie-training-guide/"'), "Home must show today's solver comparison first");
@@ -360,11 +416,13 @@ assert(!home.includes('<h1 class="card-title">认真提升</h1>'), "Home must re
 assert(!home.includes("研究更多实战分析"), "Home must remove the improvement card button");
 
 const homeMirror = read("travis-poker.html");
-assert(homeMirror.includes('href="download.html" class="pokerrookie-hero-title-link w-inline-block"'), "travis-poker.html hero slogan must link to the download page");
+assert(homeMirror.includes('href="download" class="pokerrookie-hero-title-link w-inline-block"'), "travis-poker.html hero slogan must link to the extensionless download page");
 assert(homeMirror.includes('src="assets/sologan.webp"'), "travis-poker.html must use the slogan artwork");
 assert(homeMirror.includes(bilibiliUrl), "travis-poker.html must mirror the Bilibili profile link");
 assert(homeMirror.includes(`href="${bilibiliUrl}" target="_blank" rel="noopener"`), "travis-poker.html Bilibili CTA must open as a safe external link");
-assert((homeMirror.match(/class="pokerrookie-home-article-item"/g) || []).length === 26, "travis-poker.html must mirror all strategy articles");
+assert((homeMirror.match(/class="pokerrookie-home-article-item"/g) || []).length === 27, "travis-poker.html must mirror all 27 strategy articles");
+assert(homeMirror.includes('href="articles/isolation-raise-vs-limpers/"'), "travis-poker.html must link to the new isolation raise article");
+assert(homeMirror.indexOf('href="articles/isolation-raise-vs-limpers/"') < homeMirror.indexOf('href="articles/cash-game-vs-tournament/"'), "travis-poker.html must show the new isolation raise article first");
 assert(homeMirror.includes('"@id":"https://www.pokerrookie.top/#articles"'), "travis-poker.html structured data must include the article ItemList");
 
 const daily = read("daily.html");
@@ -372,16 +430,17 @@ assert(daily.includes('class="pokerrookie-daily-sharing"'), "Daily page must inc
 assert(daily.includes('id="pokerrookie-daily-title"'), "Daily page must expose an accessible page heading");
 assert(daily.includes("少一点套路，多一点判断"), "Daily page must communicate the quality-first editorial approach");
 assert(!daily.includes("每天两篇，持续积累"), "Daily page must not promise a fixed two-article quota");
-assert(daily.includes("2026年8月27日"), "Daily page must show the latest publishing date");
+assert(daily.includes("2026年9月1日"), "Daily page must show the latest publishing date");
 assert(daily.includes("2026年7月23日"), "Daily page must show the earliest publishing date");
-assert((daily.match(/class="pokerrookie-daily-group"/g) || []).length === 15, "Daily page must group articles under all 15 publishing dates");
-assert((daily.match(/class="pokerrookie-daily-article"/g) || []).length === 26, "Daily page must list all 26 strategy articles exactly once");
+assert((daily.match(/class="pokerrookie-daily-group"/g) || []).length === 16, "Daily page must group articles under all 16 publishing dates");
+assert((daily.match(/class="pokerrookie-daily-article"/g) || []).length === 27, "Daily page must list all 27 strategy articles exactly once");
+assert(daily.indexOf('href="articles/isolation-raise-vs-limpers/"') < daily.indexOf('href="articles/cash-game-vs-tournament/"'), "Daily page must show the new isolation raise article first");
 assert(daily.indexOf('href="articles/cash-game-vs-tournament/"') < daily.indexOf('href="articles/omaha-vs-texas-holdem/"'), "Daily page must show the new cash versus tournament article first");
 assert(daily.indexOf('href="articles/omaha-vs-texas-holdem/"') < daily.indexOf('href="articles/gto-plus-piosolver-comparison/"'), "Daily page must show the Omaha beginner article before older guides");
 assert(daily.indexOf('href="articles/gto-plus-piosolver-comparison/"') < daily.indexOf('href="articles/multiway-pot-mistakes/"'), "Daily page must show today's tool articles first");
 assert(daily.indexOf('href="articles/multiway-pot-mistakes/"') < daily.indexOf('href="articles/river-blockers-guide/"'), "Daily page must order articles from newest to oldest");
-assert(daily.includes('"@id":"https://www.pokerrookie.top/daily.html#daily-articles"'), "Daily page structured data must include the article ItemList");
-assert(daily.includes('href="daily.html" aria-current="page"'), "Daily page nav must mark Daily Sharing as current");
+assert(daily.includes('"@id":"https://www.pokerrookie.top/daily#daily-articles"'), "Daily page structured data must use the extensionless article ItemList ID");
+assert(daily.includes('href="daily" aria-current="page"'), "Daily page extensionless nav must mark Daily Sharing as current");
 
 const free = read("free.html");
 assert(free.includes("<title>视频教学｜PokerRookie 德州扑克实战复盘合集</title>"), "Free page title must be renamed to video teaching");
@@ -491,9 +550,9 @@ assert(gtoArticle.includes("GTO+ 怎么用：用范围、尺度与 EV 完成一�
 assert(gtoArticle.includes('"datePublished":"2026-07-23"'), "GTO+ article must retain its original publication date");
 assert(gtoArticle.includes('"dateModified":"2026-08-21"'), "GTO+ article must use today's modification date");
 assert(gtoArticle.includes("../../assets/GTO%2B.webp"), "GTO+ article must use the local GTO+ image");
-assert(gtoArticle.includes('href="../../free.html"'), "GTO+ article must link to video teaching");
-assert(gtoArticle.includes('href="../../about.html"'), "GTO+ article must link to practical tools");
-assert(gtoArticle.includes('href="../../download.html"'), "GTO+ article must link to download page");
+assert(gtoArticle.includes('href="../../free"'), "GTO+ article must link to the extensionless video teaching page");
+assert(gtoArticle.includes('href="../../about"'), "GTO+ article must link to the extensionless practical tools page");
+assert(gtoArticle.includes('href="../../download"'), "GTO+ article must link to the extensionless download page");
 assert(gtoArticle.includes('href="../piosolver-guide/"'), "GTO+ article must link to the PioSolver guide");
 assert(gtoArticle.includes('href="../poker-position-range-pot-odds/"'), "GTO+ article must link to the beginner guide");
 assert(gtoArticle.includes('href="../turn-card-leaks/"'), "GTO+ article must link to the turn strategy guide");
@@ -511,9 +570,9 @@ assert(pioArticle.includes('id="pokerrookie-seo-jsonld"'), "PioSolver article mu
 assert(pioArticle.includes("PioSolver 入门指南：把复杂牌局拆成可训练的决策"), "PioSolver article must include the article headline");
 assert(pioArticle.includes("../../assets/PioSolver.webp"), "PioSolver article must use the local PioSolver image");
 assert(pioArticle.includes('href="../gto-plus-guide/"'), "PioSolver article must link to the GTO+ guide");
-assert(pioArticle.includes('href="../../free.html"'), "PioSolver article must link to video teaching");
-assert(pioArticle.includes('href="../../about.html"'), "PioSolver article must link to practical tools");
-assert(pioArticle.includes('href="../../download.html"'), "PioSolver article must link to download page");
+assert(pioArticle.includes('href="../../free"'), "PioSolver article must link to the extensionless video teaching page");
+assert(pioArticle.includes('href="../../about"'), "PioSolver article must link to the extensionless practical tools page");
+assert(pioArticle.includes('href="../../download"'), "PioSolver article must link to the extensionless download page");
 assert(pioArticle.includes('href="../poker-position-range-pot-odds/"'), "PioSolver article must link to the beginner guide");
 assert(pioArticle.includes('href="../turn-card-leaks/"'), "PioSolver article must link to the turn strategy guide");
 assert(pioArticle.includes('href="https://piosolver.com/" target="_blank" rel="noopener"'), "PioSolver article must link safely to the PioSolver website");
@@ -532,9 +591,9 @@ assert(beginnerArticle.includes("底池赔率"), "Beginner article must cover po
 assert(beginnerArticle.includes('href="../gto-plus-guide/"'), "Beginner article must link to the GTO+ guide");
 assert(beginnerArticle.includes('href="../piosolver-guide/"'), "Beginner article must link to the PioSolver guide");
 assert(beginnerArticle.includes('href="../turn-card-leaks/"'), "Beginner article must link to the turn strategy guide");
-assert(beginnerArticle.includes('href="../../free.html"'), "Beginner article must link to video teaching");
-assert(beginnerArticle.includes('href="../../about.html"'), "Beginner article must link to practical tools");
-assert(beginnerArticle.includes('href="../../download.html"'), "Beginner article must link to download page");
+assert(beginnerArticle.includes('href="../../free"'), "Beginner article must link to the extensionless video teaching page");
+assert(beginnerArticle.includes('href="../../about"'), "Beginner article must link to the extensionless practical tools page");
+assert(beginnerArticle.includes('href="../../download"'), "Beginner article must link to the extensionless download page");
 assert(beginnerArticle.includes('href="../preflop-opening-ranges/"'), "Beginner article must link to the preflop ranges guide");
 assert(beginnerArticle.includes('href="../bet-sizing-basics/"'), "Beginner article must link to the bet sizing guide");
 
@@ -551,9 +610,9 @@ assert(turnArticle.includes("河牌计划"), "Turn article must cover river plan
 assert(turnArticle.includes('href="../poker-position-range-pot-odds/"'), "Turn article must link to the beginner guide");
 assert(turnArticle.includes('href="../gto-plus-guide/"'), "Turn article must link to the GTO+ guide");
 assert(turnArticle.includes('href="../piosolver-guide/"'), "Turn article must link to the PioSolver guide");
-assert(turnArticle.includes('href="../../free.html"'), "Turn article must link to video teaching");
-assert(turnArticle.includes('href="../../about.html"'), "Turn article must link to practical tools");
-assert(turnArticle.includes('href="../../download.html"'), "Turn article must link to download page");
+assert(turnArticle.includes('href="../../free"'), "Turn article must link to the extensionless video teaching page");
+assert(turnArticle.includes('href="../../about"'), "Turn article must link to the extensionless practical tools page");
+assert(turnArticle.includes('href="../../download"'), "Turn article must link to the extensionless download page");
 assert(turnArticle.includes('href="../final-table-review/"'), "Turn article must link to the final table guide");
 assert(turnArticle.includes('href="../range-reading-advanced/"'), "Turn article must link to the range reading guide");
 assert(turnArticle.includes('href="../bet-sizing-basics/"'), "Turn article must link to the bet sizing guide");
@@ -570,7 +629,7 @@ assert(finalTableArticle.includes("有效筹码"), "Final table article must cov
 assert(finalTableArticle.includes("ICM"), "Final table article must cover ICM");
 assert(finalTableArticle.includes('href="../range-reading-advanced/"'), "Final table article must link to the range reading guide");
 assert(finalTableArticle.includes('href="../poker-position-range-pot-odds/"'), "Final table article must link to the beginner guide");
-assert(finalTableArticle.includes('href="../../free.html"'), "Final table article must link to video teaching");
+assert(finalTableArticle.includes('href="../../free"'), "Final table article must link to the extensionless video teaching page");
 
 const rangeArticle = read(rangeArticlePath);
 assert(rangeArticle.includes("<title>德州扑克范围阅读进阶｜从行动线判断组合 - PokerRookie</title>"), "Range article must use the SEO title");
@@ -583,7 +642,7 @@ assert(rangeArticle.includes("下注尺度"), "Range article must cover bet sizi
 assert(rangeArticle.includes("阻断牌"), "Range article must cover blockers");
 assert(rangeArticle.includes('href="../final-table-review/"'), "Range article must link to the final table guide");
 assert(rangeArticle.includes('href="../poker-position-range-pot-odds/"'), "Range article must link to the beginner guide");
-assert(rangeArticle.includes('href="../../about.html"'), "Range article must link to practical tools");
+assert(rangeArticle.includes('href="../../about"'), "Range article must link to the extensionless practical tools page");
 assert(rangeArticle.includes('href="../preflop-opening-ranges/"'), "Range article must link to the preflop ranges guide");
 assert(rangeArticle.includes('href="../flop-cbet-mistakes/"'), "Range article must link to the flop c-bet guide");
 assert(rangeArticle.includes('href="../river-bluff-catching/"'), "Range article must link to the river bluff-catching guide");
@@ -593,6 +652,9 @@ assert(articleCss.includes("--article-font"), "Shared article CSS must define th
 assert(preflopArticle.includes('<link rel="stylesheet" href="../../assets/article.css?v='), "Preflop article must use the cache-busted shared article CSS");
 assert(preflopArticle.includes("<title>德州扑克翻前开池范围｜不同位置怎么调整 - PokerRookie</title>"), "Preflop article must use the SEO title");
 assert(preflopArticle.includes(`<link rel="canonical" href="${preflopArticleUrl}">`), "Preflop article must use the canonical URL");
+assert(preflopArticle.includes('"datePublished":"2026-08-03"'), "Preflop article must retain its original publication date");
+assert(preflopArticle.includes('"dateModified":"2026-09-01"'), "Preflop article must expose the isolation raise backlink update date");
+assert(preflopArticle.includes("更新：2026-09-01"), "Preflop article must show the isolation raise backlink update date");
 assert(preflopArticle.includes('<meta name="robots" content="index,follow">'), "Preflop article must be indexable");
 assert(preflopArticle.includes('id="pokerrookie-seo-jsonld"'), "Preflop article must include structured data");
 assert(preflopArticle.includes("德州扑克翻前开池范围：不同位置应该怎么调整"), "Preflop article must include the headline");
@@ -601,7 +663,8 @@ assert(preflopArticle.includes("前位"), "Preflop article must cover early posi
 assert(preflopArticle.includes("按钮位"), "Preflop article must cover the button");
 assert(preflopArticle.includes('href="../bet-sizing-basics/"'), "Preflop article must link to the bet sizing guide");
 assert(preflopArticle.includes('href="../poker-position-range-pot-odds/"'), "Preflop article must link to the beginner guide");
-assert(preflopArticle.includes('href="../../free.html"'), "Preflop article must link to video teaching");
+assert(preflopArticle.includes('href="../isolation-raise-vs-limpers/"'), "Preflop article must link back to the isolation raise guide");
+assert(preflopArticle.includes('href="../../free"'), "Preflop article must link to the extensionless video teaching page");
 
 const sizingArticle = read(sizingArticlePath);
 assert(sizingArticle.includes('<link rel="stylesheet" href="../../assets/article.css?v='), "Sizing article must use the cache-busted shared article CSS");
@@ -615,7 +678,7 @@ assert(sizingArticle.includes("范围优势"), "Sizing article must cover range 
 assert(sizingArticle.includes("底池"), "Sizing article must cover pot-relative sizing");
 assert(sizingArticle.includes('href="../preflop-opening-ranges/"'), "Sizing article must link to the preflop ranges guide");
 assert(sizingArticle.includes('href="../turn-card-leaks/"'), "Sizing article must link to the turn strategy guide");
-assert(sizingArticle.includes('href="../../about.html"'), "Sizing article must link to practical tools");
+assert(sizingArticle.includes('href="../../about"'), "Sizing article must link to the extensionless practical tools page");
 assert(sizingArticle.includes('href="../flop-cbet-mistakes/"'), "Sizing article must link to the flop c-bet guide");
 
 for (const [label, article] of [
@@ -779,12 +842,15 @@ const smallBlindArticle = read(smallBlindArticlePath);
 assert(smallBlindArticle.includes("<title>德州扑克小盲位策略｜翻前3-bet、盲注战与翻后计划 - PokerRookie</title>"), "Small blind article must use the SEO title");
 assert(smallBlindArticle.includes(`<link rel="canonical" href="${smallBlindArticleUrl}">`), "Small blind article must use the canonical URL");
 assert(smallBlindArticle.includes('"datePublished":"2026-08-10"'), "Small blind article must use today's publication date");
+assert(smallBlindArticle.includes('"dateModified":"2026-09-01"'), "Small blind article must expose the isolation raise backlink update date");
+assert(smallBlindArticle.includes("更新：2026-09-01"), "Small blind article must show the isolation raise backlink update date");
 assert(smallBlindArticle.includes("../../assets/Hustler%20Casino%20Live.webp"), "Small blind article must include a local cash-game image example");
 assert(smallBlindArticle.includes('class="article-figure"'), "Small blind article must include an explained image example");
 assert(smallBlindArticle.includes("完整场景"), "Small blind article must include a complete strategy scenario");
 assert(smallBlindArticle.includes("小盲位复盘清单"), "Small blind article must include an actionable review checklist");
 assert(smallBlindArticle.includes('href="https://upswingpoker.com/small-blind-poker-strategy-tips/" target="_blank" rel="noopener"'), "Small blind article must cite the professional small-blind source");
 assert(smallBlindArticle.includes('href="https://blog.gtowizard.com/playing-limped-pots-as-sb-in-mtts/" target="_blank" rel="noopener"'), "Small blind article must cite the professional MTT source");
+assert(smallBlindArticle.includes('href="../isolation-raise-vs-limpers/"'), "Small blind article must link back to the isolation raise guide");
 
 const potOddsArticle = read(potOddsArticlePath);
 assert(potOddsArticle.includes("<title>德州扑克底池赔率与隐含赔率｜听牌跟注计算完整指南 - PokerRookie</title>"), "Pot odds article must use the SEO title");
@@ -980,6 +1046,49 @@ assert(cashTournamentChineseCharacters <= 3200, "Cash versus tournament article 
 assert(highStakesVideoArticle.includes('href="../cash-game-vs-tournament/"'), "Cash hand review must link back to the new game comparison");
 assert(bubbleArticle.includes('href="../cash-game-vs-tournament/"'), "Tournament ICM guide must link back to the new game comparison");
 
+const isolationRaiseArticle = read(isolationRaiseArticlePath);
+const isolationRaiseMain = isolationRaiseArticle.match(/<main[\s\S]*?<\/main>/i)?.[0] || "";
+const isolationRaiseSources = isolationRaiseArticle.match(/<aside class="article-sources"[\s\S]*?<\/aside>/i)?.[0] || "";
+assert(isolationRaiseArticle.includes("<title>德州扑克面对跛入者应该加注多少｜隔离加注尺度与范围 - PokerRookie</title>"), "Isolation raise article must use the search-intent title");
+assert(isolationRaiseArticle.includes(`<link rel="canonical" href="${isolationRaiseArticleUrl}">`), "Isolation raise article must use the canonical URL");
+assert(isolationRaiseArticle.includes('<meta name="robots" content="index,follow">'), "Isolation raise article must be indexable");
+assert(isolationRaiseArticle.includes('"datePublished":"2026-09-01"'), "Isolation raise article must expose its publication date");
+assert(isolationRaiseArticle.includes('"dateModified":"2026-09-01"'), "Isolation raise article must expose its modification date");
+assert(isolationRaiseArticle.includes("发布：2026-09-01"), "Isolation raise article must show its publication date");
+assert((isolationRaiseArticle.match(/"@type":"Article"/g) || []).length === 1, "Isolation raise article must expose exactly one Article structured-data entity");
+assert(!isolationRaiseArticle.includes('"@type":"FAQPage"'), "Isolation raise article must not use FAQ structured data");
+assert(isolationRaiseArticle.includes('class="article-editorial article-hand-story article-isolation-raise"'), "Isolation raise article must use its narrative hand-story format");
+assert((isolationRaiseArticle.match(/class="section(?:\s|")/g) || []).length === 6, "Isolation raise article must use six narrative sections");
+assert(isolationRaiseArticle.includes("第一次倒带：只加到 4BB"), "Isolation raise article must include the 4BB rewind");
+assert(isolationRaiseArticle.includes("第二次倒带：直接加到 7BB"), "Isolation raise article must include the 7BB rewind");
+assert(isolationRaiseArticle.includes("A♠J♠"), "Isolation raise article must preserve the suited ace-jack hand example");
+assert(isolationRaiseArticle.includes("4 + 4 + 1.5 = 9.5BB"), "Isolation raise article must show the 4BB pot and SPR calculation");
+assert(isolationRaiseArticle.includes("11.5BB"), "Isolation raise article must show the 5BB resulting pot");
+assert(isolationRaiseArticle.includes("15.5BB"), "Isolation raise article must show the 7BB resulting pot");
+assert((isolationRaiseMain.match(/<img\b/g) || []).length === 2, "Isolation raise article must contain exactly two substantive images");
+assert(isolationRaiseMain.includes('src="../../assets/Hustler%20Casino%20Live.webp"'), "Isolation raise article must include the cash-game hero visual");
+assert(isolationRaiseMain.includes('src="../../assets/HighStakesPoker.webp"'), "Isolation raise article must include the table-observation visual");
+assert((isolationRaiseSources.match(/<a\b/g) || []).length === 3, "Isolation raise article must cite exactly three supporting sources");
+assert(isolationRaiseArticle.includes('href="https://www.888poker.com/magazine/strategy/iso-raising-poker-all-you-need-know" target="_blank" rel="noopener"'), "Isolation raise article must cite the public 888poker sizing guide");
+assert(isolationRaiseArticle.includes('href="https://www.pokernews.com/strategy/how-to-play-against-limpers-in-live-poker-tournaments-50800.htm" target="_blank" rel="noopener"'), "Isolation raise article must cite the public PokerNews limper guide");
+assert(isolationRaiseArticle.includes('href="https://blog.gtowizard.com/how-to-handle-loose-passive-limpers/" target="_blank" rel="noopener"'), "Isolation raise article must cite the public GTO Wizard limper guide");
+for (const internalHref of [
+  "../preflop-opening-ranges/",
+  "../multiway-pot-mistakes/",
+  "../small-blind-strategy/",
+  "../bet-sizing-basics/"
+]) {
+  assert(isolationRaiseArticle.includes(`href="${internalHref}"`), `Isolation raise article must link contextually to ${internalHref}`);
+}
+assert((isolationRaiseMain.match(/href="\.\.\/(?!\.\.\/)[^"]+\/"/g) || []).length === 4, "Isolation raise article must contain exactly four contextual internal article links");
+for (const forbiddenTemplate of ["本文将系统讲解", "建立完整框架", "形成闭环", "完整场景", "复盘清单", "专业资料与延伸阅读"]) {
+  assert(!isolationRaiseArticle.includes(forbiddenTemplate), `Isolation raise article must not use the forbidden template phrase: ${forbiddenTemplate}`);
+}
+assert(!/<h2>\s*(?:[一二三四五六七八九十]+|\d+)[、.．]/.test(isolationRaiseArticle), "Isolation raise article must not reuse numbered H2 headings");
+const isolationRaiseChineseCharacters = countMainChineseCharacters(isolationRaiseArticle);
+assert(isolationRaiseChineseCharacters >= 1800, "Isolation raise article must develop the sizing decision with enough original analysis");
+assert(isolationRaiseChineseCharacters <= 3200, "Isolation raise article must remain a focused hand narrative");
+
 assert(editorialGuide.includes("默认每周发布 3 至 4 篇"), "Editorial guide must prioritize quality over a fixed daily quota");
 assert(editorialGuide.includes("连续两篇文章不得使用同一种结构"), "Editorial guide must require structural rotation");
 assert(editorialGuide.includes("不编造作者亲历"), "Editorial guide must prohibit fabricated first-hand signals");
@@ -993,35 +1102,13 @@ assert(articleCss.includes(".river-math"), "Article stylesheet must support the 
 assert(articleCss.includes(".qa-hand-case"), "Article stylesheet must support the Omaha 2+3 hand example");
 assert(articleCss.includes(".qa-checklist"), "Article stylesheet must support the beginner Q&A takeaway");
 
-for (const articlePath of [
-  gtoArticlePath,
-  pioArticlePath,
-  beginnerArticlePath,
-  turnArticlePath,
-  finalTableArticlePath,
-  rangeArticlePath,
-  preflopArticlePath,
-  sizingArticlePath,
-  flopArticlePath,
-  riverArticlePath,
-  videoReviewArticlePath,
-  threeBetArticlePath,
-  hand2NoteArticlePath,
-  pokerTrackerArticlePath,
-  bubbleArticlePath,
-  bigBlindArticlePath,
-  smallBlindArticlePath,
-  potOddsArticlePath,
-  turnDoubleBarrelArticlePath,
-  riverBlockersArticlePath,
-  highStakesVideoArticlePath,
-  multiwayArticlePath,
-  pokerSnowieArticlePath,
-  solverComparisonArticlePath,
-  omahaComparisonArticlePath,
-  cashTournamentArticlePath
-]) {
-  assert(read(articlePath).includes('href="../../daily.html"'), `${articlePath} must link to daily sharing in the article nav`);
+for (const articlePath of articlePaths) {
+  assert(read(articlePath).includes('href="../../daily"'), `${articlePath} must link to the extensionless daily sharing page in the article nav`);
+}
+
+const legacyPublicPageHref = /href=["'](?:https:\/\/www\.pokerrookie\.top\/|(?:\.\.\/)*|\.\/|\/)(?:download|free|daily|about)\.html(?:[?#][^"']*)?["']/i;
+for (const htmlPath of [...Object.keys(pages), ...articlePaths]) {
+  assert(!legacyPublicPageHref.test(read(htmlPath)), `${htmlPath} must not link to a legacy .html public page URL`);
 }
 assert(!about.includes("code-embed w-embed pokerrookie-practical-tools-embed"), "Tools page module must not be hidden by code-embed");
 assert(!about.includes("background: #0d1117"), "Tools page must not use the old dark tools design");
